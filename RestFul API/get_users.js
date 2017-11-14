@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Contact = require('./model/user.model');
 const db = 'mongodb://localhost:27017/skypeClone';
+const port = 8080;
 
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
@@ -28,5 +29,7 @@ app.get('/get_users/:id', (request, response)=>{
 
 
 
-app.listen(8080);
+app.listen(port, ()=>{
+    console.log('Server listening on ' + port);
+});
 
