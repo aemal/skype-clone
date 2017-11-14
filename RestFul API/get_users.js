@@ -22,7 +22,7 @@ app.get('/get_users/:id', (request, response)=>{
         if(err){
             response.send('We can not find the friends');
         }else{
-            response.json(contact.contacts.list);
+             response.json(contact.contacts.list);
         }
     });
 });
