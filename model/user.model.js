@@ -12,7 +12,7 @@ const userSchema = new Schema({
 	},
 	status:{
 		lastSeen: String,
-	    active: String
+	    active: Boolean
 	},
 	socialMediaSignUp:{},
 	contacts:{
@@ -24,5 +24,3 @@ const userSchema = new Schema({
 });
 
 module.exports = mongoose.model('user', userSchema);
-
-
