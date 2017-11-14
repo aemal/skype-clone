@@ -1,25 +1,19 @@
 {
   "name": "skypeclone",
   "version": "1.0.0",
-  "description": "Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &amp; WebRTC",
-  "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "mongoose": "^4.13.2"
-  },
-  "devDependencies": {},
+  "description": "Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB & WebRTC",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/josearmandojacq/SkypeClone.git"
+    "url": "git+https://github.com/aemal/SkypeClone.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/josearmandojacq/SkypeClone/issues"
+    "url": "https://github.com/aemal/SkypeClone/issues"
   },
-  "homepage": "https://github.com/josearmandojacq/SkypeClone#readme"
+  "homepage": "https://github.com/aemal/SkypeClone#readme"
 }
