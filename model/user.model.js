@@ -13,7 +13,7 @@ const userSchema = new Schema({
 	},
 	status:{
 		lastSeen: String,
-	    active: String
+	    active: Boolean
 	},
 	socialMediaSignUp:{
 		facebook: {type: String },
