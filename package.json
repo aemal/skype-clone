@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/aemal/SkypeClone/issues"
   },
-  "homepage": "https://github.com/aemal/SkypeClone#readme"
+  "homepage": "https://github.com/mudhaffar2/SkypeClone#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.2"
+  }
 }
