@@ -2,19 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	emailAddress: String,
+	emailAddress: { type: String , lowercase: true},
 	password: String,
 	dateOfBirth: String,
 	profile:{
-		firstName: String,
-		lastName: String,
+		firstName: { type: String, lowercase: true , unique: true, required: true },
+		lastName: { type: String, lowercase: true , unique: true, required: true },
+		timestamp: { type : Date, default: Date.now },
 		Avatar: String
 	},
 	status:{
 		lastSeen: String,
 	    active: String
 	},
-	socialMediaSignUp:{},
+	socialMediaSignUp:{
+		facebook: {type: String },
+        twitter: {type: String },
+        instagram: {type: String }},
 	contacts:{
 		list: Array,
 		requested: Array,
@@ -24,5 +28,3 @@ const userSchema = new Schema({
 });
 
 module.exports = mongoose.model('user', userSchema);
-
-
