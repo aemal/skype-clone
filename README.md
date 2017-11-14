@@ -6,15 +6,12 @@ Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &a
 
 - Yaser
 - Hussein
-
-
+---
 - Ahmad
 - Mudhafar
-
-
+---
 - Jose
 - Sareh
-
-
+---
 - Mir
 - Michal
