@@ -16,7 +16,13 @@ const userSchema = new Schema({
 	},
 	socialMediaSignUp:{},
 	contacts:{
-		list: Array,
+		list:[{
+			friend: {
+				firstName: String,
+				lastName: String,
+				Avatar: String
+			}
+		}],
 		requested: Array,
 		pending: Array,
 		blocked: Array
