@@ -2,23 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	emailAddress: { type: String , lowercase: true},
+	emailAddress: String,
 	password: String,
 	dateOfBirth: String,
 	profile:{
-		firstName: { type: String, lowercase: true , unique: true, required: true },
-		lastName: { type: String, lowercase: true , unique: true, required: true },
-		timestamp: { type : Date, default: Date.now },
+		firstName: String,
+		lastName: String,
 		Avatar: String
 	},
 	status:{
 		lastSeen: String,
-	    active: String
+	    active: Boolean
 	},
-	socialMediaSignUp:{
-		facebook: {type: String },
-        twitter: {type: String },
-        instagram: {type: String }},
+	socialMediaSignUp:{},
 	contacts:{
 		list: Array,
 		requested: Array,
