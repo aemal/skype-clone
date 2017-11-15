@@ -20,7 +20,13 @@ const userSchema = new Schema({
         twitter: {type: String },
         instagram: {type: String }},
 	contacts:{
-		list: Array,
+		list:[{
+			friend: {
+				firstName: String,
+				lastName: String,
+				Avatar: String
+			}
+		}],
 		requested: Array,
 		pending: Array,
 		blocked: Array
