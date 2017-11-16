@@ -20,16 +20,10 @@ const userSchema = new Schema({
         twitter: {type: String },
         instagram: {type: String }},
 	contacts:{
-		list:[{
-			friend: {
-				firstName: String,
-				lastName: String,
-				Avatar: String
-			}
-		}],
-		requested: Array,
-		pending: Array,
-		blocked: Array
+    friends : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    blocked : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    requested : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    pending : [{ type: Schema.Types.ObjectId, ref: 'User' }]
 	}
 });
 
