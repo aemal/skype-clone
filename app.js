@@ -43,7 +43,7 @@ app.get('/message/get/:id', (req, res) => {
 	});
 });
 
-app.get('/users/:id', (request, response)=>{
+app.get('/users/:id', (req, res)=>{
     Contact.find({
         _id: request.params.id
     }).exec((err, contact)=>{
