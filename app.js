@@ -26,15 +26,15 @@ mongoose.connection.openUri(db);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/message/send', messageHandler.send.bind(this));
+app.post('/message/send', messageHandler.send.bind(messageHandler));
+app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
 
-app.get('/message/get/:id', messageHandler.get.bind(this));
-app.get('/user/get/:id', userHandler.get.bind(this));
+app.get('/user/get/:id', userHandler.get.bind(userHandler));
 
-app.get('/friend/add/:id', friendHandler.add.bind(this));
-app.get('/friend/accept/:id', friendHandler.accept.bind(this))
-app.get('/friend/decline/:id', friendHandler.decline.bind(this))
-app.get('/friend/remove/:id', friendHandler.remove.bind(this));
+app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
+app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
+app.get('/friend/decline/:id', friendHandler.decline.bind(friendHandler))
+app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 app.listen(port, function() {
 	console.log('Server started .....')
