@@ -18,10 +18,10 @@ const userSchema = new Schema({
   loginStrategy : {type : String, enum : {values : ['facebook','twitter','instagram','github'], message : 'Unknown oAuth provider ;('}},
   loginObject : Object,
 	contacts:{
-    friends : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    blocked : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    requested : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    pending : [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    friends : [{ type: Schema.Types.ObjectId, ref: 'User', unique : true}],
+    blocked : [{ type: Schema.Types.ObjectId, ref: 'User' , unique : true}],
+    requested : [{ type: Schema.Types.ObjectId, ref: 'User', unique : true}],
+    pending : [{ type: Schema.Types.ObjectId, ref: 'User', unique : true}]
 	}
 });
 
