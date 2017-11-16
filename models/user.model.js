@@ -15,10 +15,8 @@ const userSchema = new Schema({
 		lastSeen: { type: Date },
 	  active: Boolean
 	},
-	socialMediaSignUp: {
-		facebook: {type: String },
-        twitter: {type: String },
-        instagram: {type: String }},
+  loginStrategy : {type : String, enum : {values : ['facebook','twitter','instagram','github'], message : 'Unknown oAuth provider ;('}},
+  loginObject : Object,
 	contacts:{
     friends : [{ type: Schema.Types.ObjectId, ref: 'User' }],
     blocked : [{ type: Schema.Types.ObjectId, ref: 'User' }],
