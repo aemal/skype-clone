@@ -1,12 +1,12 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
 
-var Message = require('./models/message.model');
+const Message = require('./models/message.model');
 const User = require('./models/user.model');
-var db = 'mongodb://localhost:27017/skypeClone';
+const db = 'mongodb://localhost:27017/skypeClone';
 
 
 //Handlers
