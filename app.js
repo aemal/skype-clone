@@ -4,16 +4,16 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 
-const Message = require('./models/message.model');
-const User = require('./models/user.model');
+const Message = require('./lib/models/message.model');
+const User = require('./lib/models/user.model');
 const db = 'mongodb://localhost:27017/skypeClone';
 
 
 //Handlers
 
-const UserHandler = require('./handlers/user.js');
-const FriendHandler = new require('./handlers/friend.js');
-const MessageHandler = new require('./handlers/message.js');
+const UserHandler = require('./lib/handlers/user.js');
+const FriendHandler = new require('./lib/handlers/friend.js');
+const MessageHandler = new require('./lib/handlers/message.js');
 
 const userHandler = new UserHandler(User);
 const friendHandler = new FriendHandler(User);
