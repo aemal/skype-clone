@@ -2,34 +2,28 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	emailAddress: { type: String , lowercase: true},
+	emailAddress: { type: String , lowercase: true, unique : true},
 	password: String,
 	dateOfBirth: String,
 	profile:{
-		firstName: { type: String, lowercase: true , unique: true, required: true },
-		lastName: { type: String, lowercase: true , unique: true, required: true },
+		firstName: { type: String, lowercase: true, required: true },
+		lastName: { type: String, lowercase: true, required: true },
 		timestamp: { type : Date, default: Date.now },
-		Avatar: String
+		avatarURL: String
 	},
 	status:{
-		lastSeen: String,
-	    active: Boolean
+		lastSeen: { type: Date },
+	  active: Boolean
 	},
-	socialMediaSignUp:{
+	socialMediaSignUp: {
 		facebook: {type: String },
         twitter: {type: String },
         instagram: {type: String }},
 	contacts:{
-		list:[{
-			friend: {
-				firstName: String,
-				lastName: String,
-				Avatar: String
-			}
-		}],
-		requested: Array,
-		pending: Array,
-		blocked: Array
+    friends : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    blocked : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    requested : [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    pending : [{ type: Schema.Types.ObjectId, ref: 'User' }]
 	}
 });
 
