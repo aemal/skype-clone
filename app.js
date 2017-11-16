@@ -15,7 +15,7 @@ mongoose.connection.openUri(db);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/message', (req, res) => {
+app.post('/message/send', (req, res) => {
 	var newMessage = new Message ({
 		senderUserID: req.body.sendUserId,
 		receiverUserID: req.body.receiveUserId,
@@ -30,9 +30,9 @@ app.post('/message', (req, res) => {
 	});
 });
 
-app.get('/:message', (req, res) => {
+app.get('/message/get/:id', (req, res) => {
 	Message.findOne({
-		message: req.params.message
+		message: req.params.id
 	})
 	.exec((err, message) => {
 		if(err) {
@@ -43,7 +43,7 @@ app.get('/:message', (req, res) => {
 	});
 });
 
-app.get('/get_users/:id', (request, response)=>{
+app.get('/users/:id', (request, response)=>{
     Contact.find({
         _id: request.params.id
     }).exec((err, contact)=>{
