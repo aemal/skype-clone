@@ -48,6 +48,7 @@ app.post('/message/send', messageHandler.send.bind(messageHandler));
 app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
 
 app.get('/user/get/:id', userHandler.get.bind(userHandler));
+app.post('/user/register', userHandler.register.bind(userHandler));
 
 app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
 app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
