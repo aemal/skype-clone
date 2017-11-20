@@ -30,8 +30,8 @@ passport.deserializeUser=serialAuthenticator.deserialize;
 //Handlers
 
 const UserHandler = require('./lib/handlers/user.js');
-const FriendHandler = new require('./lib/handlers/friend.js');
-const MessageHandler = new require('./lib/handlers/message.js');
+const FriendHandler = require('./lib/handlers/friend.js');
+const MessageHandler = require('./lib/handlers/message.js');
 
 const userHandler = new UserHandler(User);
 const friendHandler = new FriendHandler(User);
