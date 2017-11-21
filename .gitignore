@@ -1,6 +1,7 @@
 node_modules/
 .DS_Store
 
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -59,3 +60,6 @@ typings/
 
 # dotenv environment variables file
 .env
+=======
+*.sw?
+>>>>>>> 393f9d7422979115d9cda87d516aaf41a753e1ca
