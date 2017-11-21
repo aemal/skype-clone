@@ -24,10 +24,6 @@ Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &a
   ````
  ---
 
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-
 [Skype Clone Heroku App Link](https://skypeclone.herokuapp.com)
 
 [Specifications Video](https://www.youtube.com/watch?v=veXSDyUSEhU&t=120s)
