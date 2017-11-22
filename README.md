@@ -13,9 +13,11 @@ Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &a
 - Mir
 - Michal
 ---
+
 ## Data Temp
  For the porpuse of the examine the Schema of the mongoose we created the `data.js` file in `temporary` folder.
- -To add the data to your ``Database`` apply the following lines in your mongo database:
+ -To add the data to your ``Database`` apply the following lines in your mongo database in `Terminal`:
+
   ````
    use skypeClone
    db.createCollection('users')
