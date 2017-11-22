@@ -19,11 +19,16 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+<<<<<<< HEAD
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.2"
+=======
     "express-session": "^1.15.6",
     "js-sha512": "^0.6.0",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
+>>>>>>> 393f9d7422979115d9cda87d516aaf41a753e1ca
   }
 }
