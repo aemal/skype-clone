@@ -20,7 +20,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.13.2"
+    "mongoose": "^4.13.2",
     "express-session": "^1.15.6",
     "js-sha512": "^0.6.0",
     "passport": "^0.4.0",
