@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({extended: false }));
 app.post('/message/send', messageHandler.send.bind(messageHandler));
 app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
 
-app.get('/user/get/:id', userHandler.get.bind(userHandler));
+app.get('/user/get_friends/:id', userHandler.get.bind(userHandler));
 app.post('/user/register', userHandler.register.bind(userHandler));
 
 app.get('/user/profile/:id', profileHandler.getProfile.bind(profileHandler));
