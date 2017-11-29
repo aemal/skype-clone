@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const formidable = require('formidable');
+
 
 const SerialAuthenticator = require('./lib/auth/index');
 const Message = require('./lib/models/message.model');
@@ -22,9 +22,9 @@ app.use((err,req, res, next)=>{
    if (err.code === 'LIMIT_FILE_SIZE') {
        conseol.log(err.code);
   }
-
-
+  next(err);
 });
+
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,7 +49,7 @@ mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false }));
 
 app.post('/message/send', messageHandler.send.bind(messageHandler));
 app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
@@ -64,23 +64,6 @@ app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
 app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
 app.get('/friend/decline/:id', friendHandler.decline.bind(friendHandler))
 app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
-
-app.post('/upload',(req, res)=>{
-
-	var form = new formidable.IncomingForm();
-
-	form.uploadDir = __dirname + '/public';
-
-	form.parse(req, (err, fields, files)=>{
-		console.log(files.file.name);
-		if(err){ throw err};
-		if(files.name !== ''){
-			res.send('received upload:\n\n');
-		}else{
-			res.send('No file chosen');
-		}
-	});  
-});
 
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
 
