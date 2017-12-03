@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-
+const multiparty = require('./lib/handlers/file-upload');
+const router = express.Router();
 
 const SerialAuthenticator = require('./lib/auth/index');
 const Message = require('./lib/models/message.model');
@@ -17,13 +18,10 @@ const authStrategies = {
 
 const serialAuthenticator = new SerialAuthenticator(User); // pun intended
 
-app.use((err,req, res, next)=>{
+app.use((err,req, res, next)=>{});
 
-   if (err.code === 'LIMIT_FILE_SIZE') {
-       conseol.log(err.code);
-  }
-  next(err);
-});
+app.use(router);
+app.use(multiparty);
 
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -58,7 +56,7 @@ app.get('/user/get_friends/:id', userHandler.get.bind(userHandler));
 app.post('/user/register', userHandler.register.bind(userHandler));
 
 app.get('/user/profile/:id', profileHandler.getProfile.bind(profileHandler));
-app.post('/user/profile_edit/:id',profileHandler.editProfile.bind(profileHandler)); 
+router.post('/user/profile_edit/:id',profileHandler.editProfile.bind(profileHandler)); 
 
 app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
 app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
