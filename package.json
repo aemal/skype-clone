@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/aemal/SkypeClone#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongoose": "^4.13.2",
     "express-session": "^1.15.6",
-    "js-sha512": "^0.6.0",
+    "mongoose": "^4.13.2",
     "multer": "^1.3.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
