@@ -11,7 +11,7 @@ Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &a
 - Sareh
 ---
 - Mir
-- Michal
+- Dr Who
 ---
 
 [Skype Clone Heroku App Link](https://skypeclone.herokuapp.com)
