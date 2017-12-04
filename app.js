@@ -10,13 +10,14 @@ const router = express.Router();
 const SerialAuthenticator = require('./lib/auth/index');
 const Message = require('./lib/models/message.model');
 const User = require('./lib/models/user.model');
+const Chat = require('./lib/models/chat.model');
 
 const db = 'mongodb://localhost:27017/skypeClone';
 const authStrategies = {
   local : require('./lib/auth/local')(User)
 };
 
-const serialAuthenticator = new SerialAuthenticator(User); // pun intended
+const serialAuthenticator = new SerialAuthenticator(User);
 
 app.use((err,req, res, next)=>{});
 
@@ -36,11 +37,13 @@ const UserHandler = require('./lib/handlers/user.js');
 const FriendHandler = require('./lib/handlers/friend.js');
 const MessageHandler = require('./lib/handlers/message.js');
 const ProfileHandler = require('./lib/handlers/profile.js');
+const ContactHandler = require('./lib/handlers/contact.js');
 
 const userHandler = new UserHandler(User);
 const friendHandler = new FriendHandler(User);
-const messageHandler = new MessageHandler(Message);
+const messageHandler = new MessageHandler(Message, Chat);
 const profileHandler = new ProfileHandler(User);
+const contactHandler = new ContactHandler(User);
 
 const port = process.env.PORT || 8080;
 mongoose.Promise = global.Promise;
@@ -48,6 +51,9 @@ mongoose.connection.openUri(db);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
+
+app.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
+app.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
 
 app.post('/message/send', messageHandler.send.bind(messageHandler));
 app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
