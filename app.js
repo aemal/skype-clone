@@ -64,6 +64,9 @@ app.get('/', function (req, res) {
 app.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
 app.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
 
+app.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
+app.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
+
 app.post('/message/send', messageHandler.send.bind(messageHandler));
 app.get('/message/get/:id', messageHandler.get.bind(messageHandler));
 
@@ -79,7 +82,6 @@ app.get('/friend/decline/:id', friendHandler.decline.bind(friendHandler))
 app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
-
 
 mockData(User,Message, (err)=>{
   if(err){
