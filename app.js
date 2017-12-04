@@ -71,7 +71,7 @@ app.get('/user/get_friends/:id', userHandler.get.bind(userHandler));
 app.post('/user/register', userHandler.register.bind(userHandler));
 
 app.get('/user/profile/:id', profileHandler.getProfile.bind(profileHandler));
-app.post('/user/profile_edit/:id', multiparty, profileHandler.editProfile.bind(profileHandler)); 
+router.post('/user/profile_edit/:id', multiparty, profileHandler.editProfile.bind(profileHandler)); 
 
 app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
 app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
@@ -81,11 +81,11 @@ app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
 
 
-mockData(User,Message, (err)=>{
-  if(err){
-    throw err;
-  }
+// mockData(User,Message, (err)=>{
+//   if(err){
+//     throw err;
+//   }
   app.listen(port, ()=>{
     console.log('Server started on port.....' + port );
   });
-});
+// });
