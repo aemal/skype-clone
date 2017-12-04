@@ -23,19 +23,6 @@ app.use((err,req, res, next)=>{});
 app.use(router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
-//app.use(multiparty);
-
-// router.post('/upload/:id', multiparty,(req, res, next)=>{
-//     var name;
-//     console.log(req.filename);
-//     // req.on('end', ()=>{
-//     // 	name = req.filename;
-//     // 	console.log(name);
-
-//     // }); 
-//     //next();
-//     res.send('File uploaded');    
-// });
 
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
