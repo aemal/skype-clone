@@ -23,7 +23,8 @@ const serialAuthenticator = new SerialAuthenticator(User);
 app.use((err,req, res, next)=>{});
 
 app.use(router);
-app.use(multiparty);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false }));
 
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -54,10 +55,15 @@ mongoose.connection.openUri(db).catch(function(err){
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
+
 app.get('/', function (req, res) {
   res.set('Content-Type', 'text/html');
   res.send('<h1>bla</h1>');
 });
+
+app.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
+app.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
+
 app.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
 app.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
 
@@ -68,7 +74,7 @@ app.get('/user/get_friends/:id', userHandler.get.bind(userHandler));
 app.post('/user/register', userHandler.register.bind(userHandler));
 
 app.get('/user/profile/:id', profileHandler.getProfile.bind(profileHandler));
-router.post('/user/profile_edit/:id',profileHandler.editProfile.bind(profileHandler));
+app.post('/user/profile_edit/:id', multiparty, profileHandler.editProfile.bind(profileHandler)); 
 
 app.get('/friend/add/:id', friendHandler.add.bind(friendHandler));
 app.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
@@ -76,11 +82,12 @@ app.get('/friend/decline/:id', friendHandler.decline.bind(friendHandler))
 app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
-mockData(User,Message,function(err){
+
+mockData(User,Message, (err)=>{
   if(err){
     throw err;
   }
-  app.listen(port, function() {
+  app.listen(port, ()=>{
     console.log('Server started on port.....' + port );
   });
 });
