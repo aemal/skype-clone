@@ -20,8 +20,6 @@ const authStrategies = {
 
 const serialAuthenticator = new SerialAuthenticator(User);
 
-app.use((err,req, res, next)=>{});
-
 app.use(router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
@@ -83,6 +81,9 @@ app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
 
+// ErrorHandler, Please pass all the errors to the next callback function
+app.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
+
 mockData(User,Message, (err)=>{
   if(err){
     throw err;
@@ -90,4 +91,4 @@ mockData(User,Message, (err)=>{
   app.listen(port, ()=>{
     console.log('Server started on port.....' + port );
   });
-
+});
