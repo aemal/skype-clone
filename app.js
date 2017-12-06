@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-//const multiparty = require('./lib/handlers/file-upload');
+const multiparty = require('./lib/handlers/file-upload');
 const router = express.Router();
 const mockData = require('./lib/mock-data');
 
