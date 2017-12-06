@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const multiparty = require('./lib/handlers/file-upload');
+//const multiparty = require('./lib/handlers/file-upload');
 const router = express.Router();
 
 const SerialAuthenticator = require('./lib/auth/index');
@@ -22,7 +22,7 @@ const serialAuthenticator = new SerialAuthenticator(User);
 app.use((err,req, res, next)=>{});
 
 app.use(router);
-app.use(multiparty);
+//app.use(multiparty);
 
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -72,6 +72,6 @@ app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
 
 app.listen(port, function() {
-  console.log('Server started on port.....' + port );
+  console.log('Server started on port.....' + port ); 
 });
 
