@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const multiparty = require('./lib/handlers/file-upload');
+//const multiparty = require('./lib/handlers/file-upload');
 const router = express.Router();
 const mockData = require('./lib/mock-data');
 
@@ -21,8 +21,12 @@ const authStrategies = {
 const serialAuthenticator = new SerialAuthenticator(User);
 
 app.use(router);
+
+app.use(multiparty);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false }));
+
 
 app.use(require('express-session')({ secret: "FIXME: I should be retrieved from env var ;(", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -81,8 +85,10 @@ app.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 app.get('/login/local', passport.authenticate('local'), (req,res) => { res.send('ok') });
 
+
 // ErrorHandler, Please pass all the errors to the next callback function
 app.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
+
 
 mockData(User,Message, (err)=>{
   if(err){
