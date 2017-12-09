@@ -83,14 +83,16 @@ app.get('*', isAuthenticated,(req, res, next)=>{
     res.redirect('/');
 });
 
-// ErrorHandler, Please pass all the errors to the next function
+
+// ErrorHandler, Please pass all the errors to the next callback function
 app.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
 
-// mockData(User,Message, (err)=>{
-//   if(err){
-//     throw err;
-//   }
+
+mockData(User,Message, (err)=>{
+  if(err){
+    throw err;
+  }
   app.listen(port, ()=>{
     console.log('Server started on port.....' + port );
   });
-// });
+ });
