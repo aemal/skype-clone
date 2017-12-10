@@ -13,8 +13,8 @@ const SerialAuthenticator = require('./lib/auth/index');
 const User = require('./lib/models/user.model');
 const Message = require('./lib/models/message.model');
 
-const authRoutes = require('./lib/router/auth-routers')(passport);
-const userRoutes = require('./lib/router/user-routers')();
+const authRoutes = require('./lib/routers/auth-routers')(passport);
+const userRoutes = require('./lib/routers/user-routers')();
 
 const db = 'mongodb://localhost:27017/skypeClone';
 
