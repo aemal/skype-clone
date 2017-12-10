@@ -24,7 +24,7 @@ mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
 
 app.use(router);
-app.use('/', authRoutes);
+app.use('/', authRoutes);  // login/out authentication routes
 
 router.use(cookieParser());
 router.use(bodyParser.json());
@@ -33,7 +33,8 @@ router.use(require('express-session')({ secret: "FIXME: I should be retrieved fr
 router.use(passport.initialize());
 router.use(passport.session());
 
-SerialAuthenticator(passport);
+// passport de/serialize and local strategy
+SerialAuthenticator(passport); 
 
 //Handlers
 const UserHandler = require('./lib/handlers/user.js');
@@ -48,7 +49,7 @@ const messageHandler = new MessageHandler(Message, Chat);
 const profileHandler = new ProfileHandler(User);
 const contactHandler = new ContactHandler(User);
 
-router.get('/', (req, res, next)=>{res.send('Home')});
+router.get('/', (req, res, next)=>res.send('Home'));
 
 router.post('/message/get_history', messageHandler.messageHistory.bind(messageHandler));
 router.get('/contacts/search/:keyword', contactHandler.searchContact.bind(contactHandler));
@@ -70,11 +71,11 @@ router.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 // ErrorHandler, Please pass all the errors to the next function
 router.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
 
-// mockData(User,Message, (err)=>{
-//   if(err){
-//     throw err;
-//   }
+mockData(User,Message, (err)=>{
+  if(err){
+    throw err;
+  }
   app.listen(port, ()=>{
     console.log('Server started on port.....' + port );
   });
-// });
+});
