@@ -68,8 +68,9 @@ router.get('/friend/accept/:id', friendHandler.accept.bind(friendHandler))
 router.get('/friend/decline/:id', friendHandler.decline.bind(friendHandler))
 router.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
-// ErrorHandler, Please pass all the errors to the next function
+// ErrorHandler, pass errors to the next function
 router.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
+
 
 mockData(User,Message, (err)=>{
   if(err){
