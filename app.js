@@ -14,7 +14,7 @@ const SerialAuthenticator = require('./lib/auth/index');
 const Message = require('./lib/models/message.model');
 const User = require('./lib/models/user.model');
 const Chat = require('./lib/models/chat.model');
-const authRoutes = require('./lib/router/auth-routes')(passport);
+const authRoutes = require('./lib/router/auth-routers')(passport);
 
 const db = 'mongodb://localhost:27017/skypeClone';
 
@@ -70,7 +70,6 @@ router.get('/friend/remove/:id', friendHandler.remove.bind(friendHandler));
 
 // ErrorHandler, pass errors to the next function
 router.use((err,req, res, next)=>res.status(err.status || 400).send(err.message));
-
 
 mockData(User,Message, (err)=>{
   if(err){
