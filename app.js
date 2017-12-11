@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 const app = express();
 const router = express.Router();
@@ -29,16 +30,16 @@ app.use('/user', userRoutes); // user authentication
 
 router.use(cookieParser());
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({
-    extended: true
-}));
+router.use(bodyParser.urlencoded({extended: true}));
 router.use(require('express-session')({
     secret: "FIXME: I should be retrieved from env var ;(",
     resave: true,
     saveUninitialized: true
 }));
+
 router.use(passport.initialize());
 router.use(passport.session());
+router.use(flash());
 
 // passport de/serialize and local strategy
 SerialAuthenticator(passport);
