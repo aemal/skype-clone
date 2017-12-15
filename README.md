@@ -1,18 +1,21 @@
 # SkypeClone
 Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &amp; WebRTC
-## Teams:
-- Yaser
-- Hussein
----
-- Ahmad
-- Mudhafar
----
-- Jose
-- Sareh
----
-- Mir
-- Dr Who
----
+## Setup
+Install dependencies
+`npm install`
+
+Start Server
+`node app.js`
+
+## Teams
+
+|Team 1   |Team 2   | Team 3  | Team 4  |
+|---|---|---|---|---|
+| Yaser  | Ahmad  |  Jose |  Mir |
+| Hussein |  Mudhafar | Sareh  | Dr Who  |
+
+
+## Links
 
 [Skype Clone Heroku App Link](https://skypeclone.herokuapp.com)
 
