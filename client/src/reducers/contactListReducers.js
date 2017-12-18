@@ -1,0 +1,20 @@
+export default function reducer(state={
+	contactlist:[],
+	fetching:false,
+	fetched:null
+},action){
+	switch(action.type){
+		case 'FETCH_CONTACT_LIST':{
+			return {...state,fetching:true}
+		}
+		case 'FETCH_USER_DONE':{
+		  return {...state,fetching:false,fetched:true,contactlist:action.payload}	
+		}
+		case 'FETCH_USER_WITHERROR':{
+			return {...state,fetching:false,error:action.payload}
+		}
+    default:
+    return state
+	}
+
+}

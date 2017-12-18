@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function fetchUsersList(){
+export function fetchContactList(){
 		return function(dispatch){
 			axios.get('https://jsonplaceholder.typicode.com/users')
 			.then((response) => {
