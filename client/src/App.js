@@ -4,13 +4,28 @@ import ContactList from './components/contactList';
 import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
-
+import {fetchContactList} from './actions/userActions';
+import {connect} from 'react-redux';
 import './App.css';
 import './style.css';
 
+function mapStateToProps(state) {
+  return {
+    contactList: state.contactList
+  };
+}
+
 class App extends Component {
 
+  componentWillMount(){
+
+    this.props.dispatch(fetchContactList());
+    
+  }
+  
+
   render() {
+    
     return (
       <div>
         <div className="sideBarMainComponent">
@@ -18,7 +33,7 @@ class App extends Component {
             <Avatar />
           </div>
           <div className="sideBarContactListComponent">
-            <ContactList />
+            <ContactList contactList={this.props.contactList.contactList}/>
           </div>
         </div>
         <div className="messagesMainComponent">
@@ -37,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

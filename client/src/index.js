@@ -1,25 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducer from './reducers';
+//import {createStore} from 'redux';
+//import reducer from './reducers';
+import store from './store';
 
-const store = createStore(reducer);
 
-const MainComponent = () => (
+/*const MainComponent = () => (
 
   <MuiThemeProvider>
     <App />
   </MuiThemeProvider>
-);
+);*/
 
 
 ReactDOM.render(
 <Provider store={store}>
-	<MainComponent />
+	 <App />
 </Provider>
 	, document.getElementById('root'));
 registerServiceWorker();

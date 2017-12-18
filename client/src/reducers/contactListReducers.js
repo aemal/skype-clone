@@ -1,7 +1,9 @@
 export default function reducer(state={
 	contactList:[],
 	fetching:false,
-	fetched:null
+	fetched:false,
+	error:null
+	
 },action){
 	switch(action.type){
 		case 'FETCH_CONTACT_LIST':{
