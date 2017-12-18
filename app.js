@@ -9,13 +9,13 @@ const flash = require('connect-flash');
 const app = express();
 const router = express.Router();
 
-const mockData = require('./lib/mock-data');
-const SerialAuthenticator = require('./lib/auth/index');
-const User = require('./lib/models/user.model');
-const Message = require('./lib/models/message.model');
+const mockData = require('./server/mock-data');
+const SerialAuthenticator = require('./server/auth/index');
+const User = require('./server/models/user.model');
+const Message = require('./server/models/message.model');
 
-const authRoutes = require('./lib/routers/auth-routers')(passport);
-const userRoutes = require('./lib/routers/user-routers')();
+const authRoutes = require('./server/routers/auth-routers')(passport);
+const userRoutes = require('./server/routers/user-routers')();
 
 const db = 'mongodb://localhost:27017/skypeClone';
 

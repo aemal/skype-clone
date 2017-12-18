@@ -18,9 +18,9 @@ const profileHandler = new ProfileHandler(User);
 const contactHandler = new ContactHandler(User);
 const messageHandler = new MessageHandler(Message, Chat);
 
-module.exports = function () {
+module.exports = ()=>{
 
-    const isAuthenticated = function(req, res, next) {
+    const isAuthenticated = (req, res, next)=>{
         if (req.isAuthenticated()) return next();
         else res.redirect('/auth/login');
     };

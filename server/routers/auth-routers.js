@@ -20,5 +20,23 @@ module.exports = function loginout(passport) {
         failureRedirect: '/auth/register',
         failureFlash: true
     }));
+
+    router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+
+    router.get('/facebook/callback',
+        passport.authenticate('facebook', { failureRedirect: '/auth/login' }),
+        (req, res)=>{
+        res.redirect('/');
+    });
+
+    router.get('/github',
+        passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+    router.get('/github/callback', 
+        passport.authenticate('github', { failureRedirect: '/auth/login' }),
+        (req, res)=>{
+        res.redirect('/');
+    });
+
     return router;
 }
