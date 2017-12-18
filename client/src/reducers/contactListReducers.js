@@ -1,5 +1,5 @@
 export default function reducer(state={
-	contactlist:[],
+	contactList:[],
 	fetching:false,
 	fetched:null
 },action){
@@ -8,7 +8,7 @@ export default function reducer(state={
 			return {...state,fetching:true}
 		}
 		case 'FETCH_USER_DONE':{
-		  return {...state,fetching:false,fetched:true,contactlist:action.payload}	
+		  return {...state,fetching:false,fetched:true,contactList:action.payload}	
 		}
 		case 'FETCH_USER_WITHERROR':{
 			return {...state,fetching:false,error:action.payload}

@@ -4,7 +4,7 @@ import ContactList from './components/contactList';
 import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
-import AppBar from 'material-ui/AppBar';
+
 import './App.css';
 import './style.css';
 
