@@ -37,6 +37,10 @@ module.exports = function loginout(passport) {
         (req, res)=>{
         res.redirect('/');
     });
+    ////// Twitter //////
+    router.get('/twitter', passport.authenticate('twitter'));
+    router.get('/twitter/callback', 
+        passport.authenticate('twitter',{failureRedirect: '/auth/login'}));
 
     return router;
 }
