@@ -1,7 +1,7 @@
 .sideBarMainComponent {
   background-color: #ffaadd;
   height: 100vh;
-  width: 30%;
+  width: 25%;
   float: left;
 }
 
@@ -24,7 +24,7 @@
 .messagesMainComponent {
   background-color: #11aadd;
   height: 100vh;
-  width: 70%;
+  width: 75%;
   float: left;
 }
 
