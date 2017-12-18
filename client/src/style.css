@@ -1,0 +1,62 @@
+.sideBarMainComponent {
+  background-color: #ffaadd;
+  height: 100vh;
+  width: 30%;
+  float: left;
+}
+
+.sideBarAvatarComponent {
+  background-color: #aaddee;
+  height: 30vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.sideBarContactListComponent {
+  background-color: #ccddee;
+  height: 70vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.messagesMainComponent {
+  background-color: #11aadd;
+  height: 100vh;
+  width: 70%;
+  float: left;
+}
+
+.messagesContactDetailComponent{
+  background-color: #11aadd;
+  height: 20vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.messagesLogComponent{
+  background-color: #00ff00;
+  height: 70vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.messagesNewMessageComponent{
+  background-color: #02ddaa;
+  height: 10vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.avatarIcons {
+  float: right;
+  display: block;
+}
+
+.avatarPhoto {
+  border-radius: 200px;
+}
