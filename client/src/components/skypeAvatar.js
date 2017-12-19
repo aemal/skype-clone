@@ -1,13 +1,13 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import  {ListItemText } from 'material-ui/List';
 
 
 class SkypeAvatar extends React.Component {
 
 	render(){
         const props = {
-            avatarUrl : this.props.avatar,
+        avatarUrl : this.props.avatar,
 		    size : this.props.size,
 		    key : this.props.key,
 		    name : this.props.name,
@@ -17,7 +17,7 @@ class SkypeAvatar extends React.Component {
 		const style = {
 				width:props.size, 
 				height:props.size,
-                backgroundImage: "url(" + props.avatarUrl + ")",
+        backgroundImage: "url(" + props.avatarUrl + ")",
 		}
 
 		return(
