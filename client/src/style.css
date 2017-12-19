@@ -25,6 +25,7 @@ html {
   width: 100%;
   float: left;
   display: block;
+  position: relative;
 }
 
 .sideBarContactListComponent {
