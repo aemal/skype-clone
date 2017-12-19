@@ -1,5 +1,4 @@
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
 
 class SkypeAvatar extends React.Component {
 
@@ -10,20 +9,21 @@ class SkypeAvatar extends React.Component {
 		    key : this.props.key,
 		    name : this.props.name
         }
-		
+		const style = {
+				width:props.size, 
+				height:props.size,
+                backgroundImage: "url(" + props.avatarUrl + ")",
+		}
 		return(
-			<div style={{border: '1px solid'}}>
-			  <Avatar 
+			<div style={{padding:'0',}}>
+			  <div
 				  key={props.key}
 				  alt={props.name} 
 				  src={props.avatarUrl}
-			      style={{
-				   	width:props.size, 
-				   	height:props.size,
-                    margin:'0 auto',
-			      }}
-			   	/>
-		      <p style={{textAlign:'center'}}>{props.name}</p>
+				  className="avatar"
+			      style={style}
+			   	></div>
+		      <p style={{textAlign:'center'}}>Jhon Doe</p>
 		    </div>
 			)
 	}
