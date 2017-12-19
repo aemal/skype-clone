@@ -1,3 +1,17 @@
+/**,
+*:before,
+*:after {
+  box-sizing: border-box;
+}*/
+/*
+*+* {
+  margin-top: 1rem;
+}*/
+
+html {
+  height: 100%;
+}
+
 .sideBarMainComponent {
   background-color: #ffaadd;
   height: 100vh;
@@ -59,4 +73,16 @@
 
 .avatarPhoto {
   border-radius: 200px;
+}
+
+.avatar {
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
 }
