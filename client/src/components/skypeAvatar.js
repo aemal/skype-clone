@@ -23,7 +23,7 @@ class SkypeAvatar extends React.Component {
 				  className="avatar"
 			      style={style}
 			   	></div>
-		      <p style={{textAlign:'center'}}>Jhon Doe</p>
+		      <p style={{textAlign:'center'}}>{props.name}</p>
 		    </div>
 			)
 	}
