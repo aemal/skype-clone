@@ -1,4 +1,7 @@
 import React from 'react';
+import Avatar from 'material-ui/Avatar';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+
 
 class SkypeAvatar extends React.Component {
 
@@ -7,24 +10,26 @@ class SkypeAvatar extends React.Component {
             avatarUrl : this.props.avatar,
 		    size : this.props.size,
 		    key : this.props.key,
-		    name : this.props.name
+		    name : this.props.name,
+		    align : this.props.align
         }
+
 		const style = {
 				width:props.size, 
 				height:props.size,
                 backgroundImage: "url(" + props.avatarUrl + ")",
 		}
+
 		return(
-			<div style={{padding:'0',}}>
-			  <div
-				  key={props.key}
-				  alt={props.name} 
-				  src={props.avatarUrl}
-				  className="avatar"
-			      style={style}
-			   	></div>
-		      <p style={{textAlign:'center'}}>{props.name}</p>
-		    </div>
+			<div>
+				<Avatar
+					key={props.key}
+					alt={props.name} 
+					className="avatar"
+					style={style}
+				/>
+				<ListItemText primary={props.name}/>				
+			</div>
 			)
 	}
 }
