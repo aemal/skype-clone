@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SkypeAvatar from './skypeAvatar';
-import avatar from './3.jpg';
+
 
 class MessagesLog extends Component {
   render() {
@@ -9,7 +9,7 @@ class MessagesLog extends Component {
           <div>
             <div style={{border: '1px solid', marginTop:'2%'}}>
               <div style={{width: '10%', border: '1px solid'}}>
-               <SkypeAvatar avatar={avatar} size={60}/>
+               <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={60}/>
               </div>
               <div>
                <p>Hi There!</p>
@@ -21,9 +21,9 @@ class MessagesLog extends Component {
               <p>Hi There!</p>
             </div>
             <div style={{float:'right', width: '10%', border: '1px solid'}}>
-             <SkypeAvatar avatar={avatar} size={60}/>
+             <SkypeAvatar avatar={'http://www.tollywood.net/Topstoriespics/sonali-rauts-sexy-avatar-in-black.jpg'} size={60}/>
             </div>
-          </div> 
+          </div>
         </div>
     );
   }
