@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 //import Card, {CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Avatar from './skypeAvatar';
+import FormDialog from './dialog'
 
 
 
@@ -53,13 +54,31 @@ const User = {
 }
 
 class ContactDetail extends Component {
+  state = {
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
         <div className={classes.btns}>
           <Button className = {classes.phoneIcon}><i className= 'material-icons'>phone</i></Button>
-          <Button className = {classes.videoIcon}><i className='material-icons' >videocam</i></Button>
+          <Button className = {classes.videoIcon}
+                  onClick={this.handleClickOpen}>
+              <i className='material-icons' >videocam</i>
+          </Button>
+          <FormDialog
+              open={this.state.open}
+              handleClickOpen={this.handleClickOpen}
+              handleClose={this.handleClose}/>
         </div>
           <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={70} name={'ET'} />
       </div>
