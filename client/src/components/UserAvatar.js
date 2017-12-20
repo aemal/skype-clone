@@ -35,9 +35,6 @@ class UserAvatar extends Component {
      const{classes} = this.props;
     return (
       <div >
-        <div className={classes.name}>
-          
-        </div>
         <div className={classes.iconsContainer}>
         <IconButton tooltip="SVG Icon" className={classes.icons}>
           <i className="material-icons">settings</i>

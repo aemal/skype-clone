@@ -11,7 +11,9 @@ body {
   height: 100%;
   margin: 0px;
 }
-
+.app {
+  height: 100%;
+}
 .sideBarMainComponent {
   background-color: #ffaadd;
   height: auto;

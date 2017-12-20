@@ -11,7 +11,7 @@ import { findDOMNode } from 'react-dom';
 const styles = theme => ({
   root: {
     width: '100%',
-    height:'50px'
+    height:'auto'
     
   },
   flex: {

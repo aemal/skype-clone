@@ -30,6 +30,30 @@ class MessagesLog extends Component {
             </div>
             <MessageBaloun alignment={true} />
           </div>
+          <div style={{margin:'1%'}} className="message" >
+            <div style={{order:2}} >
+             <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
+            </div>
+            <MessageBaloun alignment={true} />
+          </div>
+           <div style={{margin:'1%'}} className="message" >
+            <div style={{order:2}} >
+             <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
+            </div>
+            <MessageBaloun alignment={true} />
+          </div>
+           <div style={{margin:'1%'}} className="message" >
+            <div style={{order:''}} >
+             <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
+            </div>
+            <MessageBaloun alignment={false} />
+          </div>
+           <div style={{margin:'1%'}} className="message" >
+            <div style={{order:2}} >
+             <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
+            </div>
+            <MessageBaloun alignment={true} />
+          </div>
         </div>
     );
   }

@@ -63,8 +63,8 @@ class App extends Component {
       alignItems: 'stretch',
     }
     return (
-        <Grid container  alignItems={alignItems} direction={direction} justify={justify}>
-             <Grid item xs={12} sm={3} lg={2}>
+        <Grid container  alignItems={alignItems} direction={direction} justify={justify} >
+             <Grid item xs={12} sm={3} lg={2} className='app'>
             
                   <Grid >  
                     <Paper>
@@ -73,9 +73,9 @@ class App extends Component {
                            <UserAvatar/>
                          </Paper>
                       </Grid>
-                      <Grid item  sm={12}>
+                      <Grid item  sm={12} className='sideBarContactListComponent'>
                          <Paper>
-                          <ContactList contactList={this.props.contactList.contactList}/>
+                          <ContactList  contactList={this.props.contactList.contactList}/>
                          </Paper>
                       </Grid>
                       <Grid item  sm={12}>
@@ -89,23 +89,23 @@ class App extends Component {
               </Grid>
          
       
-         <Grid  item xs={12} sm={9} lg={10}>
+         <Grid  item xs={12} sm={9} lg={10} className='app'>
              
 
-                   <Grid item  sm={12}>
+                   <Grid item  sm={12} className='messagesContactDetailComponent'>
                     <Paper>
                       <ContactDetail />
                     </Paper>
                   </Grid>
 
-                  <Grid item  sm={12}>
+                  <Grid item  sm={12} className='messagesLogComponent'>
                     <Paper>
                       <MessagesLog />
                     
                     </Paper>
                   </Grid>
 
-                  <Grid item  sm={12}>
+                  <Grid item  sm={12} className='messagesNewMessageComponent'>
                    <Paper>
                       <NewMessage />
                    </Paper>
