@@ -1,5 +1,26 @@
 # SkypeClone
 Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &amp; WebRTC
+
+## Installation 
+
+```git clone aaaaaaaa
+cd skypeClone
+npm install
+cd client
+npm install
+```
+## Running the app
+### Run client side
+```
+cd skypeClone
+cd client
+npm start
+```
+### Run server side
+```
+cd skypeClone
+node app.js
+```
 ## Teams:
 - Yaser
 - Hussein
