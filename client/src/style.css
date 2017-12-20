@@ -14,7 +14,7 @@ html {
 
 .sideBarMainComponent {
   background-color: #ffaadd;
-  height: 100vh;
+  height: auto;
   width: 25%;
   float: left;
 }

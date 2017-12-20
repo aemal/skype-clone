@@ -7,6 +7,7 @@ import NewMessage from './components/newMessage';
 import MessageBaloun from './components/messageBaloun';
 import {fetchContactList} from './actions/userActions';
 import {connect} from 'react-redux';
+import SearchBar from './components/SearchBar';
 import './App.css';
 import './style.css';
 
@@ -35,6 +36,7 @@ class App extends Component {
           </div>
           <div className="sideBarContactListComponent">
             <ContactList contactList={this.props.contactList.contactList}/>
+            <SearchBar/>
           </div>
         </div>
         <div className="messagesMainComponent">
