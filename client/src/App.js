@@ -63,7 +63,8 @@ class App extends Component {
       alignItems: 'stretch',
     }
     return (
-        <Grid container  alignItems={alignItems} direction={direction} justify={justify} >
+        <Grid container xs={12} sm={12}
+         alignItems={alignItems} direction={direction} justify={justify} >
              <Grid item xs={12} sm={3} lg={2} className='app'>
 
                   <Grid >
