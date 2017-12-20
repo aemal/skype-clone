@@ -11,24 +11,32 @@ class SkypeAvatar extends React.Component {
 		    size : this.props.size,
 		    key : this.props.key,
 		    name : this.props.name,
-		    align : this.props.align
+		    order : this.props.alignment
         }
+
+        let order;
+        if(this.props.alignment){
+	        order = '2';
+		}else{
+			order = '1';
+		}
 
 		const style = {
 				width:props.size, 
 				height:props.size,
+				order: order,
                 backgroundImage: "url(" + props.avatarUrl + ")",
 		}
-
+        
 		return(
-			<div>
+			<div style={{order:order}}>
 				<Avatar
 					key={props.key}
 					alt={props.name} 
 					className="avatar"
 					style={style}
 				/>
-				<ListItemText primary={props.name}/>				
+				<ListItemText style={{textAlign:'center'}} primary={props.name}/>				
 			</div>
 			)
 	}

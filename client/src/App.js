@@ -4,7 +4,6 @@ import ContactList from './components/contactList';
 import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
-import MessageBaloun from './components/messageBaloun';
 import {fetchContactList} from './actions/userActions';
 import {connect} from 'react-redux';
 import './App.css';
@@ -43,8 +42,6 @@ class App extends Component {
           </div>
           <div className="messagesLogComponent">
             <MessagesLog />
-            <MessageBaloun />
-            <MessageBaloun />
           </div>
           <div className="messagesNewMessageComponent">
             <NewMessage />

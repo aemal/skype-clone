@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
-//import Card, {CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Avatar from './skypeAvatar';
 
@@ -61,7 +60,7 @@ class ContactDetail extends Component {
           <Button className = {classes.phoneIcon}><i className= 'material-icons'>phone</i></Button>
           <Button className = {classes.videoIcon}><i className='material-icons' >videocam</i></Button>
         </div>
-          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={70} name={'ET'} />
+          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={60} name={'Jhon Doe'} />
       </div>
     );
   }

@@ -3,11 +3,18 @@ import React, { Component } from 'react';
 class ContactDetail extends Component {
 
   render() {
+
+  	let align;
+	if(this.props.alignment){
+        align = 'bubble you';
+	}else{
+		align = 'bubble me';
+	}
+  
     return (
-      <div class="chat">
-        <div class="bubble me">Hello there!</div>
-        <div class="bubble you">Hi. I'm an expandeable chat box with box shadow. How are you? I expand horizontally and vertically, as you can see here.</div>
-        </div>
+      <div className="chat">
+        <div className={align} >Hello there!</div>
+      </div>
     );
   }
 }
