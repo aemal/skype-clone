@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from './components/avatar';
+import UserAvatar from './components/UserAvatar';
 import ContactList from './components/contactList';
 import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
@@ -9,7 +9,28 @@ import {fetchContactList} from './actions/userActions';
 import {connect} from 'react-redux';
 import SearchBar from './components/SearchBar';
 import './App.css';
-import './style.css';
+//import './style.css';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import { withStyles } from 'material-ui/styles';
+
+
+const styles = theme => ({
+  root: {
+    flexGrow: 3,
+  },
+  demo: {
+    height: 'auto',
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    height: '100%',
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
+});
+
 
 function mapStateToProps(state) {
   return {
@@ -19,6 +40,13 @@ function mapStateToProps(state) {
 
 class App extends Component {
 
+  state = {
+      direction: 'row',
+      justify: 'flex-start',
+      alignItems: 'stretch',
+    };
+
+
   componentWillMount(){
 
     this.props.dispatch(fetchContactList());
@@ -27,32 +55,66 @@ class App extends Component {
 
 
   render() {
+    const { classes } = this.props;
+    const { alignItems, direction, justify } = this.state;
+    const style = {
 
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'stretch',
+    }
     return (
-      <div>
-        <div className="sideBarMainComponent">
-          <div className="sideBarAvatarComponent">
-            <Avatar />
-          </div>
-          <div className="sideBarContactListComponent">
-            <ContactList contactList={this.props.contactList.contactList}/>
-            <SearchBar/>
-          </div>
-        </div>
-        <div className="messagesMainComponent">
-          <div className="messagesContactDetailComponent">
-            <ContactDetail />
-          </div>
-          <div className="messagesLogComponent">
-            <MessagesLog />
-            <MessageBaloun />
-            <MessageBaloun />
-          </div>
-          <div className="messagesNewMessageComponent">
-            <NewMessage />
-          </div>
-        </div>
-      </div>
+        <Grid container  alignItems={alignItems} direction={direction} justify={justify}>
+             <Grid item xs={12} sm={3} lg={2}>
+            
+                  <Grid >  
+                    <Paper>
+                      <Grid item  sm={12}>
+                         <Paper>
+                           <UserAvatar/>
+                         </Paper>
+                      </Grid>
+                      <Grid item  sm={12}>
+                         <Paper>
+                          <ContactList contactList={this.props.contactList.contactList}/>
+                         </Paper>
+                      </Grid>
+                      <Grid item  sm={12}>
+                         <Paper>
+                            <SearchBar/>
+                         </Paper>
+                      </Grid>
+                      
+                    </Paper>
+                  </Grid> 
+              </Grid>
+         
+      
+         <Grid  item xs={12} sm={9} lg={10}>
+             
+
+                   <Grid item  sm={12}>
+                    <Paper>
+                      <ContactDetail />
+                    </Paper>
+                  </Grid>
+
+                  <Grid item  sm={12}>
+                    <Paper>
+                      <MessagesLog />
+                    
+                    </Paper>
+                  </Grid>
+
+                  <Grid item  sm={12}>
+                   <Paper>
+                      <NewMessage />
+                   </Paper>
+                  </Grid>
+
+            
+       </Grid>
+      </Grid>
     );
   }
 }
