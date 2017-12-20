@@ -10,7 +10,7 @@ const styles = {
     flexWrap: 'wrap'
   },
   avatar:{
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
     left: '10%'
   },

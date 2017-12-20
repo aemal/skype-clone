@@ -23,7 +23,7 @@ const styles = theme => ({
     cursor:'pointer',
   },
   addButton: {
-    marginLeft: 200,
+    marginLeft: 100,
     marginRight: 20,
   },
   color: {

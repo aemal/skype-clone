@@ -13,6 +13,8 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     width:'100%',
+    position:'fixed',
+    bottom:'0',
   },
   inputLabelFocused: {
     color: purple[500],
