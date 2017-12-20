@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import Tooltip from 'material-ui/Tooltip';
 import IconButton from 'material-ui/IconButton';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import { FormControl, FormLabel, FormControlLabel } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Popover from 'material-ui/Popover';
 import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
@@ -23,9 +20,10 @@ const styles = theme => ({
   searchButton: {
     marginLeft: -12,
     marginRight: 20,
+    cursor:'pointer',
   },
   addButton: {
-    marginLeft: 100,
+    marginLeft: 200,
     marginRight: 20,
   },
   color: {
@@ -47,10 +45,8 @@ class SearchBar extends Component {
 	 };
 
 
-	 handleChange = key => (event, value) => {
-	    this.setState({
-	      [key]: value,
-	    });
+	 handleChange = (event, value) => {
+	    console.log(event.target.value)
 	  };
 
 	  handleNumberInputChange = key => event => {
@@ -89,16 +85,16 @@ class SearchBar extends Component {
 			<div className={classes.root}>
 	      <AppBar position="static" color='primary'>
 	        <Toolbar>
-	          <Button
-	            ref={node => {
-	              this.button = node;
-	            }}
-	            raised
-	            className={classes.button}
-	            onClick={this.handleClickButton}
-	          >
-	            <i class="material-icons">search</i>
-	          </Button>
+	        <IconButton 
+		         ref={node => {
+	            this.button = node;
+		          }}
+	          onClick={this.handleClickButton}
+		         className={classes.searchButton}
+		         color="contrast"
+		         aria-label="Menu"> 
+		         <i className="material-icons">search</i>
+	         </IconButton>
 	          <Popover
 	            open={open}
 	            anchorEl={anchorEl}
@@ -114,19 +110,19 @@ class SearchBar extends Component {
 	              horizontal: transformOriginHorizontal,
 	            }}
 	          >
-	            <Typography className={classes.typography}>
+	            
 	             <FormControl className={classes.formControl}>
                    <InputLabel htmlFor="searchContact">search</InputLabel>
 	                   <Input
 	                     id="searchContact"
 	                     type="text"
-	                     onChange={this.handleNumberInputChange('positionTop')}
+	                     onChange={this.handleChange.bind(this)}
 	                   />
                </FormControl>
-	            </Typography>
+	            
 	          </Popover>
 	          <IconButton className={classes.addButton} color="contrast" aria-label="Menu">
-	            <i class="material-icons">add_circle</i>
+	            <i className="material-icons">add_circle</i>
 	          </IconButton>
 	        </Toolbar>
 	      </AppBar>

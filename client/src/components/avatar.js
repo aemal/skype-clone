@@ -40,13 +40,13 @@ class UserAvatar extends Component {
         </div>
         <div className={classes.iconsContainer}>
         <IconButton tooltip="SVG Icon" className={classes.icons}>
-          <i class="material-icons">settings</i>
+          <i className="material-icons">settings</i>
         </IconButton>
         <IconButton className={classes.icons}>
-          <i class="material-icons">notifications</i>
+          <i className="material-icons">notifications</i>
         </IconButton>
         <IconButton tooltip="Font Icon" className={classes.icons}>
-          <i class="material-icons">exit_to_app</i>
+          <i className="material-icons">exit_to_app</i>
         </IconButton>
         </div>
         <div className={classes.avatar}>
