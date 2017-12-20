@@ -11,12 +11,14 @@ npm install
 ```
 ## Running the app
 ### Run client side
-```cd skypeClone
+```
+cd skypeClone
 cd client
 npm start
 ```
 ### Run server side
-```cd skypeClone
+```
+cd skypeClone
 node app.js
 ```
 ## Teams:
