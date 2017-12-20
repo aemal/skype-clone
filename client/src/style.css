@@ -7,9 +7,9 @@
 *+* {
   margin-top: 1rem;
 }*/
-
-html {
+body {
   height: 100%;
+  margin: 0px;
 }
 
 .sideBarMainComponent {
@@ -46,7 +46,7 @@ html {
 
 .messagesContactDetailComponent{
   background-color: #11aadd;
-  height: 20vh;
+  height: 70px;
   width: 100%;
   float: left;
   display: block;
@@ -55,7 +55,7 @@ html {
 .messagesLogComponent{
   background-color: #fafafa;
   overflow: auto;
-  height: 70vh;
+  height: calc(100vh - 135px);
   width: 100%;
   float: left;
   display: block;
@@ -63,7 +63,7 @@ html {
 
 .messagesNewMessageComponent{
   background-color: #02ddaa;
-  height: 10vh;
+  height: 65px;
   width: 100%;
   float: left;
   display: block;

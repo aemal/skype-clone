@@ -28,7 +28,7 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div style={{margin: '0'}}>
         <div className="sideBarMainComponent">
           <div className="sideBarAvatarComponent">
             <Avatar />

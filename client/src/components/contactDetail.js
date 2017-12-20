@@ -76,7 +76,7 @@ class ContactDetail extends Component {
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClose}/>
         </div>
-          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={60} name={'Jhon Doe'} />
+          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={50} />
       </div>
     );
   }
