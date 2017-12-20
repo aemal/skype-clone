@@ -11,15 +11,13 @@ class SkypeAvatar extends React.Component {
 		    size : this.props.size,
 		    key : this.props.key,
 		    name : this.props.name,
-		    align : this.props.align
         }
-
 		const style = {
 				width:props.size, 
 				height:props.size,
-        backgroundImage: "url(" + props.avatarUrl + ")",
+                backgroundImage: "url(" + props.avatarUrl + ")",
 		}
-
+        
 		return(
 			<div>
 				<Avatar
@@ -28,7 +26,7 @@ class SkypeAvatar extends React.Component {
 					className="avatar"
 					style={style}
 				/>
-				<ListItemText primary={props.name}/>				
+				<ListItemText style={{textAlign:'center'}} primary={props.name}/>				
 			</div>
 			)
 	}

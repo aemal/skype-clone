@@ -33,6 +33,7 @@ html {
   height: 70vh;
   width: 100%;
   float: left;
+  overflow: auto;
   display: block;
 }
 
@@ -52,7 +53,8 @@ html {
 }
 
 .messagesLogComponent{
-  background-color: #00ff00;
+  background-color: #fafafa;
+  overflow: auto;
   height: 70vh;
   width: 100%;
   float: left;
@@ -89,7 +91,7 @@ html {
 }
 
 .chat {
-    width: 400px;
+    width: 95%;
 }
 
 .bubble{
@@ -110,10 +112,10 @@ html {
     position: absolute;
     top: 11px;
     transform:             rotate( 29deg ) skew( -35deg );
-        -moz-transform:    rotate( 29deg ) skew( -35deg );
-        -ms-transform:     rotate( 29deg ) skew( -35deg );
-        -o-transform:      rotate( 29deg ) skew( -35deg );
-        -webkit-transform: rotate( 29deg ) skew( -35deg );
+    -moz-transform:    rotate( 29deg ) skew( -35deg );
+    -ms-transform:     rotate( 29deg ) skew( -35deg );
+    -o-transform:      rotate( 29deg ) skew( -35deg );
+    -webkit-transform: rotate( 29deg ) skew( -35deg );
     width:  20px;
 }
 
@@ -135,4 +137,8 @@ html {
 .you::before {
     box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
     right: -9px;
+}
+
+.message{
+  display: flex;
 }

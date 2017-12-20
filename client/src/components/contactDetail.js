@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 import Avatar from './skypeAvatar';
 import FormDialog from './dialog'
 
@@ -75,7 +76,7 @@ class ContactDetail extends Component {
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClose}/>
         </div>
-          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={70} name={'ET'} />
+          <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={60} name={'Jhon Doe'} />
       </div>
     );
   }

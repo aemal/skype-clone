@@ -4,7 +4,6 @@ import ContactList from './components/contactList';
 import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
-import MessageBaloun from './components/messageBaloun';
 import {fetchContactList} from './actions/userActions';
 import {connect} from 'react-redux';
 import SearchBar from './components/SearchBar';
@@ -64,6 +63,7 @@ class App extends Component {
       alignItems: 'stretch',
     }
     return (
+
         <Grid container  alignItems={alignItems} direction={direction} justify={justify}>
              <Grid item xs={12} sm={3} lg={2}>
             

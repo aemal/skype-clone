@@ -50,7 +50,7 @@ class UserAvatar extends Component {
         </IconButton>
         </div>
         <div className={classes.avatar}>
-          <Avatar avatar={'http://cdn.skim.gs/images/c_fill,dpr_1.0,f_auto,fl_lossy,h_391,q_auto,w_695/funny-dog-names/funny-dog-names'} size={100} name={'Yasser'}/>
+          <Avatar avatar={'http://cdn.skim.gs/images/c_fill,dpr_1.0,f_auto,fl_lossy,h_391,q_auto,w_695/funny-dog-names/funny-dog-names'} size={100} name={'Jose'}/>
         </div>
     </div>
       
