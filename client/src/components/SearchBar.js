@@ -11,8 +11,8 @@ import { findDOMNode } from 'react-dom';
 const styles = theme => ({
   root: {
     width: '100%',
-    height:'auto'
-    
+    height:'65px'
+
   },
   flex: {
     flex: 1,
@@ -50,7 +50,7 @@ class SearchBar extends Component {
 	  };
 
 	  handleNumberInputChange = key => event => {
-	    
+
 	  };
 
 	  handleClickButton = () => {
@@ -82,17 +82,17 @@ class SearchBar extends Component {
 		      anchorReference,
 		    } = this.state;
 		return (
-			<div className={classes.root}>
-	      <AppBar position="static" color='primary'>
+			<div>
+	      <AppBar position="static" color='primary'  className={classes.root}>
 	        <Toolbar>
-	        <IconButton 
+	        <IconButton
 		         ref={node => {
 	            this.button = node;
 		          }}
 	          onClick={this.handleClickButton}
 		         className={classes.searchButton}
 		         color="contrast"
-		         aria-label="Menu"> 
+		         aria-label="Menu">
 		         <i className="material-icons">search</i>
 	         </IconButton>
 	          <Popover
@@ -110,7 +110,7 @@ class SearchBar extends Component {
 	              horizontal: transformOriginHorizontal,
 	            }}
 	          >
-	            
+
 	             <FormControl className={classes.formControl}>
                    <InputLabel htmlFor="searchContact">search</InputLabel>
 	                   <Input
@@ -119,7 +119,7 @@ class SearchBar extends Component {
 	                     onChange={this.handleChange.bind(this)}
 	                   />
                </FormControl>
-	            
+
 	          </Popover>
 	          <IconButton className={classes.addButton} color="contrast" aria-label="Menu">
 	            <i className="material-icons">add_circle</i>
@@ -132,9 +132,3 @@ class SearchBar extends Component {
 }
 
 export default withStyles(styles)(SearchBar);
-
-
-        
-
-
-       

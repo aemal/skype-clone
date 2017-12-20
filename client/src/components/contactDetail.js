@@ -21,10 +21,8 @@ const styles =  {
     container :{
       display: 'flex',
       justifyContent: 'space-between',
-      border: '1px solid #4DB6AC',
       borderRadius: 5,
-      padding: 10,
-      backgroundColor: '#BBDEFB',
+      padding: '10px'
     },
 
     btns :{

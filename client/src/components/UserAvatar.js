@@ -12,9 +12,8 @@ const styles = {
   avatar:{
     position: 'relative',
     bottom: 0,
-    left: '10%'
+    padding: '10px'
   },
-  
   iconsContainer:{
     float: 'right',
   },
@@ -24,7 +23,7 @@ const styles = {
   img:{
     width: '100%',
   }
-  
+
 };
 
 
@@ -36,22 +35,22 @@ class UserAvatar extends Component {
     return (
       <div >
         <div className={classes.iconsContainer}>
-        <IconButton tooltip="SVG Icon" className={classes.icons}>
-          <i className="material-icons">settings</i>
-        </IconButton>
-        <IconButton className={classes.icons}>
-          <i className="material-icons">notifications</i>
-        </IconButton>
-        <IconButton tooltip="Font Icon" className={classes.icons}>
-          <i className="material-icons">exit_to_app</i>
-        </IconButton>
+          <IconButton tooltip="SVG Icon" className={classes.icons}>
+            <i className="material-icons">settings</i>
+          </IconButton>
+          <IconButton className={classes.icons}>
+            <i className="material-icons">notifications</i>
+          </IconButton>
+          <IconButton tooltip="Font Icon" className={classes.icons}>
+            <i className="material-icons">exit_to_app</i>
+          </IconButton>
         </div>
         <div className={classes.avatar}>
-          <Avatar avatar={'http://cdn.skim.gs/images/c_fill,dpr_1.0,f_auto,fl_lossy,h_391,q_auto,w_695/funny-dog-names/funny-dog-names'} size={100} name={'Jose'}/>
+          <Avatar avatar={'http://cdn.skim.gs/images/c_fill,dpr_1.0,f_auto,fl_lossy,h_391,q_auto,w_695/funny-dog-names/funny-dog-names'} size={100} />
         </div>
     </div>
-      
-    
+
+
     );
   }
 }

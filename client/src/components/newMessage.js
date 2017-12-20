@@ -11,9 +11,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    
-    
-    
+    width: '100%'
   },
   inputLabelFocused: {
     color: purple[500],

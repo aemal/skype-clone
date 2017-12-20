@@ -65,10 +65,10 @@ class App extends Component {
     return (
         <Grid container  alignItems={alignItems} direction={direction} justify={justify} >
              <Grid item xs={12} sm={3} lg={2} className='app'>
-            
-                  <Grid >  
+
+                  <Grid >
                     <Paper>
-                      <Grid item  sm={12}>
+                      <Grid item  sm={12} className="sideBarAvatarComponent">
                          <Paper>
                            <UserAvatar/>
                          </Paper>
@@ -83,14 +83,14 @@ class App extends Component {
                             <SearchBar/>
                          </Paper>
                       </Grid>
-                      
+
                     </Paper>
-                  </Grid> 
+                  </Grid>
               </Grid>
-         
-      
+
+
          <Grid  item xs={12} sm={9} lg={10} className='app'>
-             
+
 
                    <Grid item  sm={12} className='messagesContactDetailComponent'>
                     <Paper>
@@ -101,7 +101,7 @@ class App extends Component {
                   <Grid item  sm={12} className='messagesLogComponent'>
                     <Paper>
                       <MessagesLog />
-                    
+
                     </Paper>
                   </Grid>
 
@@ -111,7 +111,7 @@ class App extends Component {
                    </Paper>
                   </Grid>
 
-            
+
            </Grid>
       </Grid>
     );
