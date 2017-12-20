@@ -15,7 +15,7 @@ class ContactDetail extends Component {
       <div className="chat">
         <div className={align} >Hello there!</div>
       </div>
-    );
+      );    
   }
 }
 

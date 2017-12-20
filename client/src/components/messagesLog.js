@@ -7,8 +7,10 @@ class MessagesLog extends Component {
     return (
         <div>
           <div style={{margin:'1%'}} className="message" >
-               <SkypeAvatar alignment={true} avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
-               <MessageBaloun alignment={true} />
+            <div style={{order:2}} >
+             <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
+            </div>
+            <MessageBaloun alignment={true} />
           </div>
         </div>
     );

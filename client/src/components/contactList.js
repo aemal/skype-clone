@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
+import SkypeAvatar from './skypeAvatar';
 
 
 const styles = theme => ({
@@ -9,6 +9,12 @@ const styles = theme => ({
     width: '100%',
     background: theme.palette.background.paper,
   },
+  bigAvatar: {
+      width: 60,
+      height: 60,
+      backgroundSize: 'cover',
+      backgroundPosition: 'top center',
+    },
 });
 
 class ContactList extends Component {
@@ -19,9 +25,9 @@ class ContactList extends Component {
   	const listItems = this.props.contactList.map((item) => {
   		return (
   			<ListItem key={item.id} dense button className={classes.listItem}>
-  				<Avatar alt={item.name} src='https://d30y9cdsu7xlg0.cloudfront.net/png/10299-200.png' />
+          <SkypeAvatar avatar={'http://icons.iconarchive.com/icons/icons8/ios7/512/Users-User-Male-2-icon.png' } size={50}/>
   				<ListItemText primary={item.name} />
-  			 </ListItem>
+  			</ListItem>
   			)
   	})
     return (
