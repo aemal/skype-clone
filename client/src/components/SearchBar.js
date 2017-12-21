@@ -11,20 +11,24 @@ import { findDOMNode } from 'react-dom';
 const styles = theme => ({
   root: {
     width: '100%',
-    height:'65px'
+		height:'65px',
+		position:'relative',
+		bottom: 0,
 
   },
   flex: {
     flex: 1,
   },
   searchButton: {
-    marginLeft: -12,
-    marginRight: 20,
-    cursor:'pointer',
+    position: 'absolute',
+    top: 9,
+    left: 2,
   },
   addButton: {
-    marginLeft: 100,
-    marginRight: 20,
+		position: 'absolute',
+    top: 7,
+    right: 2,
+
   },
   color: {
   	color:'accent',
@@ -83,7 +87,7 @@ class SearchBar extends Component {
 		    } = this.state;
 		return (
 			<div>
-	      <AppBar position="static" color='primary'  className={classes.root}>
+	      <AppBar color='primary'  className={classes.root}>
 	        <Toolbar>
 	        <IconButton
 		         ref={node => {
