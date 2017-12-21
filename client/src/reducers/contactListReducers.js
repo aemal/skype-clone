@@ -1,8 +1,8 @@
-export default function reducer(state={
+export default function contactListReducer(state={
 	contactList:[],
 	fetching:false,
 	fetched:false,
-	error:null
+	error:null 
 	
 },action){
 	switch(action.type){

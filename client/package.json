@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "fuzzysearch": "^1.0.3",
     "material-ui": "^1.0.0-beta.24",
     "react": "^16.2.0",
     "react-chat-bubble": "^0.8.7",
