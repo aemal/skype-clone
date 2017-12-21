@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     const { alignItems, direction, justify } = this.state;
     return (
-        <Grid container xs={12} sm={12}
+        <Grid container 
          alignItems={alignItems} direction={direction} justify={justify} >
              <Grid item xs={12} sm={3} lg={2} className='app'>
 
