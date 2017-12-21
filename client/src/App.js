@@ -5,6 +5,7 @@ import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
 import {fetchContactList} from './actions/userActions';
+
 import {connect} from 'react-redux';
 import SearchBar from './components/SearchBar';
 import './App.css';
@@ -12,13 +13,16 @@ import './style.css';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 
-
-
-function mapStateToProps(state) {
+function mapStateToProps(state,filter) {
   return {
-    contactList: state.contactList
+    contactList: state.contactListReducers.contactList.filter( (c) => {
+      return c.name.toLowerCase().indexOf(state.contactListFilterReducer.toLowerCase()) > -1
+    })
+     
   };
 }
+
+
 
 class App extends Component {
 
@@ -30,9 +34,7 @@ class App extends Component {
 
 
   componentWillMount(){
-
     this.props.dispatch(fetchContactList());
-
   }
 
 
@@ -52,12 +54,12 @@ class App extends Component {
                       </Grid>
                       <Grid item  sm={12} className='sideBarContactListComponent'>
                          <Paper>
-                          <ContactList  contactList={this.props.contactList.contactList}/>
+                          <ContactList  friendsList={this.props.contactList}/>
                          </Paper>
                       </Grid>
                       <Grid item  sm={12}>
                          <Paper>
-                            <SearchBar/>
+                            <SearchBar />
                          </Paper>
                       </Grid>
 

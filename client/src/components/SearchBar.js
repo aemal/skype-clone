@@ -7,6 +7,17 @@ import { FormControl } from 'material-ui/Form';
 import Popover from 'material-ui/Popover';
 import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
+import {setFilter }from '../actions/filterAction';
+import {connect} from 'react-redux';
+import '../style.css'; 
+
+
+const mapDispatchToProps = dispatch => ({
+ onFilter: filter => dispatch(setFilter(filter))
+      
+    
+
+})
 
 const styles = theme => ({
   root: {
@@ -45,8 +56,8 @@ class SearchBar extends Component {
 	 };
 
 
-	 handleChange = (event, value) => {
-	    console.log(event.target.value)
+	 handleChange = (event) => {
+	    //console.log(event.target.value)
 	  };
 
 	  handleNumberInputChange = key => event => {
@@ -83,14 +94,13 @@ class SearchBar extends Component {
 		    } = this.state;
 		return (
 			<div>
-	      <AppBar position="static" color='primary'  className={classes.root}>
+	      <AppBar position="static" color='primary' className='root'>
 	        <Toolbar>
 	        <IconButton
 		         ref={node => {
 	            this.button = node;
 		          }}
 	          onClick={this.handleClickButton}
-		         className={classes.searchButton}
 		         color="contrast"
 		         aria-label="Menu">
 		         <i className="material-icons">search</i>
@@ -111,17 +121,20 @@ class SearchBar extends Component {
 	            }}
 	          >
 
-	             <FormControl className={classes.formControl}>
+	             <FormControl >
                    <InputLabel htmlFor="searchContact">search</InputLabel>
 	                   <Input
 	                     id="searchContact"
 	                     type="text"
-	                     onChange={this.handleChange.bind(this)}
+	                     onChange={e =>{
+	                      //console.log(this.props)
+	                      this.props.onFilter(e.target.value)
+	                    }}
 	                   />
                </FormControl>
 
 	          </Popover>
-	          <IconButton className={classes.addButton} color="contrast" aria-label="Menu">
+	          <IconButton  color="contrast" aria-label="Menu" className='addButton'>
 	            <i className="material-icons">add_circle</i>
 	          </IconButton>
 	        </Toolbar>
@@ -131,4 +144,7 @@ class SearchBar extends Component {
 	}
 }
 
-export default withStyles(styles)(SearchBar);
+
+
+export default connect(null, mapDispatchToProps)(SearchBar)
+	 	
