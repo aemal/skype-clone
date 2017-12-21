@@ -11,24 +11,7 @@ import './App.css';
 import './style.css';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
 
-
-const styles = theme => ({
-  root: {
-    flexGrow: 3,
-  },
-  demo: {
-    height: 'auto',
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    height: '100%',
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
-});
 
 
 function mapStateToProps(state) {
@@ -54,14 +37,7 @@ class App extends Component {
 
 
   render() {
-    const { classes } = this.props;
     const { alignItems, direction, justify } = this.state;
-    const style = {
-
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'stretch',
-    }
     return (
         <Grid container xs={12} sm={12}
          alignItems={alignItems} direction={direction} justify={justify} >

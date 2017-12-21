@@ -18,10 +18,9 @@ const styles = theme => ({
 });
 
 class ContactList extends Component {
- 
+
   render() {
   	const { classes } = this.props;
-  	console.log(this.props.contactList)
   	const listItems = this.props.contactList.map((item) => {
   		return (
   			<ListItem key={item.id} dense button className={classes.listItem}>
