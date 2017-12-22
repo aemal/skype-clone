@@ -9,6 +9,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
 import {setFilter }from '../actions/filterAction';
 import {connect} from 'react-redux';
+import Modal from './Modal';
+
 
 const mapDispatchToProps = dispatch => ({
  onFilter: filter => dispatch(setFilter(filter))
@@ -17,32 +19,6 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-		height:'65px',
-		position:'relative',
-		bottom: 0,
-
-  },
-  flex: {
-    flex: 1,
-  },
-  searchButton: {
-    position: 'absolute',
-    top: 9,
-    left: 2,
-  },
-  addButton: {
-		position: 'absolute',
-    top: 7,
-    right: 2,
-
-  },
-  color: {
-  	color:'accent',
-  }
-});
 
 class SearchBar extends Component {
 	state = {
@@ -55,16 +31,15 @@ class SearchBar extends Component {
 	   positionTop: 200, // Just so the popover can be spotted more easily
 	   positionLeft: 400, // Same as above
 	   anchorReference: 'anchorEl',
+	   showModal: false
 	 };
-
-
-	 handleChange = (event) => {
-	    //console.log(event.target.value)
-	  };
-
-	  handleNumberInputChange = key => event => {
-
-	  };
+    
+	  hideModal = () => {
+	     this.setState({showModal: false});
+	   };
+	  showModal = () => {
+	     this.setState({showModal: true});
+	   };
 
 	  handleClickButton = () => {
 	    this.setState({
@@ -138,10 +113,14 @@ class SearchBar extends Component {
                </FormControl>
 
 	          </Popover>
-	          <IconButton  color="contrast" aria-label="Menu" style={{position:'absolute',top:7,right:2}}>
+	          <IconButton  color="contrast" aria-label="Menu" style={{position:'absolute',top:7,right:2}} onClick={this.showModal.bind(this)}>
 
 	            <i className="material-icons">add_circle</i>
 	          </IconButton>
+	          {this.state.showModal ?
+	                    <Modal onClose={this.hideModal}>
+	                      <h1>hello</h1>
+	                    </Modal> : null}
 	        </Toolbar>
 	      </AppBar>
 			</div>

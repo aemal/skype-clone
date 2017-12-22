@@ -9,6 +9,7 @@
     "react": "^16.2.0",
     "react-chat-bubble": "^0.8.7",
     "react-dom": "^16.2.0",
+    "react-page-click": "^4.0.2",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
