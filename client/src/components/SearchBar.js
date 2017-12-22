@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+//import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -9,8 +9,6 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
 import {setFilter }from '../actions/filterAction';
 import {connect} from 'react-redux';
-import '../style.css'; 
-
 
 const mapDispatchToProps = dispatch => ({
  onFilter: filter => dispatch(setFilter(filter))
@@ -84,7 +82,7 @@ class SearchBar extends Component {
 	  button = null;
 
 	render() {
-		const { classes } = this.props;
+		//const { classes } = this.props;
 		const {
 		      open,
 		      anchorEl,
@@ -98,9 +96,7 @@ class SearchBar extends Component {
 		    } = this.state;
 		return (
 			<div>
-	      <AppBar position="static" color='primary' className='root'>
-
-	      <AppBar color='primary'>
+	      <AppBar color='primary' style={{position: 'relative',bottom:0, height:65}}>
 
 	        <Toolbar>
 	        <IconButton
@@ -109,6 +105,7 @@ class SearchBar extends Component {
 		          }}
 	          onClick={this.handleClickButton}
 		         color="contrast"
+		        style={{position:'absolute',top:9,left:2}}
 		         aria-label="Menu">
 		         <i className="material-icons">search</i>
 	         </IconButton>
@@ -141,7 +138,8 @@ class SearchBar extends Component {
                </FormControl>
 
 	          </Popover>
-	          <IconButton  color="contrast" aria-label="Menu" className='addButton'>
+	          <IconButton  color="contrast" aria-label="Menu" style={{position:'absolute',top:7,right:2}}>
+
 	            <i className="material-icons">add_circle</i>
 	          </IconButton>
 	        </Toolbar>
