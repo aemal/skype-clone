@@ -106,7 +106,7 @@ class SearchBar extends Component {
 	                     id="searchContact"
 	                     type="text"
 	                     onChange={e =>{
-	                      //console.log(this.props)
+	                      
 	                      this.props.onFilter(e.target.value)
 	                    }}
 	                   />
@@ -119,7 +119,7 @@ class SearchBar extends Component {
 	          </IconButton>
 	          {this.state.showModal ?
 	                    <Modal onClose={this.hideModal}>
-	                      <h1>hello</h1>
+	                     
 	                    </Modal> : null}
 	        </Toolbar>
 	      </AppBar>
