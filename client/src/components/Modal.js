@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReactPageClick} from 'react-page-click';
 import'../Modal.css';
-import AddFriends from './AddFriends';
+import AddFriends from '../container/AddFriends';
 const Modal = ({onClose, notifyOnTouchEnd, ...rest}) => (
   <div>
     <div className="shade" />

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import SearchBar from 'material-ui-search-bar';
 
+
+
+
  class AddFriends extends Component {
 	render() {
 		return (
@@ -10,7 +13,8 @@ import SearchBar from 'material-ui-search-bar';
             onRequestSearch={() => console.log('onRequestSearch')}
             style={{
               margin: '0 auto',
-              maxWidth: 800,
+              maxWidth: 700,
+             
             }}
 
           />

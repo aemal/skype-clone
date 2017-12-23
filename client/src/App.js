@@ -7,7 +7,7 @@ import NewMessage from './components/newMessage';
 import {fetchContactList} from './actions/userActions';
 
 import {connect} from 'react-redux';
-import SearchBar from './components/FriendsSearchBar';
+import SearchBar from './container/FriendsSearchBar';
 import './App.css';
 import './style.css';
 import Grid from 'material-ui/Grid';

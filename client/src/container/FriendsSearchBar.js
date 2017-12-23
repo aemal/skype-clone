@@ -9,7 +9,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
 import {setFilter }from '../actions/filterAction';
 import {connect} from 'react-redux';
-import Modal from './Modal';
+import Modal from '../components/Modal';
 
 
 const mapDispatchToProps = dispatch => ({
