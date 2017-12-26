@@ -18,7 +18,7 @@ function mapStateToProps(state,filter) {
     contactList: state.contactListReducers.contactList.filter( (c) => {
       return c.name.toLowerCase().indexOf(state.contactListFilterReducer.toLowerCase()) > -1
     })
-     
+
   };
 }
 
@@ -41,8 +41,10 @@ class App extends Component {
   render() {
     const { alignItems, direction, justify } = this.state;
     return (
-        <Grid container 
-         alignItems={alignItems} direction={direction} justify={justify} >
+        <div className='mainContainer'>
+        <Grid container
+         alignItems={alignItems} direction={direction} justify={justify}
+            sm={12} sm={12} lg={12}>
              <Grid item xs={12} sm={3} lg={2} className='app'>
 
                   <Grid >
@@ -78,14 +80,11 @@ class App extends Component {
                   </Grid>
 
                   <Grid item  sm={12} className='messagesLogComponent'>
-                    <Paper>
                       <MessagesLog />
-
-                    </Paper>
                   </Grid>
 
                   <Grid item  sm={12} className='messagesNewMessageComponent'>
-                   <Paper>
+                   <Paper style={{padding: '10px'}}>
                       <NewMessage />
                    </Paper>
                   </Grid>
@@ -93,6 +92,7 @@ class App extends Component {
 
            </Grid>
       </Grid>
+      </div>
     );
   }
 }

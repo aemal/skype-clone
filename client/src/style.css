@@ -10,11 +10,15 @@
 body {
   height: 100%;
   margin: 0px;
-  overflow: hidden;
 }
 .app {
   height: 100%;
 }
+
+.mainContainer {
+  overflow: hidden;
+}
+
 .sideBarMainComponent {
   height: auto;
   width: 25%;
@@ -52,11 +56,12 @@ body {
   width: 100%;
   float: left;
   display: block;
+  position: relative;
 }
 
 .messagesLogComponent{
   overflow: auto;
-  height: calc(100vh - 135px);
+  height: calc(100vh - 155px);
   width: 100%;
   float: left;
   border: 0px;
@@ -64,7 +69,7 @@ body {
 }
 
 .messagesNewMessageComponent{
-  height: 65px;
+  height: 55px;
   width: 100%;
   float: left;
   display: block;

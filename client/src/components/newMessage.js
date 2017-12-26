@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
+import IconButton from 'material-ui/IconButton';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
+import InsertEmoticon from 'material-ui-icons/InsertEmoticon';
 import purple from 'material-ui/colors/purple';
 
 const styles = theme => ({
@@ -42,6 +44,13 @@ class NewMessage extends Component {
                 inkbar: classes.inputInkbar,
               }}
               id="custom-color-input"
+              endAdornment={
+             <InputAdornment position="end">
+                 <IconButton>
+                     <InsertEmoticon />
+                   </IconButton>
+             </InputAdornment>
+           }
             />
           </FormControl>
       </div>
