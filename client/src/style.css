@@ -15,10 +15,6 @@ body {
   height: 100%;
 }
 
-.mainContainer {
-  overflow: hidden;
-}
-
 .sideBarMainComponent {
   height: auto;
   width: 25%;
