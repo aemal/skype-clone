@@ -4,6 +4,7 @@ Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB &a
 ## Installation 
 
 ```
+git clone https://github.com/aemal/SkypeClone.git
 cd skypeClone
 npm install
 ```
