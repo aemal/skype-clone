@@ -7,7 +7,7 @@ import NewMessage from './components/newMessage';
 import {fetchContactList} from './actions/userActions';
 
 import {connect} from 'react-redux';
-//import SearchBar from './container/FriendsSearchBar'; //FIXME: Incompatible with Material UI 1.0 Beta. Use react-autosuggest instead.
+import SearchBar from './container/FriendsSearchBar'; //FIXME: Incompatible with Material UI 1.0 Beta. Use react-autosuggest instead.
 import './App.css';
 import './style.css';
 import Grid from 'material-ui/Grid';
@@ -43,7 +43,7 @@ class App extends Component {
     return (
         <Grid container
          alignItems={alignItems} direction={direction} justify={justify}
-            sm={12} sm={12} lg={12}>
+            sm={12} lg={12}>
              <Grid item xs={12} sm={3} lg={2} className='app'>
 
                   <Grid >
@@ -60,10 +60,10 @@ class App extends Component {
                       </Grid>
                       <Grid item  sm={12}>
                          <Paper>
-                            {/*
-                                <SearchBar /> //This component should be uncommented after the auto complete is replaced with react auto suggest.
-                              */}
-                              FIX ME!
+                            
+                                <SearchBar /> 
+                              
+                             
                          </Paper>
                       </Grid>
 
