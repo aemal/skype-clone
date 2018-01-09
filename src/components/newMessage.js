@@ -27,7 +27,8 @@ const styles = theme => ({
 
 class NewMessage extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, handleSubmit } = this.props;
+
     return (
     <div className={classes.container}>
           <FormControl className={classes.formControl}>
@@ -40,6 +41,7 @@ class NewMessage extends Component {
               Type your message here..
             </InputLabel>
             <Input
+              onKeyUp={(e) => handleSubmit(e)}
               classes={{
                 inkbar: classes.inputInkbar,
               }}

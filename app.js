@@ -17,7 +17,7 @@ const Message = require('./server/models/message.model');
 const authRoutes = require('./server/routers/auth-routers')(passport);
 const userRoutes = require('./server/routers/user-routers')();
 
-const db = 'mongodb://localhost:27017/skypeClone';
+const db = 'mongodb://10.0.1.188:27017/skypeClone';
 
 const port = process.env.PORT || 8080;
 

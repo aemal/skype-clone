@@ -5,6 +5,7 @@ import ContactDetail from './components/contactDetail';
 import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
 import {fetchContactList} from './actions/userActions';
+import io  from 'socket.io-client';
 
 import {connect} from 'react-redux';
 import SearchBar from './container/FriendsSearchBar'; //FIXME: Incompatible with Material UI 1.0 Beta. Use react-autosuggest instead.
@@ -26,24 +27,59 @@ function mapStateToProps(state,filter) {
 
 class App extends Component {
 
-  state = {
-      direction: 'row',
-      justify: 'flex-start',
-      alignItems: 'stretch',
-    };
-
+    constructor(props){
+      super(props)
+      this.state = {
+          direction: 'row',
+          justify: 'flex-start',
+          alignItems: 'stretch',
+          socketId: '',
+          messages: [],
+        };
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
   componentWillMount(){
     this.props.dispatch(fetchContactList());
   }
 
+  componentDidMount() {
+    this.socket = io('http://localhost:8080'); //FIXME: This should come from settings/env variable.
+      this.socket.on('connect', (socket) => this.connect(socket));
+      this.socket.on('message', message => {
+              this.setState({ messages: [...this.state.messages, message]})
+
+      })
+  }
+
+  connect(socket) {
+    this.setState({
+      socketId: this.socket.id,
+    });
+    console.log(this.state.socketId)
+  }
+
+  handleSubmit(event) {
+    const body = event.target.value
+    let id = this.state.socketId
+    if (event.keyCode === 13 && body) {
+      const message = {
+        body,
+        id,
+        socketId: this.state.socketId,
+      }
+        this.setState({ messages: [...this.state.messages, message ]})
+         this.socket.emit('message', body)
+         event.target.value = ''
+    }
+  }
 
   render() {
     const { alignItems, direction, justify } = this.state;
     return (
         <Grid container
          alignItems={alignItems} direction={direction} justify={justify}
-            sm={12} lg={12}>
+            item sm={12} lg={12}>
              <Grid item xs={12} sm={3} lg={2} className='app'>
 
                   <Grid >
@@ -60,10 +96,10 @@ class App extends Component {
                       </Grid>
                       <Grid item  sm={12}>
                          <Paper>
-                            
-                                <SearchBar /> 
-                              
-                             
+
+                                <SearchBar />
+
+
                          </Paper>
                       </Grid>
 
@@ -82,12 +118,12 @@ class App extends Component {
                   </Grid>
 
                   <Grid item  sm={12} className='messagesLogComponent'>
-                      <MessagesLog />
+                    <MessagesLog messages={this.state.messages} socketId={this.state.socketId} />
                   </Grid>
 
                   <Grid item  sm={12} className='messagesNewMessageComponent'>
                    <Paper style={{padding: '10px'}}>
-                      <NewMessage />
+                      <NewMessage handleSubmit={this.handleSubmit} />
                    </Paper>
                   </Grid>
 
