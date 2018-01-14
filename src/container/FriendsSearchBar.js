@@ -80,6 +80,7 @@ class SearchBar extends Component {
 		          }}
 	          onClick={this.handleClickButton}
 		         color="contrast"
+                         id="cypress-friend-search-button"
 		        style={{position:'absolute',top:9,left:2}}
 		         aria-label="Menu">
 		         <i className="material-icons">search</i>

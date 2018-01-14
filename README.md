@@ -17,6 +17,11 @@ npm start
 ```
 node app.js
 ```
+
+### Run tests
+open test console `./node_modules/.bin/cypress open`
+
+run `dashboard_spec.js`
 ## Teams:
 - Yaser
 - Hussein
