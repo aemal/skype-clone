@@ -29,7 +29,7 @@ class ContactList extends Component {
   			)
   	})
     return (
-     <div className={classes.root}>
+     <div id="friend-list" className={classes.root}>
        <List>
         {listItems}
        </List>
