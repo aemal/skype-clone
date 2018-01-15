@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Tooltip from 'material-ui/Tooltip';
 import Checkbox from 'material-ui/Checkbox';
 import Grid from 'material-ui/Grid';
-
+import {Link} from 'react-router-dom';
 const styles = theme =>({
     container:{
         width: 800,
@@ -145,9 +145,9 @@ class SignIn extends Component{
                                 <p className={classes.p}>Remeber me</p>
                                 </div>
                                 <div className={classes.registerWrapper}>
-                                    <a className={classes.registerNow} href='#'>Register now</a>
+                                    <Link className={classes.registerNow} to='#'>Register now</Link>
                                     <div className={classes.registerSeparator}></div>
-                                    <a className={classes.forgotPassword} href='#'>Forgot Password?</a>
+                                    <Link className={classes.forgotPassword} to='#'>Forgot Password?</Link>
                                 </div>
                         </form>
                         
