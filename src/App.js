@@ -6,7 +6,7 @@ import MessagesLog from './components/messagesLog';
 import NewMessage from './components/newMessage';
 import {fetchContactList} from './actions/userActions';
 import io  from 'socket.io-client';
-
+import moment from 'moment';
 import {connect} from 'react-redux';
 import SearchBar from './container/FriendsSearchBar'; //FIXME: Incompatible with Material UI 1.0 Beta. Use react-autosuggest instead.
 import './App.css';
@@ -35,6 +35,7 @@ class App extends Component {
           alignItems: 'stretch',
           socketId: '',
           messages: [],
+          moment:moment().startOf('day').fromNow()   
         };
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -62,11 +63,13 @@ class App extends Component {
   handleSubmit(event) {
     const body = event.target.value
     let id = this.state.socketId
+    let moment = <p>this.state.moment</p> 
     if (event.keyCode === 13 && body) {
       const message = {
         body,
         id,
         socketId: this.state.socketId,
+        moment,
       }
         this.setState({ messages: [...this.state.messages, message ]})
          this.socket.emit('message', body)

@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import MessageBaloun from './messageBaloun';
 import SkypeAvatar from './skypeAvatar';
-
+import moment from 'moment';
 
 class MessagesLog extends Component {
+  constructor(){
+    super();
+    
+   this.state = {
+      moment:moment().calendar()    
+    }
+  }
   componentDidMount() {
     this.scrollToBottom();
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
+    console.log(this.state.moment)
   }
 
   scrollToBottom() {
@@ -21,7 +29,8 @@ class MessagesLog extends Component {
 
     const Message = messages.map((message, index, socketId) => {
       let order;
-
+      
+    
       if(message.socketId === undefined) {
         order = 2
       } else {
@@ -36,7 +45,7 @@ class MessagesLog extends Component {
           <div style={{order:order}} >
               <SkypeAvatar avatar={'https://wordsmith.org/words/images/avatar2_large.png'} size={40}/>
            </div>
-              <MessageBaloun message={message} />
+              <MessageBaloun message={message} time={this.state.moment} />
              </div>
             </div>
         );

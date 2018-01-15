@@ -106,6 +106,15 @@ body {
     vertical-align: top;
 }
 
+.timer{
+  display: block;
+  color:#777777;
+  font-size: 13px;
+  padding-top: 5px;
+  font-family: 'Kavivanar', cursive;
+}
+
+
 .bubble::before {
     background-color: #F2F2F2;
     content: "\00a0";
