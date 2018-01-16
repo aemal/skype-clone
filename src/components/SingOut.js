@@ -75,14 +75,12 @@ const styles = theme =>({
 
 
 
-class SignUp extends Component{
+class SignOut extends Component{
     constructor(){
         super();
         this.state = {
             value: '',
             selectedDate: moment(),
-            emailErr: '',
-            email: '',
         }
     }
     
@@ -95,29 +93,6 @@ class SignUp extends Component{
         console.log('date', date.format());
         this.setState({
             selectedDate: date.format() });
-    }
-
-    validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-      }
-
-    change = e =>{
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    onSubmit = e =>{
-        e.preventDefault();
-        const err = this.validateEmail(this.state.email);
-
-        if(!err){
-            this.setState({
-                email: '',
-                emailErr: 'Requires valid email',
-            })
-        } 
     }
 
 
@@ -143,11 +118,7 @@ class SignUp extends Component{
                             <TextField
                                 id='email'
                                 label='Email'
-                                name='email'
                                 className={classes.textField}
-                                helperText={this.state.emailErr}
-                                value={this.state.email}
-                                onChange={e=>this.change(e)}
                             />
                             <TextField
                                 id='password'
@@ -184,7 +155,7 @@ class SignUp extends Component{
                                     <FormControlLabel value='other' control={<Radio />} label='Other' />
                                 </RadioGroup>
                             </FormControl>
-                                <Button raised color='primary' className={classes.button} onClick={e=>{this.onSubmit(e)}}>
+                                <Button raised color='primary' className={classes.button}>
                                     Sing Up
                                 </Button>
                                 
@@ -197,4 +168,4 @@ class SignUp extends Component{
     }
 }
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(SignOut);

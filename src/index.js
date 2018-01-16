@@ -10,6 +10,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import SingIn from './components/SingIn';
 import { Route } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
+import SingUp from './components/SingUp' ;
 
 const history = createHistory();
 
@@ -19,6 +20,7 @@ ReactDOM.render(
 	  <div>
         <Route exact path="/" component={SingIn}/>
         <Route exact path="/main" component={App}/>
+        <Route exact path='/singup' component={SingUp}/>
       </div>
  </ConnectedRouter> 
 </Provider>

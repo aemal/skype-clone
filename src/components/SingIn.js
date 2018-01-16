@@ -7,6 +7,8 @@ import Tooltip from 'material-ui/Tooltip';
 import Checkbox from 'material-ui/Checkbox';
 import Grid from 'material-ui/Grid';
 import {Link} from 'react-router-dom';
+
+
 const styles = theme =>({
     container:{
         width: 800,
@@ -101,18 +103,53 @@ const styles = theme =>({
 });
 
 
+  
+
+
 
 class SignIn extends Component{
     constructor(){
         super();
         this.state = {
             checked: false,
+            emailErr: '',
+            email: '',
         }
     }
+
+     validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
+
     
     handleChange = (event)=>{
         this.setState({checked: event.target.checked});
     }
+
+
+    onSubmit = e =>{
+        e.preventDefault();
+        const err = this.validateEmail(this.state.email);
+        
+        
+        if(!err){
+            this.setState({
+                email: '',
+                emailErr: 'Requires valid email',
+            })
+        } 
+    }
+
+    change = e =>{
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+        
+    }
+
+    
+    
 
 
     render(){
@@ -126,7 +163,12 @@ class SignIn extends Component{
                             <TextField
                                 id='email'
                                 label='Email'
+                                name='email'
                                 className={classes.textField}
+                                value={this.state.email}
+                                onChange={e => this.change(e)}
+                                helperText={this.state.emailErr}
+                                
                             />
                             <TextField
                                 id='password'
@@ -134,7 +176,7 @@ class SignIn extends Component{
                                 className={classes.textField}
                             />
                             
-                                <Button raised color='primary' className={classes.button}>
+                                <Button raised color='primary' className={classes.button} onClick={e => this.onSubmit(e)}>
                                     Login
                                 </Button>
                                 <div className={classes.checkBoxWrapper}>
@@ -145,7 +187,7 @@ class SignIn extends Component{
                                 <p className={classes.p}>Remeber me</p>
                                 </div>
                                 <div className={classes.registerWrapper}>
-                                    <Link className={classes.registerNow} to='#'>Register now</Link>
+                                    <Link className={classes.registerNow} to='/singup'>Register now</Link>
                                     <div className={classes.registerSeparator}></div>
                                     <Link className={classes.forgotPassword} to='#'>Forgot Password?</Link>
                                 </div>

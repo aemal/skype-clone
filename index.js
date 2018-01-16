@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 
 
-const server = app.listen(8080);
+const server = app.listen(3002);
 
 const io = require('socket.io').listen(server);
 
