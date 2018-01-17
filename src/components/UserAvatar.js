@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withStyles} from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Avatar from './skypeAvatar';
+import {Link} from 'react-router-dom';
 
 const styles = {
   row:{
@@ -36,7 +37,8 @@ class UserAvatar extends Component {
       <div >
         <div className={classes.iconsContainer}>
           <IconButton tooltip="SVG Icon" className={classes.icons}>
-            <i className="material-icons">settings</i>
+           <Link to='/setting'><i className="material-icons">settings</i></Link>
+            
           </IconButton>
           <IconButton className={classes.icons}>
             <i className="material-icons">notifications</i>
