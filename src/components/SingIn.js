@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import classNames from "classnames";
-import Tooltip from "material-ui/Tooltip";
 import Checkbox from "material-ui/Checkbox";
 import Grid from "material-ui/Grid";
 import { Link } from "react-router-dom";
@@ -113,7 +111,7 @@ class SignIn extends Component {
               <p className={classes.p}>Remeber me</p>
             </div>
             <div className={classes.registerWrapper}>
-              <Link className={classes.registerNow} to="#">
+              <Link className={classes.registerNow} to="/singup">
                 Register now
               </Link>
               <div className={classes.registerSeparator} />

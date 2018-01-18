@@ -12,6 +12,7 @@ import SingIn from "./components/SingIn";
 import { Route } from "react-router";
 import createHistory from "history/createBrowserHistory";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
+import SingUp from "./components/SingUp";
 
 
 const history = createHistory();
@@ -22,7 +23,8 @@ ReactDOM.render(
 	  <div>
         <Route exact path="/" component={SingIn}/> 
         <Route exact path="/auth" component={App}/> 
-        <Route exact path="/profile" component={ProfileSettings}/>
+        <Route exact path="/auth/profile" component={ProfileSettings}/>
+        <Route exact path="/singup" component={SingUp}/>
     </div>
  </ConnectedRouter> 
 </Provider>

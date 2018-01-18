@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton';
 import Avatar from './skypeAvatar';
 import {Link} from 'react-router-dom';
 
+
+
 const styles = {
   row:{
     display: 'flex',
@@ -17,6 +19,8 @@ const styles = {
   },
   iconsContainer:{
     float: 'right',
+    zIndex:'1000',
+    
   },
   icons:{
     height: 60,
@@ -31,15 +35,20 @@ const styles = {
 
 class UserAvatar extends Component {
 
-  render() {
+  
+   
+   render() {
      const{classes} = this.props;
+
     return (
       <div >
         <div className={classes.iconsContainer}>
-          <IconButton tooltip="SVG Icon" className={classes.icons}>
-           <Link to='/setting'><i className="material-icons">settings</i></Link>
-            
+         
+          <IconButton component={Link}  className={classes.icons}  to="/profile" onClick={() => {console.log('hi')} }> 
+           <i className="material-icons">settings</i>
           </IconButton>
+      
+        
           <IconButton className={classes.icons}>
             <i className="material-icons">notifications</i>
           </IconButton>
