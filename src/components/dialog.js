@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
+  
   DialogTitle,
 } from 'material-ui/Dialog';
 const styles = {
@@ -20,27 +20,24 @@ const styles = {
 }
 
  class FormDialog extends React.Component {
-
+   
 
   render() {
     const { classes } = this.props
+    
     return (
       <div className={classes.comp}>
         <Dialog
+          fullScreen={this.props.fullScreen}
           open={this.props.open}
           onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title"></DialogTitle>
+          <DialogTitle id="form-dialog-title">{'page setting'}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Hallo world hlekfjklewjflkwejflkewfjelkfjeflkjflejflekfjelkwfjelkfjlkfjslkf
-            </DialogContentText>
+            {this.props.compo}
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.handleClose} color="primary">
-              Cancel
-            </Button>
             <Button className = {classes.closeDialog}
                   onClick={this.props.handleClose}>
               <i className='material-icons' >close</i>

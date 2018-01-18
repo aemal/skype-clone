@@ -60,6 +60,7 @@ class ContactDetail extends Component {
   };
   render() {
     const { classes } = this.props;
+    
     return (
       <div className={classes.container}>
         <div className={classes.btns}>
@@ -71,7 +72,11 @@ class ContactDetail extends Component {
           <FormDialog
               open={this.state.open}
               handleClickOpen={this.handleClickOpen}
-              handleClose={this.handleClose}/>
+              handleClose={this.handleClose}
+              compo={"hello"}
+              fullScreen={false}
+              />
+              
         </div>
           <Avatar avatar={'http://images.entertainment.ie/images_content/rectangle/620x372/E-T.jpg'} size={50} />
       </div>
