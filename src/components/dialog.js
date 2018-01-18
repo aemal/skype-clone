@@ -4,8 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import Dialog, {
   DialogActions,
   DialogContent,
-  
-  DialogTitle,
 } from 'material-ui/Dialog';
 const styles = {
   closeDialog:{
@@ -33,7 +31,7 @@ const styles = {
           onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">{'page setting'}</DialogTitle>
+          
           <DialogContent>
             {this.props.compo}
           </DialogContent>

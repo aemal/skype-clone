@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {withStyles} from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Avatar from './skypeAvatar';
-import SingUp from './SingUp';
+import ProfileSettings from './ProfileSettings';
 import FormDialog from './dialog';
 
 
@@ -63,7 +63,7 @@ class UserAvatar extends Component {
               open={this.state.open}
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClose}
-              compo={<SingUp/>}
+              compo={<ProfileSettings/>}
               fullScreen={true}
               />
          <IconButton className={classes.icons}>

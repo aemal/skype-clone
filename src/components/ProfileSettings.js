@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import UserData from './UserData';
 
 
 
@@ -9,8 +9,8 @@ class ProfileSettings extends Component {
 
   render() {
     return (
-      
-     <h1>hi</h1>
+     <UserData place={"setting"}/> 
+     
     );
   }
 }

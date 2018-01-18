@@ -81,6 +81,8 @@ class UserData extends Component{
         this.state = {
             value: '',
             selectedDate: moment(),
+            formTitle:'Sing Up',
+            buttonTitle:'Sing Up'
         }
     }
     
@@ -94,16 +96,24 @@ class UserData extends Component{
         this.setState({
             selectedDate: date.format() });
     }
-
+   componentWillMount(){
+    if(this.props.place==='setting'){
+      this.setState({
+        formTitle:"setting",
+        buttonTitle:"save",
+      })
+    }
+   }
 
     render(){
         const {classes} = this.props;
+       
         return(
             <Grid>
                 <Grid item xs={12} lg={12} sm={12}>
                     <Paper  elevation={4} className={classes.Paper}>
                         <form className={classes.formWrapper} noValidate autoComplete='off'>
-                            <h3 className={classes.h3}>Sing Up</h3>
+                            <h3 className={classes.h3}>{this.state.formTitle}</h3>
                             <TextField
                                 id='password'
                                 label='First Name'
@@ -155,7 +165,7 @@ class UserData extends Component{
                                 </RadioGroup>
                             </FormControl>
                                 <Button raised color='primary' className={classes.button}>
-                                    Sing Up
+                                    {this.state.buttonTitle}
                                 </Button>
                                 
                             
