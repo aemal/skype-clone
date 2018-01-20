@@ -74,7 +74,6 @@ const styles = theme =>({
 });
 
 
-
 class UserData extends Component{
     constructor(){
         super();
@@ -82,7 +81,15 @@ class UserData extends Component{
             value: '',
             selectedDate: moment(),
             formTitle:'Sing Up',
-            buttonTitle:'Sing Up'
+            buttonTitle:'Sing Up',
+            settingUserDat:{
+              firstName:'john',
+              lastName:'Doe',
+              email:'johnDoe@gmail.com',
+              oldPassword:'******',
+              newPassword:'newPasssword',
+
+            }
         }
     }
     
@@ -116,27 +123,27 @@ class UserData extends Component{
                             <h3 className={classes.h3}>{this.state.formTitle}</h3>
                             <TextField
                                 id='password'
-                                label='First Name'
+                                label={this.state.settingUserDat.firstName}
                                 className={classes.textField}
                             />
                             <TextField
                                 id='password'
-                                label='Last Name'
+                                label={this.state.settingUserDat.lastName}
                                 className={classes.textField}
                             />
                             <TextField
                                 id='email'
-                                label='Email'
+                                label={this.state.settingUserDat.email}
                                 className={classes.textField}
                             />
                             <TextField
                                 id='password'
-                                label='Password'
+                                label={this.state.settingUserDat.oldPassword}
                                 className={classes.textField}
                             />
                             <TextField
                                 id='password'
-                                label='Repeat Password'
+                                label={this.state.settingUserDat.newPassword}
                                 className={classes.textField}
                             />
                             <div className='picker'>
