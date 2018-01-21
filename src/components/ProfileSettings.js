@@ -9,7 +9,9 @@ const styles = theme => ({
     width: 1000,
     height: "auto",
     margin: "1% auto",
-    boxShadow: "3px 3px 9px 3px #777777"
+    boxShadow: "3px 3px 9px 3px #777777",
+   
+   
   },
   separatorWrapper: {
     display: "flex",
@@ -42,7 +44,6 @@ class ProfileSettings extends Component {
           <Grid item xs>
             <div className={classes.separatorWrapper}>
               <div className={classes.separator} />
-              
             </div>
           </Grid>
           <Grid item xs>

@@ -31,7 +31,7 @@ const styles = {
   img:{
     width: '100%',
   },
-  hello:{
+  container:{
     display:'flex',
   }
 
@@ -54,7 +54,7 @@ class UserAvatar extends Component {
    render() {
      const{classes} = this.props;
     return (
-      <div className={classes.hello}>
+      <div className={classes.container}>
         <div className={classes.iconsContainer}>
          <IconButton  className={classes.icons} onClick={this.handleClickOpen}> 
           <i className="material-icons">settings</i>
@@ -65,6 +65,7 @@ class UserAvatar extends Component {
               handleClose={this.handleClose}
               compo={<ProfileSettings/>}
               fullScreen={true}
+              
               />
          <IconButton className={classes.icons}>
            <i className="material-icons">notifications</i>

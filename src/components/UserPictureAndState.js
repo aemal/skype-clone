@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles';
-import classNames from 'classnames';
 import Button from 'material-ui/Button';
-import Avatar from './skypeAvatar';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 const styles = {
   row: {
@@ -53,8 +51,8 @@ const styles = {
           <div className={classes.row}>
              <img src=" https://image.freepik.com/free-icon/small-camera_318-11159.jpg" className={classes.img} alt={'profile'}/>
             <label htmlFor="raised-button-file">
-                <Button raised component="span" className={classes.button}>
-                  Upload Profile Photo
+                <Button raised component="span" className={classes.button} containerElement='label' label='Upload Profile Photo'>
+                  <input type="file" />
                 </Button>
             </label>
             <FormControl fullWidth className={classes.formControl}>

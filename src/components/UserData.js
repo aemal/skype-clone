@@ -15,11 +15,12 @@ const styles = theme =>({
         width: '50%',
         margin: '7% auto',
         textAlign: 'center',
+        
     },
     formWrapper:{
         display: 'flex',
         flexDirection: 'column',
-        width: '50%',
+        width: '100%',
         margin: '0 auto',
         alignItems:'stretch',
         textAlign: 'center',
@@ -28,9 +29,11 @@ const styles = theme =>({
     Paper:{
         width: '80%',
         margin: '8% auto',
+        
     },
     textField:{
         marginBottom: 20,
+        width:"100%",
     },
 
     p:{
@@ -47,7 +50,7 @@ const styles = theme =>({
     
     
     h3:{
-        color: '#777777',
+        color: '#000000',
     },
     Typography:{
         fontSize: '20px',
@@ -56,6 +59,7 @@ const styles = theme =>({
     DatePicker:{
         float: 'left',
         marginBottom: 30,
+        width:250,
     },
     RadioGroup:{
         display: 'inline-block',
@@ -68,6 +72,7 @@ const styles = theme =>({
     
     button:{
         marginBottom: 30,
+        width:200,
     },
 
 
@@ -86,7 +91,7 @@ class UserData extends Component{
               firstName:'john',
               lastName:'Doe',
               email:'johnDoe@gmail.com',
-              oldPassword:'******',
+              password:'******',
               newPassword:'newPasssword',
 
             }
@@ -109,7 +114,18 @@ class UserData extends Component{
         formTitle:"setting",
         buttonTitle:"save",
       })
+    }else{
+      this.setState({
+        settingUserDat:{
+            firstName:'FirstName',
+            lastName:'LastName',
+            email:'Email Adress',
+            password:'password',
+            newPassword:'repeat password',
+        }
+          })
     }
+
    }
 
     render(){
@@ -138,7 +154,7 @@ class UserData extends Component{
                             />
                             <TextField
                                 id='password'
-                                label={this.state.settingUserDat.oldPassword}
+                                label={this.state.settingUserDat.password}
                                 className={classes.textField}
                             />
                             <TextField
