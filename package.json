@@ -31,7 +31,7 @@
     "express-session": "^1.15.6",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
-    "material-ui": "^1.0.0-beta.24",
+    "material-ui": "^1.0.0-beta.30",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-pickers": "^1.0.0-beta.12",
     "material-ui-search-bar": "^1.0.0-beta.3",

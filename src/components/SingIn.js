@@ -100,7 +100,12 @@ class SignIn extends Component {
               className={classes.textField}
             />
 
-            <Button raised color="primary" className={classes.button}>
+            <Button
+              type="submit"
+              raised
+              color="primary"
+              className={classes.button}
+            >
               Login
             </Button>
             <div className={classes.checkBoxWrapper}>
