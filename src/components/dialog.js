@@ -15,6 +15,7 @@ const styles = {
   },
   comp:{
     position:'relative',
+    display:'flex',
     
   },
   background:{
