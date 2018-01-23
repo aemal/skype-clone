@@ -85,8 +85,10 @@ class UserData extends Component {
         email: "johnDoe@gmail.com",
         password: "******",
         newPassword: "newPasssword"
-      }
+      },
+
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleChange = (event, value) => {
@@ -100,6 +102,26 @@ class UserData extends Component {
       selectedDate: date.format()
     });
   };
+  handleInputChange(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+  
+    this.setState({
+      newUser:{
+        ...this.state.newUser,
+        [name]:value
+      }
+
+
+    })
+  console.log(name,value)
+   }
+  handleSubmit(e){
+    e.preventDefault();
+    console.log(this.state)
+  }
+
   componentWillMount() {
     if (this.props.place === "setting") {
       this.setState({
@@ -126,32 +148,42 @@ class UserData extends Component {
       <Grid>
         <Grid item xs={12} lg={12} sm={12}>
           <Paper elevation={4} className={classes.Paper}>
-            <form className={classes.formWrapper} noValidate autoComplete="off">
+            <form className={classes.formWrapper} noValidate autoComplete="off" onSubmit={this.handleSubmit.bind(this)}>
               <h3 className={classes.h3}>{this.state.formTitle}</h3>
               <TextField
-                id="password"
+                id="firstName"
                 label={this.state.settingUserData.firstName}
                 className={classes.textField}
+                onChange={this.handleInputChange}
+                name='firstName'
               />
               <TextField
-                id="password"
+                id="lastname"
                 label={this.state.settingUserData.lastName}
                 className={classes.textField}
+                onChange={this.handleInputChange}
+                name='lastName'
               />
               <TextField
                 id="email"
                 label={this.state.settingUserData.email}
                 className={classes.textField}
+                onChange={this.handleInputChange}
+                name='email'
               />
               <TextField
                 id="password"
                 label={this.state.settingUserData.password}
                 className={classes.textField}
+                onChange={this.handleInputChange}
+                name='password'
               />
               <TextField
-                id="password"
+                id="newpassword"
                 label={this.state.settingUserData.newPassword}
                 className={classes.textField}
+                onChange={this.handleInputChange}
+                name='newPassword'
               />
               <div className="picker">
                 <Typography
@@ -195,7 +227,7 @@ class UserData extends Component {
                   />
                 </RadioGroup>
               </FormControl>
-              <Button raised color="primary" className={classes.button}>
+              <Button raised type="submit" color="primary" className={classes.button}>
                 {this.state.buttonTitle}
               </Button>
             </form>
