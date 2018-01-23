@@ -6,6 +6,7 @@ import Checkbox from "material-ui/Checkbox";
 import Grid from "material-ui/Grid";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
+import {loginRequest} from '../utiles/Api';
 
 const styles = theme => ({
   container: {
@@ -78,26 +79,56 @@ class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      checked: false
+      checked: false,
+      email:'',
+      password:'',
     };
   }
 
   handleChange = event => {
-    this.setState({ checked: event.target.checked });
+    this.setState({ 
+      checked: event.target.checked,
+      
+     })
+    
   };
 
+  handleEmailChange = event =>{
+    this.setState({email: event.target.value});
+  }
+
+  handlePasswordChange = event =>{
+    this.setState({password: event.target.value});
+  }
+
+  handleSubmit(e){
+   e.preventDefault();
+   let url = 'localhost:3001/login';
+   let email = this.state.email;
+   let password = this.state.password;
+   loginRequest(url,email,password)
+
+  
+ }
   render() {
     const { classes } = this.props;
     return (
       <Grid container spacing={24} className={classes.container}>
         <Grid item xs>
-          <form className={classes.formWrapper} noValidate autoComplete="off">
+          <form className={classes.formWrapper}  onSubmit={this.handleSubmit.bind(this)}>
             <h3 className={classes.h3}>Sing in manually</h3>
-            <TextField id="email" label="Email" className={classes.textField} />
+            <TextField 
+             id="email"
+             label="Email" 
+             className={classes.textField}
+             onChange={this.handleEmailChange}
+              />
             <TextField
               id="password"
+              type="password"
               label="Password"
               className={classes.textField}
+              onChange={this.handlePasswordChange}
             />
 
             <Button
