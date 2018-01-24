@@ -2,12 +2,14 @@ const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = (userModel, passport)=>{
-  passport.use('signin', new LocalStrategy((email,password,done) => {
-    userModel.findOne({'emailAddress' : email},(err,user) => {
-      if (err) throw(err); 
-      if (!user) return done('wrong',false);
+  passport.use('signin', new LocalStrategy((username,password,done) => {
+    userModel.findOne({'emailAddress' : username},(err,user) => {
+      console.log(user);
+      if (err) return done(err); 
+      if (!user) return done(null,false, { message : 'Invalid e-mail address or password' });
       bcrypt.compare(password, user.password, (err, result)=>{
          if (err) { return done(err); }
+         console.log(result === true);
          if(result === true){
            user.status.lastSeen = Date.now(); 
            user.active = true;
