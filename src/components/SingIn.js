@@ -7,6 +7,9 @@ import Grid from "material-ui/Grid";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
 import {loginRequest} from '../utiles/Api';
+import {login} from '../actions/login';
+import compose from 'recompose/compose';
+import {connect} from 'react-redux';
 
 const styles = theme => ({
   container: {
@@ -103,12 +106,14 @@ class SignIn extends Component {
 
   handleSubmit(e){
    e.preventDefault();
-   let url = 'localhost:3001/login';
+   /* let url = 'localhost:3001/login';
    let email = this.state.email;
    let password = this.state.password;
    loginRequest(url,email,password)
-
-  
+ */
+  this.props.login(this.state).then(
+    (res) => this.context.router.push('/auth'),
+  )
  }
   render() {
     const { classes } = this.props;
@@ -171,4 +176,4 @@ class SignIn extends Component {
   }
 }
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(connect(null,{login})(SignIn))
