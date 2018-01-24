@@ -6,7 +6,7 @@ import { withStyles } from "material-ui/styles";
 
 const styles = theme => ({
   container: {
-    width: 1000,
+    width: "auto",
     height: "auto",
     margin: "1% auto",
     boxShadow: "3px 3px 9px 3px #777777",

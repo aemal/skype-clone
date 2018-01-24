@@ -17,9 +17,9 @@ const Message = require('./server/models/message.model');
 const authRoutes = require('./server/routers/auth-routers')(passport);
 const userRoutes = require('./server/routers/user-routers')();
 
-const db = 'mongodb://10.0.1.188:27017/skypeClone';
+const db = 'mongodb://localhost:27017/skypeClone';
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
@@ -50,9 +50,7 @@ router.get('/', (req, res, next) => res.send('Home'));
 router.use((err, req, res, next) => res.status(err.status || 400).send(err.message));
 
 mockData(User, Message, (err) => {
-    if (err) {
-        throw err;
-    }
+  
     app.listen(port, () => {
         console.log('Server started on port.....' + port);
     });
