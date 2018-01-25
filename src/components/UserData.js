@@ -79,7 +79,7 @@ class UserData extends Component {
     super();
     this.state = {
       value: "",
-      selectedDate: moment(),
+      dateOfBirth: moment(),
       formTitle: "Sing Up",
       buttonTitle: "Sing Up",
       settingUserData: {
@@ -89,7 +89,7 @@ class UserData extends Component {
         password: "******",
         newPassword: "newPasssword"
       },
-
+      
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -99,10 +99,11 @@ class UserData extends Component {
   };
 
   handleDataChange = date => {
-    console.log("selectedDate", this.state.selectedDate);
-    console.log("date", date.format());
+    
+    let checketDate = date.format().substring(0, 10);
+    console.log("date", checketDate);
     this.setState({
-      selectedDate: date.format()
+      newUser:{...this.state.newUser,dateOfBirth:checketDate}
     });
   };
   handleInputChange(event){
@@ -123,18 +124,21 @@ class UserData extends Component {
   handleSubmit(e){
     e.preventDefault();
     console.log(this.state.newUser)
-    /* this.props.signup(this.state.newUser).then(
-      (response) => console.log(response)
-    ).catch(err => console.log(err)) */
-    fetch('https://cors-anywhere.herokuapp.com/http://localhost:3001/auth/signup',{
-      
-      method:'POST',
-      headers : new Headers(),
-      body: JSON.stringify(this.state.newUser)
-     
-            
+    
+let url = "http://localhost:3001/auth/signup";
+
+const searchParams = Object.keys(this.state.newUser).map((key) => {
+  return encodeURIComponent(key) + '=' + encodeURIComponent(this.state.newUser[key]);
+}).join('&');
+
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  },
+  body: searchParams
 }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
-  }
+}
  
   componentWillMount() {
     if (this.props.place === "setting") {
@@ -210,7 +214,7 @@ class UserData extends Component {
                 </Typography>
                 <DatePicker
                   keyboard
-                  value={this.state.selectedDate}
+                  value={this.state.dateOfBirth}
                   labelFunc={date => moment(date).format("Do MMMM YYYY")}
                   onChange={this.handleDataChange}
                   className={classes.DatePicker}

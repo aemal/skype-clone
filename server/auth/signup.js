@@ -23,7 +23,7 @@ module.exports = class {
                         bcrypt.genSalt(10, (err, salt) => {
                             bcrypt.hash(req.body.password, salt, (err, hash) => {
                                 let user = new this.userModel({
-                                        emailAddress: req.body.username,
+                                        emailAddress: req.body.email,
                                         password: hash,
                                         dateOfBirth: new Date(req.body.dateOfBirth),
                                         profile: {
