@@ -17,7 +17,7 @@ class MessagesLog extends Component {
 
   componentDidUpdate() {
     this.scrollToBottom();
-    console.log(this.state.moment)
+   
   }
 
   scrollToBottom() {

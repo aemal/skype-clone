@@ -11,7 +11,7 @@ import moment from "moment";
 import Paper from "material-ui/Paper";
 import {signup} from '../actions/signup';
 import {connect} from 'react-redux';
-import axios from 'axios';
+
 
 const styles = theme => ({
   container: {

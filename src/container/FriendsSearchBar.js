@@ -75,12 +75,12 @@ class SearchBar extends Component {
 
 	        <Toolbar>
 	        <IconButton
-		         ref={node => {
+		          ref={node => {
 	            this.button = node;
 		          }}
 	          onClick={this.handleClickButton}
-		         color="contrast"
-                         id="cypress-friend-search-button"
+		         color="default"
+             id="cypress-friend-search-button"
 		        style={{position:'absolute',top:9,left:2}}
 		         aria-label="Menu">
 		         <i className="material-icons">search</i>
@@ -114,7 +114,7 @@ class SearchBar extends Component {
                </FormControl>
 
 	          </Popover>
-	          <IconButton  color="contrast" aria-label="Menu" style={{position:'absolute',top:7,right:2}} onClick={this.showModal.bind(this)}>
+	          <IconButton  color="default" aria-label="Menu" style={{position:'absolute',top:7,right:2}} onClick={this.showModal.bind(this)}>
 
 	            <i className="material-icons">add_circle</i>
 	          </IconButton>

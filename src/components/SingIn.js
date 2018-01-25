@@ -6,9 +6,7 @@ import Checkbox from "material-ui/Checkbox";
 import Grid from "material-ui/Grid";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
-import {loginRequest} from '../utiles/Api';
 import {login} from '../actions/login';
-import compose from 'recompose/compose';
 import {connect} from 'react-redux';
 
 const styles = theme => ({

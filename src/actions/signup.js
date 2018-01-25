@@ -4,7 +4,7 @@ export function signup(datauser) {
     return dispatch => {
         return axios({ 
             method:'post',
-            url:'http://localhost:3001/auth/signup',
+            url:'https://cors-anywhere.herokuapp.com/http://localhost:3001/auth/signup',
             data:JSON.stringify(datauser),
             withCredentials: true,
             headers: {

@@ -57,7 +57,7 @@ class App extends Component {
     this.setState({
       socketId: this.socket.id,
     });
-    console.log(this.state.socketId)
+  
   }
 
   handleSubmit(event) {
