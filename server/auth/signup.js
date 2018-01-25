@@ -6,6 +6,7 @@ module.exports = class {
     };
     
     signup(req, res, next){
+        console.log("Body=", req.body); 
             this.userModel.findOne({
                 'emailAddress': req.username
             }, (err, user) => {
@@ -16,6 +17,7 @@ module.exports = class {
                     return res.send({ success : false, message : 'Singin failed, email is already exist' });;
                 } else {
                     let password = req.body.password;
+                    console.log(password);
                     if(password.length >= 8 && password.length <= 20){
                         // create the user
                         bcrypt.genSalt(10, (err, salt) => {

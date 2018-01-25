@@ -9,6 +9,9 @@ import { DatePicker } from "material-ui-pickers";
 import Typography from "material-ui/Typography/Typography";
 import moment from "moment";
 import Paper from "material-ui/Paper";
+import {signup} from '../actions/signup';
+import {connect} from 'react-redux';
+import axios from 'axios';
 
 const styles = theme => ({
   container: {
@@ -115,13 +118,24 @@ class UserData extends Component {
 
 
     })
-  console.log(name,value)
+ 
    }
   handleSubmit(e){
     e.preventDefault();
-    console.log(this.state)
+    console.log(this.state.newUser)
+    /* this.props.signup(this.state.newUser).then(
+      (response) => console.log(response)
+    ).catch(err => console.log(err)) */
+    fetch('https://cors-anywhere.herokuapp.com/http://localhost:3001/auth/signup',{
+      
+      method:'POST',
+      headers : new Headers(),
+      body: JSON.stringify(this.state.newUser)
+     
+            
+}).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
   }
-
+ 
   componentWillMount() {
     if (this.props.place === "setting") {
       this.setState({
@@ -238,4 +252,4 @@ class UserData extends Component {
   }
 }
 
-export default withStyles(styles)(UserData);
+export default withStyles(styles)(connect(null,{signup})(UserData));
