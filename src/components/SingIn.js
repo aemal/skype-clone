@@ -56,14 +56,21 @@ class SignIn extends Component {
 
   handleSubmit(e){
    e.preventDefault();
+   const formData = {
+     checked:this.state.checked,
+     email:this.state.email,
+     password:this.state.password
+   }
+   console.log(formData)
    /* let url = 'localhost:3001/login';
    let email = this.state.email;
    let password = this.state.password;
    loginRequest(url,email,password)
- */
+ 
+
   this.props.login(this.state).then(
     (res) => this.context.router.push('/auth'),
-  )
+  )*/
  }
   render() {
     const { classes } = this.props;

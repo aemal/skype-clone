@@ -1,38 +1,77 @@
-import React, {Component} from 'react';
-import {withStyles} from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Radio, {RadioGroup} from 'material-ui/Radio';
-import { FormLabel, FormControl, FormControlLabel} from 'material-ui/Form';
-import {DatePicker} from 'material-ui-pickers';
-import Typography from 'material-ui/Typography/Typography';
-import moment from 'moment';
-import Avatar from './skypeAvatar';
+import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
+import Grid from "material-ui/Grid";
+import Radio, { RadioGroup } from "material-ui/Radio";
+import { FormLabel, FormControl, FormControlLabel } from "material-ui/Form";
+import { DatePicker } from "material-ui-pickers";
+import Typography from "material-ui/Typography/Typography";
+import moment from "moment";
+import Paper from "material-ui/Paper";
 import {signup} from '../actions/signup';
 import {connect} from 'react-redux';
+import Avatar from './skypeAvatar';
 
-const styles = theme =>({
+const styles = theme => ({
+  container: {
+    width: "50%",
+    margin: "7% auto",
+    textAlign: "center"
+  },
   formWrapper: {
     display: "flex",
     flexDirection: "column",
+    width: "100%",
+    margin: "0 auto",
+    alignItems: "stretch",
+    textAlign: "center"
+  },
+  Paper: {
+    width: "80%",
+    margin: "8% auto"
+  },
+  textField: {
+    marginBottom: 20,
+    width: "100%"
+  },
+
+  p: {
+    color: "#777777"
+  },
+
+  RadioGroupWrapper: {
+    display: "flex",
+    marginBottom: 10,
     position: "relative",
-    top: "2rem",
+    left: "-15px"
   },
-  RadioGroupWrapper:{
-      display: 'flex',
-      marginBottom: 10,
-      position:'relative',
-      left:'-15px',
+
+  h3: {
+    color: "#000000"
   },
-  DatePicker:{
-      float: 'left',
-      marginBottom: 30,
+  Typography: {
+    fontSize: "20px",
+    marginTop: 10
   },
-  RadioGroup:{
-      display: 'inline-block',
-      textAlign: 'left',
-      marginBottom: 20,
+  DatePicker: {
+    float: "left",
+    marginBottom: 30,
+    width: 250
   },
+  RadioGroup: {
+    display: "inline-block",
+    textAlign: "left",
+    marginBottom: 20
+  },
+  FormControl: {
+    textAlign: "left"
+  },
+
+  button: {
+    marginBottom: 30,
+    width: 200
+  }
 });
 
 class UserData extends Component {

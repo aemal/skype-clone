@@ -51,7 +51,7 @@ const styles = {
           <div className={classes.row}>
              <img src=" https://image.freepik.com/free-icon/small-camera_318-11159.jpg" className={classes.img} alt={'profile'}/>
             <label htmlFor="raised-button-file">
-                <Button raised component="span" className={classes.button} containerElement='label' label='Upload Profile Photo'>
+                <Button raised component="span" className={classes.button} >
                   <input type="file" />
                 </Button>
             </label>
