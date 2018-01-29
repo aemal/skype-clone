@@ -122,7 +122,6 @@ class UserData extends Component {
   handleSubmit(e){
     e.preventDefault();
     let formData = this.state.newUser;
-    
     let url = "http://localhost:3001/auth/signup";
     if(formData){
         const searchParams = Object.keys(formData).map((key) => {
@@ -138,8 +137,7 @@ class UserData extends Component {
         }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
     }else{
       console.log({Error: 'Fields are required'}); //Handle errors here...
-    }
-    
+    } 
   }
    
   componentWillMount() {
