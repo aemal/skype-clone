@@ -6,38 +6,22 @@ import ProfileSettings from './ProfileSettings';
 import FormDialog from './dialog';
 
 
-
-const styles = {
-  row:{
+const styles =  {
+  root: {
+    flexGrow: 1,
+  },
+  row: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap'
   },
-  avatar:{
+  avatar: {
     position: 'relative',
-    bottom: 0,
-    padding: '10px',
-    order:-1,
+    padding: '1rem',
   },
-  iconsContainer:{
-    float: 'right',
-    zIndex:"3",
-    
-  },
-  icons:{
-    height: 60,
-   
-  },
-  img:{
+  img: {
     width: '100%',
-  },
-  hello:{
-    display:'flex',
   }
-
 };
-
-
 
 class UserAvatar extends Component {
   state = {
@@ -47,39 +31,38 @@ class UserAvatar extends Component {
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+
   handleClose = () => {
     this.setState({ open: false });
   };
-   
-   render() {
-     const{classes} = this.props;
+
+  render() {
+    const{classes} = this.props;
+
     return (
-      <div className={classes.hello}>
-        <div className={classes.iconsContainer}>
-         <IconButton  className={classes.icons} onClick={this.handleClickOpen}> 
-          <i className="material-icons">settings</i>
-         </IconButton>
-         <FormDialog
-              open={this.state.open}
-              handleClickOpen={this.handleClickOpen}
-              handleClose={this.handleClose}
-              compo={<ProfileSettings/>}
-              fullScreen={true}
-              />
-         <IconButton className={classes.icons}>
-           <i className="material-icons">notifications</i>
-         </IconButton>
-         <IconButton tooltip="Font Icon" className={classes.icons}>
-           <i className="material-icons">exit_to_app</i>
-         </IconButton>
-       </div>
-       <div className={classes.avatar}>
-          <Avatar avatar={'http://cdn.skim.gs/images/c_fill,dpr_1.0,f_auto,fl_lossy,h_391,q_auto,w_695/funny-dog-names/funny-dog-names'} size={100} />
-         
-       </div>
-    </div>
-
-
+      <div className={classes.root}>
+        <div className={classes.avatar}>
+          <Avatar avatar={'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png'} size={120} />
+        </div>
+        <div className="icons">
+          <IconButton onClick={this.handleClickOpen}>
+            <i className="material-icons">settings</i>
+            <FormDialog
+                open={this.state.open}
+                handleClickOpen={this.handleClickOpen}
+                handleClose={this.handleClose}
+                compo={<ProfileSettings/>}
+                fullScreen={true}
+            />
+          </IconButton>
+          <IconButton>
+            <i className="material-icons">notifications</i>
+          </IconButton>
+          <IconButton>
+            <i className="material-icons">exit_to_app</i>
+          </IconButton>
+        </div>
+      </div>
     );
   }
 }

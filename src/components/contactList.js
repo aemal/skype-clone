@@ -6,14 +6,7 @@ import SkypeAvatar from './skypeAvatar';
 const styles = theme => ({
   root: {
     width: '100%',
-    background: theme.palette.background.paper,
   },
-  bigAvatar: {
-      width: 60,
-      height: 60,
-      backgroundSize: 'cover',
-      backgroundPosition: 'top center',
-    },
 });
 
 class ContactList extends Component {
@@ -22,12 +15,15 @@ class ContactList extends Component {
   	const { classes } = this.props;
   	const listItems = this.props.friendsList.map((item) => {
   		return (
-  			<ListItem key={item.id} dense button className={classes.listItem}>
-          <SkypeAvatar avatar={'http://icons.iconarchive.com/icons/icons8/ios7/512/Users-User-Male-2-icon.png' } size={50}/>
+  			<ListItem key={item.id} dense button className="list-item">
+          <SkypeAvatar
+          avatar={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYezaoFgT-pfb5wpqDXxzKXzhQnTLPU5JW5eUvBaKL1H8Rtmu' }
+          size={ 45 }/>
   				<ListItemText primary={item.name} />
   			</ListItem>
   			)
   	})
+
     return (
      <div id="friend-list" className={classes.root}>
        <List>
@@ -38,4 +34,4 @@ class ContactList extends Component {
   }
 }
 
-export default  withStyles(styles)(ContactList);
+export default withStyles(styles)(ContactList);

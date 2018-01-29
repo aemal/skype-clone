@@ -1,50 +1,25 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
-import Grid from "material-ui/Grid";
 import Tooltip from "material-ui/Tooltip";
 import classNames from "classnames";
 import Button from "material-ui/Button";
 
 const styles = theme => ({
-  socialMediaLogin: {
-    width: 140,
-    height: 300,
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
-    top: 120,
-    right: "20%"
-  },
-  social: {
-    display: "flex",
-    width: "250px",
-    marginBottom: 15,
-    justifyContent: "space-between",
-    color: "white"
-  },
-  facebook: {
-    backgroundColor: "#3B5998"
-  },
-  google: {
-    backgroundColor: "#DD4B39"
-  },
-  twitter: {
-    backgroundColor: "#55ACEE"
-  }
+
 });
 
 class SocialMedia extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid item xs>
-        <div className={classes.socialMediaLogin}>
+      <div className="social-media-login-main">
+        <div className="social-media-login">
           <Tooltip id="tooltip-top" title="Facebook" placement="top">
             <Button
               className={classNames(classes.social, classes.facebook)}
               raised
             >
-              <i className="fa fa-facebook-square fa-2x" /> Sign in with
+              <i className="fa fa-facebook-square fa-2x"/> Sign in with
               facebook
             </Button>
           </Tooltip>
@@ -65,7 +40,7 @@ class SocialMedia extends Component {
             </Button>
           </Tooltip>
         </div>
-      </Grid>
+      </div>
     );
   }
 }
