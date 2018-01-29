@@ -124,11 +124,13 @@ class UserData extends Component {
     let formData = this.state.newUser;
     let url = "http://localhost:3001/auth/signup";
     if(formData){
+      
         const searchParams = Object.keys(formData).map((key) => {
           return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
         }).join('&');
-
+        console.log(searchParams);
         fetch(url, {
+          CORS:'disabled',
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

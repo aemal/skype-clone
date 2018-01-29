@@ -6,6 +6,7 @@ module.exports = class {
     };
     
     signup(req, res, next){
+        console.log(req.body)
         if(!req.body.password){
             return res.json({ success : false, message : 'Password is required' });
         }
