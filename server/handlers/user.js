@@ -5,10 +5,10 @@ module.exports = class {
     this.userModel = userModel;
   }
 
-  get(req,res) {
+  get(req,res,next) {
     this.userModel.findOne({_id: req.params.id}).exec((err, user)=>{
       if(err){
-          res.send('We can not find the friends');
+          next(err);
       }else{
           res.json(user.contacts.friends);
       }

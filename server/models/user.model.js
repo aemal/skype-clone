@@ -21,7 +21,7 @@ const contact = new Schema({
         required: true,
         ref: 'User'
     }
-})
+});
 
 const userSchema = new Schema({
     emailAddress: {
@@ -36,7 +36,7 @@ const userSchema = new Schema({
         },
     dateOfBirth: {
             type: Date,
-            required: 'DateOfBirth is required',
+            required: 'Date of birth is required',
         },
     profile: {
         firstName: {
