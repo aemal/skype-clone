@@ -3,19 +3,19 @@ module.exports = class {
     this.messageModel = messageModel;
     this.chatModel = chatModel;
   };
-  get(req,res) {
-    messageModel.findOne({
+  get(req,res,next) {
+    this.messageModel.findOne({
       message: req.params.id
     })
     .exec((err, message) => {
       if(err) {
-        res.send('Error!');
+        next(err);
       } else {
         res.json(message);
       }
     });
   };
-  send(req,res) {
+  send(req,res,next) {
     var newMessage = new Message ({
       senderUserID: req.body.sendUserId,
       receiverUserID: req.body.receiveUserId,
@@ -23,21 +23,20 @@ module.exports = class {
     });
     newMessage.save((err, message) => {
       if(err) {
-          res.send('Error!');
+          next(err)
         } else {
           res.send(message);
         }
     });
   };
-  messageHistory (req, res){
+  messageHistory (req, res, next){
     this.chatModel.collection.findOne({participants: {$all: [req.body.sender, req.body.receiver]}}, (err, chat) => {
       if(err) {
-        res.send('Error!');
+        next(err);
       } else {
-        console.log(chat);
         this.messageModel.find({chatID: chat._id}, (err, message) => {
           if(err) {
-            res.send('Error!');
+            next(err);
           } else {
             res.json(message);
           }

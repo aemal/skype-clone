@@ -1,25 +1,28 @@
 const router = require('express').Router();
+const Signup = require('../auth/signup');
+const User = require('../models/user.model');
+const signup = new Signup(User);
 
-module.exports = function loginout(passport) {
+module.exports = (passport)=>{
 
-    router.get('/logout', (req, res) => {
+    router.get('/logout', (req, res, next) => {
         req.logout();
-        res.redirect('/auth/login');
+        res.send({ success : true, message : 'Logout succeeded' });
     });
 
-    router.route('/login').get((req, res) => res.send('Login page'))
-    .post(passport.authenticate('signin', {
-        successRedirect: '/',
-        failureRedirect: '/auth/login',
-        failureFlash: true
-    }));
+    router.post('/login',(req, res, next)=>{
+          passport.authenticate('signin', (err, user, info)=>{
+            console.log(err);
+            if (err) { return next(err); }
+            if (!user) { return res.send({ success : false, message : 'Login failed, email or password is wrong' }); }
+            req.logIn(user, (err)=>{
+              if (err) return next(err);
+              return res.send(user);
+            });
+          })(req, res, next);
+    });
 
-    router.route('/register').get((req, res) => res.send('register page'))
-    .post(passport.authenticate('signup', {
-        successRedirect: '/auth/login',
-        failureRedirect: '/auth/register',
-        failureFlash: true
-    }));
+    router.post('/signup', signup.signup.bind(signup));
 
     router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 
@@ -37,7 +40,7 @@ module.exports = function loginout(passport) {
         (req, res)=>{
         res.redirect('/');
     });
-    ////// Twitter //////
+
     router.get('/twitter', passport.authenticate('twitter'));
     router.get('/twitter/callback', 
         passport.authenticate('twitter',{failureRedirect: '/auth/login'}));

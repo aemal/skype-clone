@@ -17,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class SearchBar extends Component {
+
   state = {
     open: false,
     anchorEl: null,

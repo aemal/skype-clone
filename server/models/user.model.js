@@ -2,45 +2,110 @@ const mongoose = require('mongoose');
 const textSearch = require('text-search');
 const Schema = mongoose.Schema;
 
+const emailValidation = email => {
+    const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return valid.test(email);
+};
+
 const contact = new Schema({
-	fullName: { type:String, required:true },
-	avatarURL: { type:String, required:true },
-	userId: { type:Schema.Types.ObjectId, required:true, ref: 'User'}
+    fullName: {
+        type: String,
+        required: true
+    },
+    avatarURL: {
+        type: String,
+        required: true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    }
 })
-//3 Creative
+
 const userSchema = new Schema({
-	emailAddress: { type: String , lowercase: true, unique : true},
-    password: String, // Do not forget, this is an Bycrypt Digest, NOT pure password
-	dateOfBirth: Date,
-	profile:{
-		firstName: { type: String, lowercase: true, required: true },
-		lastName: { type: String, lowercase: true, required: true },
-		gender: {type : String, enum : {values : [ 'Male', 'Female', 'Other']}},
-		avatarURL: String
-	},
-	status:{
-		lastSeen: { type: Date },
-	  active: {type : Boolean, default : false}
-	},
-    loginStrategy : {type : String, enum : {values : ['facebook','twitter','instagram','github','local'], message : 'Unknown oAuth provider ;('}},
-    loginObject : Object,
-	contacts:{
-		friends : [contact],
-		blocked : [contact],
-		requested : [contact],
-		pending : [contact],
-		decline : [contact]
-	}
+    emailAddress: {
+        type: String,
+        unique: true,
+        required: 'Email is required',
+        validate: [emailValidation, 'Email is not valid...']
+    },
+    password: {
+            type: String,
+            required: 'Fill the password field',
+        },
+    dateOfBirth: {
+            type: Date,
+            required: 'DateOfBirth is required',
+        },
+    profile: {
+        firstName: {
+            type: String,
+            required: 'First name is required...',
+            minlength: [3, 'First name must has min 3 and max 20 characters ...'],
+            maxlength: [20, 'First name must has min 3 and max 20 characters ...']
+        },
+        lastName: {
+            type: String,
+            required: 'Last name is required...',
+            minlength: [3, 'Last name must has min 3 and max 20 characters ...'],
+            maxlength: [20, 'Last name must has min 3 and max 20 characters ...']
+        },
+        gender: {
+            type: String,
+            enum: {
+                values: ['Male', 'Female', 'Other'],
+    			message: 'Select gender ...'
+            }
+        },
+        avatarURL: String
+    },
+    status: {
+        lastSeen: {
+            type: Date
+        },
+        active: {
+            type: Boolean,
+            default: false
+        }
+    },
+    loginStrategy: {
+        type: String,
+        enum: {
+            values: ['facebook', 'twitter', 'instagram', 'github', 'signin'],
+            message: 'Unknown oAuth provider ;('
+        }
+    },
+    loginObject: Object,
+    contacts: {
+        friends: [contact],
+        blocked: [contact],
+        requested: [contact],
+        pending: [contact],
+        decline: [contact]
+    }
 
 });
 
-userSchema.virtual('fullName').get(function() {
+userSchema.virtual('fullName').get(()=>{
     return this.profile.firstName + ' ' + this.profile.lastName;
 });
 
+const User = mongoose.model('user', userSchema);
 
-//userSchema.plugin(textSearch);
+//To check the email is unique or not...
+User.schema.path('emailAddress').validate((value, done)=>{                                                                                           
+   User.findOne({ emailAddress: value },(err, user)=>{ 
+      if(err) return done(err);
+      done(!user);                                                                                                                         
+    });                                                                                                                                                  
+}, 'This email address is already registered');
 
-userSchema.index({"profile.firstName":"text", "profile.lastName":"text"});
+userSchema.plugin(textSearch);
 
-module.exports = mongoose.model('user', userSchema);
+userSchema.index({
+    "profile.firstName": "text",
+    "profile.lastName": "text"
+});
+
+module.exports = User;

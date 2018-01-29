@@ -21,12 +21,6 @@ const messageHandler = new MessageHandler(Message, Chat);
 module.exports = ()=>{
 
     const isAuthenticated = (req, res, next)=>{
-
-        req.user = {};
-
-        req.user._id = '5a392feb8818b735ac69aeed';
-        return next();
-
         if (req.isAuthenticated()) return next();
         else res.redirect('/auth/login');
     };
@@ -47,8 +41,6 @@ module.exports = ()=>{
     router.get('/friend/accept/:id', isAuthenticated, friendHandler.accept.bind(friendHandler))
     router.get('/friend/decline/:id', isAuthenticated, friendHandler.decline.bind(friendHandler))
     router.get('/friend/remove/:id', isAuthenticated, friendHandler.remove.bind(friendHandler));
-
-    router.get('*', isAuthenticated, (req, res) => res.redirect('/'));
 
     return router;
 };

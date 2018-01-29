@@ -8,6 +8,8 @@ import {DatePicker} from 'material-ui-pickers';
 import Typography from 'material-ui/Typography/Typography';
 import moment from 'moment';
 import Avatar from './skypeAvatar';
+import {signup} from '../actions/signup';
+import {connect} from 'react-redux';
 
 const styles = theme =>({
   formWrapper: {
@@ -33,38 +35,89 @@ const styles = theme =>({
   },
 });
 
+class UserData extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: "",
+      dateOfBirth: moment(),
+      formTitle: "Sing Up",
+      buttonTitle: "Sing Up",
+      settingUserData: {
+        firstName: "john",
+        lastName: "Doe",
+        email: "johnDoe@gmail.com",
+        password: "******",
+        newPassword: "newPasssword"
+      },
+      
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleDataChange = date => {
+    
+    let checketDate = date.format().substring(0, 10);
+    console.log("date", checketDate);
+    this.setState({
+      newUser:{...this.state.newUser,dateOfBirth:checketDate}
+    });
+  };
+  handleInputChange(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+  
+    this.setState({
+      newUser:{
+        ...this.state.newUser,
+        [name]:value
+      }
 
 
-class UserData extends Component{
-    constructor(){
-        super();
-        this.state = {
-            value: '',
-            selectedDate: moment(),
-            formTitle:'Sing Up',
-            buttonTitle:'Sing Up'
-        }
-    }
-
-    handleChange = (event, value)=>{
-        this.setState({value});
-    }
-
-    handleDataChange = (date)=>{
-        console.log('selectedDate',this.state.selectedDate);
-        console.log('date', date.format());
-        this.setState({
-            selectedDate: date.format() });
-    }
-   componentWillMount(){
-    if(this.props.place==='setting'){
-      this.setState({
-        formTitle:"setting",
-        buttonTitle:"save",
-      })
-    }
+    })
+ 
    }
+  handleSubmit(e){
+    e.preventDefault();
+    console.log(this.state.newUser)
+    
+let url = "http://localhost:3001/auth/signup";
 
+const searchParams = Object.keys(this.state.newUser).map((key) => {
+  return encodeURIComponent(key) + '=' + encodeURIComponent(this.state.newUser[key]);
+}).join('&');
+
+    fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  },
+  body: searchParams
+}).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+}
+ 
+  componentWillMount() {
+    if (this.props.place === "setting") {
+      this.setState({
+        formTitle: "setting",
+        buttonTitle: "save"
+      });
+    } else {
+      this.setState({
+        settingUserData: {
+          firstName: "FirstName",
+          lastName: "LastName",
+          email: "Email Adress",
+          password: "password",
+          newPassword: "repeat password"
+        }
+      });
+    
     render(){
         const {classes} = this.props;
 
@@ -75,31 +128,41 @@ class UserData extends Component{
           </div>
             <h3 className="sign-in-header">Sign up</h3>
             <div className="sign-in-details">
-            <form className={classes.formWrapper} noValidate autoComplete='off'>
+            <form className={classes.formWrapper} noValidate autoComplete='off' onSubmit={this.handleSubmit.bind(this)}>
                 <TextField
                     id='firstName'
-                    label='First Name'
                     className={classes.textField}
+                    label={this.state.settingUserData.firstName}
+                    onChange={this.handleInputChange}
+                    name='firstName'
                 />
                 <TextField
                     id='lastName'
-                    label='Last Name'
                     className={classes.textField}
+                    label={this.state.settingUserData.lastName}
+                    onChange={this.handleInputChange}
+                    name='lastName'
                 />
                 <TextField
                     id='email'
-                    label='Email'
                     className={classes.textField}
+                    label={this.state.settingUserData.email}
+                    onChange={this.handleInputChange}
+                    name='email'
                 />
                 <TextField
                     id='password'
-                    label='Password'
                     className={classes.textField}
+                    label={this.state.settingUserData.password}
+                    onChange={this.handleInputChange}
+                    name='password'
                 />
                 <TextField
-                    id='password'
-                    label='Repeat Password'
+                    id='newPassword'
                     className={classes.textField}
+                    label={this.state.settingUserData.newPassword}
+                    onChange={this.handleInputChange}
+                    name='newPassword'
                 />
                 <div className='picker'>
                     <Typography type='caption' align='left' gutterBottom className={classes.Typography} >
@@ -126,14 +189,13 @@ class UserData extends Component{
                         <FormControlLabel value='other' control={<Radio />} label='Other' />
                     </RadioGroup>
                 </FormControl>
-                <Button className="login-button">
+                <Button type="submit" className="login-button">
                     {this.state.buttonTitle}
                 </Button>
               </form>
             </div>
           </div>
         );
-    }
-}
-
-export default withStyles(styles)(UserData);
+      
+      
+export default withStyles(styles)(connect(null,{signup})(UserData));

@@ -5,6 +5,7 @@ import Dialog, {
   DialogActions,
   DialogContent,
 } from 'material-ui/Dialog';
+
 const styles = {
   closeDialog:{
     color:'red',
@@ -14,7 +15,13 @@ const styles = {
   },
   comp:{
     position:'relative',
+    display:'flex',
+    
   },
+  background:{
+    backgroundColor:'rgba(0, 0, 0,0.5)',
+    
+  }
 }
 
  class FormDialog extends React.Component {
@@ -30,6 +37,7 @@ const styles = {
           open={this.props.open}
           onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
+          className={classes.background}
         >
           
           <DialogContent>
