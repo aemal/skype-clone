@@ -7,17 +7,17 @@ module.exports = (passport)=>{
 
     router.get('/logout', (req, res, next) => {
         req.logout();
-        res.send({ success : true, message : 'Logout succeeded' });
+        res.json({ success : true, message : 'Logout succeeded' });
     });
 
     router.post('/login',(req, res, next)=>{
           passport.authenticate('signin', (err, user, info)=>{
-            console.log(err);
             if (err) { return next(err); }
-            if (!user) { return res.send({ success : false, message : 'Login failed, email or password is wrong' }); }
+            if (!user) { return res.json({ success : false, message : 'Login failed, email or password is wrong' }); }
             req.logIn(user, (err)=>{
               if (err) return next(err);
-              return res.send(user);
+              const {emailAddress, profile, gender, dateOfBirth, status} = user;
+              return res.json({emailAddress, profile, gender, dateOfBirth, status});
             });
           })(req, res, next);
     });
@@ -30,7 +30,7 @@ module.exports = (passport)=>{
     router.get('/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/auth/login' }),
         (req, res)=>{
-        res.redirect('/');
+        res.json({ success : true, message : 'You are loged in through your twitter account' });
     });
 
     router.get('/github',
@@ -39,7 +39,7 @@ module.exports = (passport)=>{
     router.get('/github/callback', 
         passport.authenticate('github', { failureRedirect: '/auth/login' }),
         (req, res)=>{
-        res.redirect('/');
+        res.json({ success : true, message : 'You are loged in through your twitter account' });
     });
 
     router.get('/twitter', 
@@ -47,7 +47,7 @@ module.exports = (passport)=>{
     router.get('/twitter/callback', 
         passport.authenticate('twitter',{failureRedirect: '/auth/login'}),
         (req, res)=>{
-            res.send({ success : true, message : 'You are loged in through your twitter account' });
+            res.json({ success : true, message : 'You are loged in through your twitter account' });
     });
 
     return router;
