@@ -16,7 +16,8 @@ module.exports = class {
                     return next(err);
                 }
                 if (user) {
-                    return res.json({ success : false, message : 'Singin failed, email is already exist' });;
+                    console.log(user);
+                    return res.json({ success : false, message : 'Singin failed, email is already exist' });
                 } else {
                     let password = req.body.password;
                     if(password.length >= 8 && password.length <= 20){

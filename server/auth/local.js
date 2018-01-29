@@ -3,8 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = (userModel, passport)=>{
   passport.use('signin', new LocalStrategy((username,password,done) => {
-    userModel.findOne({'emailAddress' : username},(err,user) => {
-      console.log(user);
+    userModel.findOne({'emailAddress' : username.toLowerCase()},(err,user) => {
       if (err) return done(err); 
       if (!user) return done(null,false, { message : 'Invalid e-mail address or password' });
       bcrypt.compare(password, user.password, (err, result)=>{
@@ -15,7 +14,7 @@ module.exports = (userModel, passport)=>{
            user.active = true;
            return done(null, user);
          }else{
-           return done(null, false, console.log('errMsg','Invalid password.'));
+           return done(null, false, { message : 'Invalid password' });
          }
       });     
     });

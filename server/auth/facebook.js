@@ -36,8 +36,8 @@ module.exports = (userModel, passport)=>{
                             return done(null, user);
                         });
                     } catch (err) {
-                        //TODO We should be able to handle different kind of errors and send an appropriate error message
                         console.log(err);
+                        return done(err);
                     }
                 }
             });

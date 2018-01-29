@@ -7,7 +7,7 @@ module.exports =(userModel, passport)=>{
         consumerSecret: 'YukabU2gin1dlLZ96gcjEWOWGDkfCOyxHwSwi0SLLbpSC1Vh53',
         callbackURL: "http://localhost:8080/auth/twitter/callback"
     },
-      (token, tokenSecret, profile, cb)=>{
+      (token, tokenSecret, profile, done)=>{
             console.log(profile);
             userModel.findOne({
                 'emailAddress': profile._json.email
@@ -37,8 +37,8 @@ module.exports =(userModel, passport)=>{
                             return done(null, user);
                         });
                     } catch (err) {
-                        //TODO We should be able to handle different kind of errors and send an appropriate error message
                         console.log(err);
+                        return done(err);
                     }
                 }
             });
