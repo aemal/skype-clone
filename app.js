@@ -53,7 +53,10 @@ SerialAuthenticator(passport);
 router.get('/', (req, res, next) => res.send('Home'));
 
 // ErrorHandler, pass errors to the next function
-router.use((err, req, res, next) => res.status(err.status || 400).json(err));
+app.use((err, req, res, next) =>{ 
+	res.send(err);
+	next();
+});
 
 mockData(User, Message, (err) => {
   
