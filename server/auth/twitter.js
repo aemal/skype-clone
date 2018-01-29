@@ -1,31 +1,35 @@
 const TwitterStrategy = require('passport-twitter').Strategy;
 const config = require('../config/config');
 
-module.exports = function (userModel, passport){
+module.exports =(userModel, passport)=>{
     passport.use(new TwitterStrategy({
-        clientKey: configAuth.twitterAuth.consumerKey,
-        clientSecret: configAuth.twitterAuth.consumerSecret,
-        callbackURL: configAuth.twitterAuth.callbackURL
+        consumerKey: '4xHOvecu41ApJhIpAPK3HXXLw',
+        consumerSecret: 'YukabU2gin1dlLZ96gcjEWOWGDkfCOyxHwSwi0SLLbpSC1Vh53',
+        callbackURL: "http://localhost:8080/auth/twitter/callback"
     },
-    // make the code asynchronous
-    // User.findOne won't fire until we have all our data back from Twitter
-    (token, tokenSecret,profile,done)=>{
-        procces.nextTick(()=>{
-            userModel.findOne({'twitter.id': profile.id}, (err,user)=>{
-                if(err) return err;
-                // if the user is found then log them in
-                if(user){
+      (token, tokenSecret, profile, cb)=>{
+            console.log(profile);
+            userModel.findOne({
+                'emailAddress': profile._json.email
+            }, (err, user) => {
+                if (err) {
+                    return done(err);
+                }
+                if (user) {
                     return done(null, user);
-                }else{
-                    // if there is no user, create them
-                    var newUser = new User();
-
-                    // set all of the user data that we need
-                    newUser.twitter.id = profile.id;
-                    newUser.twitter.token = token;
-                    newUser.twitter.username = profile.username;
-                    newUser.twitter.displayName = profile.displayName;
-                    
+                } else {
+                    // create the user
+                    var user = new userModel({
+                        emailAddress: profile._json.email,
+                             // dateOfBirth: new Date(req.body.dateOfBirth),
+                        profile: {
+                            firstName: profile.displayName,
+                            lastName: profile.name.familyName || 'Noun',
+                            gender: profile.gender.charAt(0).toUpperCase() + profile.gender.slice(1) || 'Other', 
+                            avatarURL: profile.photos?profile.photos[0].value: 'avatar.jpg'
+                        },
+                        loginStrategy: 'facebook'
+                    });
                     try {
                         user.save((err) => {
                             if (err) throw (err);
@@ -38,9 +42,7 @@ module.exports = function (userModel, passport){
                     }
                 }
             });
-        });
-        
-    }
-    
+
+      }
     ));
 }
