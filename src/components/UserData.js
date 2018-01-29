@@ -77,30 +77,32 @@ class UserData extends Component {
         ...this.state.newUser,
         [name]:value
       }
-
-
-    })
+    });
  
-   }
+  }
   handleSubmit(e){
     e.preventDefault();
-    console.log(this.state.newUser)
+    let formData = this.state.newUser;
     
-let url = "http://localhost:3001/auth/signup";
+    let url = "http://localhost:3001/auth/signup";
+    if(formData){
+        const searchParams = Object.keys(formData).map((key) => {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
+        }).join('&');
 
-const searchParams = Object.keys(this.state.newUser).map((key) => {
-  return encodeURIComponent(key) + '=' + encodeURIComponent(this.state.newUser[key]);
-}).join('&');
-
-    fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-  },
-  body: searchParams
-}).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
-}
- 
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: searchParams
+        }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+    }else{
+      console.log({Error: 'Fields are required'}); //Handle errors here...
+    }
+    
+  }
+   
   componentWillMount() {
     if (this.props.place === "setting") {
       this.setState({
@@ -117,6 +119,8 @@ const searchParams = Object.keys(this.state.newUser).map((key) => {
           newPassword: "repeat password"
         }
       });
+    }
+  }  
     
     render(){
         const {classes} = this.props;
@@ -196,6 +200,8 @@ const searchParams = Object.keys(this.state.newUser).map((key) => {
             </div>
           </div>
         );
+      }
+    }
       
       
 export default withStyles(styles)(connect(null,{signup})(UserData));
