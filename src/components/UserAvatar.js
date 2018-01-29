@@ -34,7 +34,6 @@ class UserAvatar extends Component {
 
   handleClose = () => {
     this.setState({open: false });
-    console.log(this.state)
   };
 
   render() {

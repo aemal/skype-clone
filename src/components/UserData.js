@@ -11,7 +11,7 @@ import moment from "moment";
 import Paper from "material-ui/Paper";
 import {signup} from '../actions/signup';
 import {connect} from 'react-redux';
-
+import Avatar from './skypeAvatar';
 
 const styles = theme => ({
   container: {
@@ -116,30 +116,32 @@ class UserData extends Component {
         ...this.state.newUser,
         [name]:value
       }
-
-
-    })
+    });
  
-   }
+  }
   handleSubmit(e){
     e.preventDefault();
-    console.log(this.state.newUser)
+    let formData = this.state.newUser;
     
-let url = "http://localhost:3001/auth/signup";
+    let url = "http://localhost:3001/auth/signup";
+    if(formData){
+        const searchParams = Object.keys(formData).map((key) => {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
+        }).join('&');
 
-const searchParams = Object.keys(this.state.newUser).map((key) => {
-  return encodeURIComponent(key) + '=' + encodeURIComponent(this.state.newUser[key]);
-}).join('&');
-
-fetch(url, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-  },
-  body: searchParams
-}).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
-}
- 
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: searchParams
+        }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+    }else{
+      console.log({Error: 'Fields are required'}); //Handle errors here...
+    }
+    
+  }
+   
   componentWillMount() {
     if (this.props.place === "setting") {
       this.setState({
@@ -157,103 +159,88 @@ fetch(url, {
         }
       });
     }
-  }
+  }  
+    
+    render(){
+        const {classes} = this.props;
 
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <Grid>
-        <Grid item xs={12} lg={12} sm={12}>
-          <Paper elevation={4} className={classes.Paper}>
-            <form className={classes.formWrapper} noValidate autoComplete="off" onSubmit={this.handleSubmit.bind(this)}>
-              <h3 className={classes.h3}>{this.state.formTitle}</h3>
-              <TextField
-                id="firstName"
-                label={this.state.settingUserData.firstName}
-                className={classes.textField}
-                onChange={this.handleInputChange}
-                name='firstName'
-              />
-              <TextField
-                id="lastname"
-                label={this.state.settingUserData.lastName}
-                className={classes.textField}
-                onChange={this.handleInputChange}
-                name='lastName'
-              />
-              <TextField
-                id="email"
-                label={this.state.settingUserData.email}
-                className={classes.textField}
-                onChange={this.handleInputChange}
-                name='email'
-              />
-              <TextField
-                id="password"
-                label={this.state.settingUserData.password}
-                className={classes.textField}
-                onChange={this.handleInputChange}
-                name='password'
-              />
-              <TextField
-                id="newpassword"
-                label={this.state.settingUserData.newPassword}
-                className={classes.textField}
-                onChange={this.handleInputChange}
-                name='newPassword'
-              />
-              <div className="picker">
-                <Typography
-                  type="caption"
-                  align="left"
-                  gutterBottom
-                  className={classes.Typography}
-                >
-                  Date of Birth
-                </Typography>
-                <DatePicker
-                  keyboard
-                  value={this.state.dateOfBirth}
-                  labelFunc={date => moment(date).format("Do MMMM YYYY")}
-                  onChange={this.handleDataChange}
-                  className={classes.DatePicker}
+        return(
+          <div className="main-container">
+          <div className={classes.avatar}>
+            <Avatar avatar={'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png'} size={80} />
+          </div>
+            <h3 className="sign-in-header">Sign up</h3>
+            <div className="sign-in-details">
+            <form className={classes.formWrapper} noValidate autoComplete='off' onSubmit={this.handleSubmit.bind(this)}>
+                <TextField
+                    id='firstName'
+                    className={classes.textField}
+                    label={this.state.settingUserData.firstName}
+                    onChange={this.handleInputChange}
+                    name='firstName'
                 />
-              </div>
-              <FormControl component="fieldset" className={classes.FormControl}>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  aria-label="gender"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  className={classes.RadioGroup}
-                >
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                </RadioGroup>
-              </FormControl>
-              <Button raised type="submit" color="primary" className={classes.button}>
-                {this.state.buttonTitle}
-              </Button>
-            </form>
-          </Paper>
-        </Grid>
-      </Grid>
-    );
-  }
-}
-
+                <TextField
+                    id='lastName'
+                    className={classes.textField}
+                    label={this.state.settingUserData.lastName}
+                    onChange={this.handleInputChange}
+                    name='lastName'
+                />
+                <TextField
+                    id='email'
+                    className={classes.textField}
+                    label={this.state.settingUserData.email}
+                    onChange={this.handleInputChange}
+                    name='email'
+                />
+                <TextField
+                    id='password'
+                    className={classes.textField}
+                    label={this.state.settingUserData.password}
+                    onChange={this.handleInputChange}
+                    name='password'
+                />
+                <TextField
+                    id='newPassword'
+                    className={classes.textField}
+                    label={this.state.settingUserData.newPassword}
+                    onChange={this.handleInputChange}
+                    name='newPassword'
+                />
+                <div className='picker'>
+                    <Typography type='caption' align='left' gutterBottom className={classes.Typography} >
+                        Date of Birth
+                    </Typography>
+                    <DatePicker
+                        keyboard
+                        value={this.state.selectedDate}
+                        labelFunc={date => moment(date).format('Do MMMM YYYY')}
+                        onChange={this.handleDataChange}
+                        className={classes.DatePicker}
+                    />
+                </div>
+                <FormControl component='fieldset' className={classes.FormControl}>
+                    <FormLabel component='legend'>Gender</FormLabel>
+                    <RadioGroup
+                        aria-label='gender'
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        className={classes.RadioGroup}
+                    >
+                        <FormControlLabel value='male' control={<Radio />} label='Male' />
+                        <FormControlLabel value='female' control={<Radio />} label='Female' />
+                        <FormControlLabel value='other' control={<Radio />} label='Other' />
+                    </RadioGroup>
+                </FormControl>
+                <Button type="submit" className="login-button">
+                    {this.state.buttonTitle}
+                </Button>
+              </form>
+            </div>
+          </div>
+        );
+      }
+    }
+      
+      
 export default withStyles(styles)(connect(null,{signup})(UserData));

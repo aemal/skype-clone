@@ -24,7 +24,8 @@ module.exports = (passport)=>{
 
     router.post('/signup', signup.signup.bind(signup));
 
-    router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+    router.get('/facebook', 
+        passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 
     router.get('/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/auth/login' }),
@@ -41,9 +42,13 @@ module.exports = (passport)=>{
         res.redirect('/');
     });
 
-    router.get('/twitter', passport.authenticate('twitter'));
+    router.get('/twitter', 
+        passport.authenticate('twitter'));
     router.get('/twitter/callback', 
-        passport.authenticate('twitter',{failureRedirect: '/auth/login'}));
+        passport.authenticate('twitter',{failureRedirect: '/auth/login'}),
+        (req, res)=>{
+            res.send({ success : true, message : 'You are loged in through your twitter account' });
+    });
 
     return router;
 }

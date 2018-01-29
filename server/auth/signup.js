@@ -6,9 +6,11 @@ module.exports = class {
     };
     
     signup(req, res, next){
-        console.log("Body=", req.body); 
+        if(!req.body.password){
+            return res.send({ success : false, message : 'Password is required' });
+        }
             this.userModel.findOne({
-                'emailAddress': req.username
+                'emailAddress': req.email
             }, (err, user) => {
                 if (err) {
                     return next(err);
@@ -21,7 +23,9 @@ module.exports = class {
                     if(password.length >= 8 && password.length <= 20){
                         // create the user
                         bcrypt.genSalt(10, (err, salt) => {
+                            if(err) return next(err);
                             bcrypt.hash(req.body.password, salt, (err, hash) => {
+                                if(err) return next(err);
                                 let user = new this.userModel({
                                         emailAddress: req.body.email,
                                         password: hash,
@@ -36,10 +40,10 @@ module.exports = class {
                                 });
                                 try {
                                     user.save((err) => {
-                                        if (err){ 
-                                            return next(err)
-                                        }else{;
-                                            return res.send(user)
+                                        if (err){
+                                            return next(err);
+                                        }else{
+                                            return res.send(user);
                                         };
                                     });
                                 } catch (err) {

@@ -2,10 +2,11 @@ const User = require('../models/user.model');
 const authStrategies = {
   local : require('../auth/local'),
   facebook : require('../auth/facebook'),
-  github : require('../auth/github')
+  github : require('../auth/github'),
+  twitter: require('../auth/twitter')
 };
 
-module.exports = function (passport) {
+module.exports = (passport)=>{
   // serialize sessions
   passport.serializeUser((user, done)=>{
     done(null, user.id)
@@ -21,4 +22,5 @@ module.exports = function (passport) {
   authStrategies.local(User, passport);
   authStrategies.facebook(User, passport);
   authStrategies.github(User, passport);
+  authStrategies.twitter(User, passport);
 };
