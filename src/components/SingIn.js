@@ -56,12 +56,29 @@ class SignIn extends Component {
 
   handleSubmit(e){
    e.preventDefault();
+   let url = 'http://localhost:3001/auth/login';
    const formData = {
      checked:this.state.checked,
-     email:this.state.email,
+     username:this.state.email,
      password:this.state.password
    }
-   console.log(formData)
+   console.log(formData);
+
+   if(formData){
+        const searchParams = Object.keys(formData).map((key) => {
+          return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
+        }).join('&');
+
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: searchParams
+        }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+    }else{
+      console.log({Error: 'Fields are required'}); //Handle errors here...
+    } 
    /* let url = 'localhost:3001/login';
    let email = this.state.email;
    let password = this.state.password;
