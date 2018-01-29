@@ -33,7 +33,8 @@ class UserAvatar extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({open: false });
+    console.log(this.state)
   };
 
   render() {
@@ -47,14 +48,14 @@ class UserAvatar extends Component {
         <div className="icons">
           <IconButton onClick={this.handleClickOpen}>
             <i className="material-icons">settings</i>
+            </IconButton>
             <FormDialog
                 open={this.state.open}
-                handleClickOpen={this.handleClickOpen}
                 handleClose={this.handleClose}
                 compo={<ProfileSettings/>}
                 fullScreen={true}
             />
-          </IconButton>
+          
           <IconButton>
             <i className="material-icons">notifications</i>
           </IconButton>
