@@ -24,6 +24,12 @@ const port = process.env.PORT || 3001;
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
 
+app.use((req, res, next)=>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(router);
 app.use('/auth', authRoutes); // login/out authentication routes
 app.use('/user', userRoutes); // user authentication
@@ -39,7 +45,7 @@ router.use(require('express-session')({
 
 router.use(passport.initialize());
 router.use(passport.session());
-router.use(flash());
+// router.use(flash());
 
 // passport de/serialize and local strategy
 SerialAuthenticator(passport);
@@ -47,7 +53,10 @@ SerialAuthenticator(passport);
 router.get('/', (req, res, next) => res.send('Home'));
 
 // ErrorHandler, pass errors to the next function
-router.use((err, req, res, next) => res.status(err.status || 400).send(err.message));
+app.use((err, req, res, next) =>{ 
+	res.send(err);
+	next();
+});
 
 mockData(User, Message, (err) => {
   

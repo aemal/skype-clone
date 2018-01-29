@@ -8,7 +8,7 @@ module.exports = class {
     signup(req, res, next){
         console.log(req.body)
         if(!req.body.password){
-            return res.send({ success : false, message : 'Password is required' });
+            return res.json({ success : false, message : 'Password is required' });
         }
             this.userModel.findOne({
                 'emailAddress': req.email
@@ -17,10 +17,9 @@ module.exports = class {
                     return next(err);
                 }
                 if (user) {
-                    return res.send({ success : false, message : 'Singin failed, email is already exist' });;
+                    return res.json({ success : false, message : 'Singin failed, email is already exist' });;
                 } else {
                     let password = req.body.password;
-                    console.log(password);
                     if(password.length >= 8 && password.length <= 20){
                         // create the user
                         bcrypt.genSalt(10, (err, salt) => {
@@ -44,7 +43,8 @@ module.exports = class {
                                         if (err){
                                             return next(err);
                                         }else{
-                                            return res.send(user);
+                                            const {emailAddress, profile, gender, dateOfBirth} = user;
+                                            return res.json({emailAddress, profile, gender, dateOfBirth});
                                         };
                                     });
                                 } catch (err) {
@@ -53,7 +53,7 @@ module.exports = class {
                             });
                         });   
                     }else{
-                        return res.send({ success : false, message : 'Password is min 8 and max 20 characters' });;
+                        return res.json({ success : false, message : 'Password is min 8 and max 20 characters' });;
                     }
                     
                 }
