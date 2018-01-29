@@ -23,8 +23,6 @@ function mapStateToProps(state,filter) {
   };
 }
 
-
-
 class App extends Component {
 
     constructor(props){
@@ -35,7 +33,7 @@ class App extends Component {
           alignItems: 'stretch',
           socketId: '',
           messages: [],
-          moment:moment().startOf('day').fromNow()   
+          moment:moment().startOf('day').fromNow()
         };
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -63,7 +61,7 @@ class App extends Component {
   handleSubmit(event) {
     const body = event.target.value
     let id = this.state.socketId
-    let moment = <p>this.state.moment</p> 
+    let moment = <p>this.state.moment</p>
     if (event.keyCode === 13 && body) {
       const message = {
         body,
@@ -83,56 +81,33 @@ class App extends Component {
         <Grid container
          alignItems={alignItems} direction={direction} justify={justify}
             item sm={12} lg={12}>
-             <Grid item xs={12} sm={3} lg={2} className='app'>
-
-                  <Grid >
-                    <Paper>
-                      <Grid item  sm={12} className="sideBarAvatarComponent">
-                         <Paper>
-                           <UserAvatar/>
-                         </Paper>
-                      </Grid>
-                      <Grid item  sm={12} className='sideBarContactListComponent'>
-                         <Paper>
-                          <ContactList  friendsList={this.props.contactList}/>
-                         </Paper>
-                      </Grid>
-                      <Grid item  sm={12}>
-                         <Paper>
-
-                                <SearchBar />
-
-
-                         </Paper>
-                      </Grid>
-
-                    </Paper>
-                  </Grid>
+             <Grid item xs={12} sm={4} lg={3} className='app'>
+                <Grid >
+                  <Paper>
+                    <Grid item sm={12} className="sideBarAvatarComponent">
+                      <UserAvatar/>
+                    </Grid>
+                    <Grid item sm={12} className='sideBarContactListComponent'>
+                      <ContactList friendsList={this.props.contactList}/>
+                    </Grid>
+                    <Grid item sm={12}>
+                      <SearchBar/>
+                    </Grid>
+                  </Paper>
+                </Grid>
               </Grid>
-
-
-         <Grid  item xs={12} sm={9} lg={10} className='app'>
-
-
-                   <Grid item  sm={12} className='messagesContactDetailComponent'>
-                    <Paper>
-                      <ContactDetail />
-                    </Paper>
-                  </Grid>
-
-                  <Grid item  sm={12} className='messagesLogComponent'>
-                    <MessagesLog messages={this.state.messages} socketId={this.state.socketId} />
-                  </Grid>
-
-                  <Grid item  sm={12} className='messagesNewMessageComponent'>
-                   <Paper style={{padding: '10px'}}>
-                      <NewMessage handleSubmit={this.handleSubmit} />
-                   </Paper>
-                  </Grid>
-
-
-           </Grid>
-      </Grid>
+            <Grid item xs={12} sm={8} lg={9} className='app'>
+              <Grid item  sm={12} className='messagesContactDetailComponent'>
+                <ContactDetail/>
+              </Grid>
+              <Grid item sm={12} className='messagesLogComponent'>
+                <MessagesLog messages={this.state.messages} socketId={this.state.socketId} />
+              </Grid>
+              <Grid item sm={12} className='messagesNewMessageComponent'>
+                <NewMessage handleSubmit={this.handleSubmit} />
+              </Grid>
+            </Grid>
+        </Grid>
     );
   }
 }
