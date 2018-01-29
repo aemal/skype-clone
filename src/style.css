@@ -1,22 +1,210 @@
-/**,
+*,
 *:before,
 *:after {
   box-sizing: border-box;
-}*/
+}
 /*
 *+* {
   margin-top: 1rem;
 }*/
+
+/* Media Query for removing padding on small devices */
+
+/*@media (min-width: 200px) and (max-width: 599px) {
+  .MuiGrid-typeItem-2 {
+    padding: 0;
+  }
+}*/
+
+/* GLOBAL STYLES */
+
 body {
   height: 100%;
   margin: 0px;
 }
+
 .app {
   height: 100%;
 }
 
+/* SIGN IN PAGE */
+/****************/
+
+.main-container {
+  width: 100%;
+  height: 400;
+  margin: 0 auto;
+  padding: 10%;
+	color: #fff;
+	background: linear-gradient(-45deg, #7d8fe0, #7dc7e0, #23A6D5, #23D5AB);
+	background-size: 200% 200%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.sign-in-header {
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 0px 1px 15px grey;
+}
+
+.sign-in-details {
+  width: 60%;
+  min-width: 300px;
+  margin: 0 auto;
+  border: 2px solid white;
+  padding: 1rem 3rem;
+  border-radius: 30px;
+  background-color: #FCF9FF;
+  box-shadow: 0px 1px 15px grey;
+}
+
+.sign-in-details .MuiFormControl-root-12 {
+  margin-top: .7rem;
+}
+
+.sign-in-details input,
+.sign-in-details label {
+  color: #3BA8C6;
+  margin-top: 1rem;
+}
+
+.sign-in-h3 {
+  letter-spacing: 1px;
+  color: #726F6F;
+}
+
+.sign-in-details .MuiButton-raised-48 {
+  background-color: #3BA8C6;
+  color: white;
+  border-radius: 10px;
+}
+
+.login-button {
+  margin: 2rem auto;
+  width: 100px;
+  color: white;
+}
+
+.additional-options {
+  justify-content: space-between;
+}
+
+.additional-options,
+.additional-options .link {
+  display: flex;
+  flex-wrap: wrap;
+  color: #726F6F;
+  text-decoration: none;
+}
+
+.color-checkbox {
+  margin-right: -2.5rem;
+}
+
+.color-checkbox.MuiCheckbox-checked-58 {
+  color: #726F6F;
+}
+.color-checkbox.MuiCheckbox-checked-66 {
+  color: #726F6F;
+}
+
+.register-forgot-password {
+  padding: 1rem;
+}
+
+.social-media-login-main button {
+  width: 100%;
+  margin: .5rem;
+}
+
+.social-media-login {
+  margin-top: 20%;
+}
+
+.social-media-login i {
+  margin-right: 2rem;
+}
+
+/* SIGN UP PAGE */
+/*************/
+
+.picker {
+  margin-top: 2rem;
+}
+
+span.MuiTypography-body1-52 {
+  color: #3BA8C6;
+  font-size: 1rem;
+}
+
+/* Tried to change the purple colour of the default, but doesn't seem to work */
+
+legend.MuiFormLabel-focused-24,
+legend.MuiFormLabel-focused-25 {
+  color: #79848E;
+}
+
+/* Tried to change the purple colour of the default, but doesn't seem to work */
+span.MuiRadio-checked-112,
+span.MuiRadio-checked-113 {
+  color: #79848E;
+}
+
+button.login-button {
+  background-color: #3BA8C6;
+  color: white;
+}
+
+button.login-button:hover {
+  background-color: #79848E;
+  color: white;
+}
+
+/* AUTH PAGE */
+/*************/
+
+/* SIDEBAR COMPONENTS */
+
 .sideBarMainComponent {
-  height: auto;
+  height: 100%;
   width: 25%;
   float: left;
 }
@@ -24,21 +212,108 @@ body {
 .sideBarAvatarComponent {
   height: 'auto';
   width: 100%;
-  float: left;
-  position: relative;
+  /*position: relative;  creates the shadow above the contact list */
+}
 
+.sideBarAvatarComponent .avatar {
+  margin: 1rem auto 0 auto;
+  box-shadow: 0 0 13px 3px grey;
+}
+
+.avatar {
+  margin: 0 auto;
+  background-size: cover;
+  background-position: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 0 0 13px grey;
+}
+
+.icons {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.icons i {
+  font-size: 1.8rem;
+  color: #726F6F;
+  transition: all .1s ease-in;
+}
+
+.icons i:hover {
+  color: #3BA8C6;
+  transform: scale(1.3);
 }
 
 .sideBarContactListComponent {
-  height: calc(100vh - 250px);
+  height: calc(75vh - 64px);
   width: 100%;
-  float: left;
   overflow: auto;
   display: block;
+  background-color: #EBEAED;
+}
+
+.list-item h3 {
+  color: #79848E;
+  font-size: .85rem;
+}
+
+.list-item:hover h3 {
+  font-weight: 700;
+  color: #3BA8C6;
+}
+
+.list-item .avatar {
+  font-weight: 700;
+  border: 2px solid #79848E;
+  transition: all .1s ease-in;
+}
+
+.list-item:hover .avatar {
+  font-weight: 700;
+  border: 2px solid #3BA8C6;
+  transform: scale(1.3);
 }
 
 .sideBarSearchComponent {
-  height: 'auto';
+  height: auto;
+  width: 100%;
+}
+
+/*.search-bar {
+  background-color: #726F6F;
+  color: white;
+}*/
+
+.search-bar i {
+  color: #FCF9FF;
+}
+
+.open-search-bar {
+  background-color: #FCF9FF;
+  box-shadow: 0 0 15px #FCF9FF;
+  color: #FCF9FF;
+  border-radius: 3rem;
+}
+
+.open-search-bar > div,
+.open-search-bar > label {
+  color: #726F6F;
+  font-size: 1rem;
+  padding: 0 1rem .3rem 1rem;
+}
+
+#searchContact {
+  width: 80%;
+  border-radius: 0;
+}
+
+/* MESSAGES FIELD COMPONENTS */
+
+.chat {
   width: 100%;
 }
 
@@ -46,111 +321,142 @@ body {
   height: 100vh;
   width: 75%;
   float: left;
+  padding: 1rem;
+}
+
+.contact-list {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem;
+  margin: 0;
+  margin-left: -15px;
+  margin-right: -16px;
+  box-shadow: 1px 0 5px grey;
+}
+
+.contact-list i {
+  font-size: 1.5rem;
+  color: #726F6F;
+  transition: all .1s ease-in;
+  margin-top: .4rem;
+  background-color: #EBEAED;
+  border-radius: 50%;
+  padding: .7rem;
+}
+
+.contact-list i:hover {
+  color: #3BA8C6;
+  transform: scale(1.2);
+}
+
+.contact-list .avatar {
+  margin-right: .8rem;
+  margin-top: .6rem;
+}
+
+/* Messages area */
+
+.messagesLogComponent {
+  overflow: auto;
+  height: 90vh;
+  width: 100%;
+  float: left;
+  display: block;
+}
+
+.MuiGrid-typeItem-2.messagesLogComponent {
+  margin-top: 2rem;
 }
 
 .messagesContactDetailComponent{
-  height: 70px;
+  height: 65px;
   width: 100%;
   float: left;
   display: block;
   position: relative;
 }
 
-.messagesLogComponent{
-  overflow: auto;
-  height: calc(100vh - 155px);
-  width: 100%;
-  float: left;
-  border: 0px;
-  display: block;
-}
-
-.messagesNewMessageComponent{
-  height: 55px;
-  width: 100%;
-  float: left;
-  display: block;
-}
-
-.avatarIcons {
-  float: right;
-  display: block;
-}
-
-.avatarPhoto {
-  border-radius: 200px;
-}
-
-.avatar {
-    margin: 0 auto;
-    background-size: cover;
-    background-position: center;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
-}
-
-.chat {
-    width: 95%;
-}
-
 .bubble{
-    background-color: #F2F2F2;
-    border-radius: 5px;
-    box-shadow: 0 0 6px #B2B2B2;
-    display: inline-block;
-    padding: 10px 18px;
-    position: relative;
-    vertical-align: top;
+  background-color: #FCF9FF;
+  border-radius: 5px;
+  box-shadow: 0 0 10px grey;
+  display: inline-block;
+  padding: 10px 15px;
+  position: relative;
+  vertical-align: top;
+  color: #726F6F;
 }
 
-.timer{
+.timer {
   display: block;
-  color:#777777;
-  font-size: 13px;
-  padding-top: 5px;
-  font-family: 'Kavivanar', cursive;
+  color: #3BA8C6;
+  font-size: .8rem;
+  margin-top: .5rem;
 }
-
 
 .bubble::before {
-    background-color: #F2F2F2;
-    content: "\00a0";
-    display: block;
-    height: 16px;
-    position: absolute;
-    top: 11px;
-    transform:             rotate( 29deg ) skew( -35deg );
-    -moz-transform:    rotate( 29deg ) skew( -35deg );
-    -ms-transform:     rotate( 29deg ) skew( -35deg );
-    -o-transform:      rotate( 29deg ) skew( -35deg );
-    -webkit-transform: rotate( 29deg ) skew( -35deg );
-    width:  20px;
+  background-color: #FCF9FF;
+  content: "\00a0";
+  display: block;
+  height: 13px;
+  position: absolute;
+  margin-left: .3rem;
+  transform:             rotate( 29deg ) skew( -35deg );
+  -moz-transform:    rotate( 29deg ) skew( -35deg );
+  -ms-transform:     rotate( 29deg ) skew( -35deg );
+  -o-transform:      rotate( 29deg ) skew( -35deg );
+  -webkit-transform: rotate( 29deg ) skew( -35deg );
+  width:  13px;
 }
 
 .me {
-    float: left;
-    margin: 5px 45px 5px 20px;
+  float: left;
+  margin: 5px 45px 5px 20px;
 }
 
 .me::before {
-    box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
-    left: -9px;
+  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+  left: -9px;
 }
 
 .you {
-    float: right;
-    margin: 5px 20px 5px 45px;
+  float: right;
+  margin: 5px 20px 5px 45px;
 }
 
 .you::before {
-    box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
-    right: -9px;
+  box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+  right: -9px;
 }
 
-.message{
+.message {
   display: flex;
+}
+
+/* Typing the text area */
+
+.messagesNewMessageComponent{
+  width: 100%;
+  float: left;
+  display: block;
+  position: fixed;
+  bottom: 2%;
+  margin-left: -15px;
+
+}
+
+.texting-area {
+  width: 80%;
+  padding: .5rem;
+  position: fixed;
+  bottom: 2%;
+  margin-left: -15px;
+}
+
+.emoticon:hover {
+  color: #3BA8C6;
+}
+
+.form-control {
+  width: 100%;
 }

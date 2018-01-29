@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Input from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
-import InsertEmoticon from 'material-ui-icons/InsertEmoticon';
-import purple from 'material-ui/colors/purple';
+// import InsertEmoticon from 'material-ui-icons/InsertEmoticon';
 
 const styles = theme => ({
 
@@ -12,17 +10,17 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  formControl: {
-    width: '100%'
-  },
   inputLabelFocused: {
-    color: purple[500],
+    color: '#3BA8C6',
   },
   inputInkbar: {
-    '&:after': {
-      backgroundColor: purple[500],
+    '&:before': {
+      backgroundColor: '#79848E',
     },
-}
+    '&:after': {
+      backgroundColor: '#3BA8C6',
+    },
+  }
 })
 
 class NewMessage extends Component {
@@ -30,31 +28,27 @@ class NewMessage extends Component {
     const { classes, handleSubmit } = this.props;
 
     return (
-    <div className={classes.container}>
-          <FormControl className={classes.formControl}>
-            <InputLabel
-              FormControlClasses={{
-                focused: classes.inputLabelFocused,
-              }}
-              htmlFor="custom-color-input"
-            >
-              Type your message here..
-            </InputLabel>
-            <Input
-              onKeyUp={(e) => handleSubmit(e)}
-              classes={{
-                inkbar: classes.inputInkbar,
-              }}
-              id="custom-color-input"
-              endAdornment={
-             <InputAdornment position="end">
-                 <IconButton>
-                     <InsertEmoticon />
-                   </IconButton>
-             </InputAdornment>
-           }
-            />
-          </FormControl>
+      <div className="texting-area">
+        <FormControl className="form-control">
+          <Input
+            id="multiline-flexible"
+            label="Multiline"
+            multiline
+            rowsMax="4"
+            placeholder="Type your message here"
+            onKeyUp={(e) => handleSubmit(e)}
+            classes={{
+              inkbar: classes.inputInkbar,
+            }}
+         //    endAdornment={
+         //   <InputAdornment position="end">
+         //       <IconButton>
+         //         <InsertEmoticon className="emoticon"/>
+         //       </IconButton>
+         //   </InputAdornment>
+         // } - cannot figure out why the emoticon is not stretching until the end. Not sure if you even need it if everyone has it on their mobiles.
+          />
+        </FormControl>
       </div>
     );
   }
