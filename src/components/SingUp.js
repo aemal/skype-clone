@@ -5,7 +5,7 @@ import UserData from './UserData';
 export default class SingUp extends Component {
     render() {
         return (
-                <UserData/>
+                <UserData history={this.props.history}/>
         )
     }
 }

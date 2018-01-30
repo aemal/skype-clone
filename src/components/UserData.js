@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import Grid from "material-ui/Grid";
 import Radio, { RadioGroup } from "material-ui/Radio";
 import { FormLabel, FormControl, FormControlLabel } from "material-ui/Form";
 import { DatePicker } from "material-ui-pickers";
 import Typography from "material-ui/Typography/Typography";
 import moment from "moment";
-import Paper from "material-ui/Paper";
 import {signup} from '../actions/signup';
 import {connect} from 'react-redux';
 import Avatar from './skypeAvatar';
@@ -71,6 +69,9 @@ const styles = theme => ({
   button: {
     marginBottom: 30,
     width: 200
+  },
+  text:{
+    color: "black"
   }
 });
 
@@ -89,9 +90,19 @@ class UserData extends Component {
         password: "******",
         newPassword: "newPasssword"
       },
-      
-    };
+      errorMessage:' '
+      // firstNameRequired:false,
+      // lastNameRequired:false,
+      // emailRequired:false,
+      // emailValid: false,
+      // emailTaken:false,
+      // passwordRequired:false,
+      // repasswordRequired:false,
+      // dateOfBirthRequird:false,
+      // genderRequired:false
+    } 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.isRequierd = this.isRequierd.bind(this)
   }
 
   handleChange = (event, value) => {
@@ -106,6 +117,18 @@ class UserData extends Component {
       newUser:{...this.state.newUser,dateOfBirth:checketDate}
     });
   };
+
+  isRequierd(formData){
+     if(formData === undefined){
+       return false
+     }
+     if(formData.firstName || formData.lastName || formData.formDataemail || formData.password || formData.newPassword || formData.dateOfBirth === ' ') {
+       return false;
+     }else {
+       return true;
+     }
+  }
+  
   handleInputChange(event){
     const target = event.target;
     const value = target.value;
@@ -121,9 +144,11 @@ class UserData extends Component {
   }
   handleSubmit(e){
     e.preventDefault();
+    console.log(this.state.newUser)
     let formData = this.state.newUser;
     let url = "http://localhost:3001/auth/signup";
-    if(formData){
+
+    if(this.isRequierd(formData)){
       
         const searchParams = Object.keys(formData).map((key) => {
           return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
@@ -136,9 +161,26 @@ class UserData extends Component {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
           },
           body: searchParams
-        }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
+        })
+        .then(res=>res.json())
+        .then( data =>{
+          console.dir(data);
+          if(data.success){
+            this.props.history.push('/wellcome')
+          }else{
+            this.setState({
+              error:data.message
+            })
+            console.log(this.state.error)
+          }
+          
+          
+        })
+        .catch(err=>console.log(err));
     }else{
-      console.log({Error: 'Fields are required'}); //Handle errors here...
+      this.setState({
+        errorMessage:'please fill the Required filed'
+      })//Handle errors here...
     } 
   }
    
@@ -172,13 +214,15 @@ class UserData extends Component {
             <h3 className="sign-in-header">Sign up</h3>
             <div className="sign-in-details">
             <form className={classes.formWrapper} noValidate autoComplete='off' onSubmit={this.handleSubmit.bind(this)}>
-                <TextField
+                <TextField 
                     id='firstName'
                     className={classes.textField}
                     label={this.state.settingUserData.firstName}
                     onChange={this.handleInputChange}
                     name='firstName'
+                  
                 />
+
                 <TextField
                     id='lastName'
                     className={classes.textField}
@@ -186,12 +230,14 @@ class UserData extends Component {
                     onChange={this.handleInputChange}
                     name='lastName'
                 />
+                
                 <TextField
                     id='email'
                     className={classes.textField}
                     label={this.state.settingUserData.email}
                     onChange={this.handleInputChange}
                     name='email'
+                    
                 />
                 <TextField
                     id='password'
@@ -200,7 +246,7 @@ class UserData extends Component {
                     onChange={this.handleInputChange}
                     name='password'
                 />
-                <TextField
+                <TextField 
                     id='newPassword'
                     className={classes.textField}
                     label={this.state.settingUserData.newPassword}
@@ -235,8 +281,10 @@ class UserData extends Component {
                 <Button type="submit" className="login-button">
                     {this.state.buttonTitle}
                 </Button>
+                <div><p className={classes.text}>{this.state.errorMessage}</p></div>
               </form>
             </div>
+            
           </div>
         );
       }

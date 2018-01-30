@@ -78,7 +78,7 @@ class SignIn extends Component {
         body: searchParams
       })
         .then(res => res.json())
-        .then(data => console.table(data))
+        .then(data => this.props.history.push('/auth'))
         .catch(err => console.log(err));
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...

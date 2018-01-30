@@ -1,0 +1,20 @@
+
+
+.main {
+    margin: 10px 0 10px 0;
+    border: 1px solid rgb(194, 194, 171);
+    height: 700px;
+    background-image: url('wellcomePage.jpg');
+    background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.wellcome {
+    background-color:rgba(129, 136, 129, 0.719);
+    margin:90px auto;
+    text-align: center;
+    border-radius: 10px;
+    width: 43%;
+    height: 500px;
+}
