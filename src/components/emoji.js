@@ -39,7 +39,7 @@ class Emoji extends Component {
       const {display,emoji} = this.props;
         return (
             <div style={{display}}>
-          <EmojiPicker onEmojiClick={this.myCallback} value={emoji}/>
+          <EmojiPicker onEmojiClick={this.myCallback} value={this.state.emoji}/>
           </div>
         )
 
