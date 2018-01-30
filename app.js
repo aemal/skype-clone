@@ -26,21 +26,12 @@ const port = process.env.PORT || 3001;
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+//Enable all CORS requests
+app.use(cors());
 
 app.use(router);
 app.use("/auth", authRoutes); // login/out authentication routes
 app.use("/user", userRoutes); // user authentication
-
-//Enable all CORS requests
-app.use(cors());
 
 router.use(cookieParser());
 router.use(bodyParser.json());
