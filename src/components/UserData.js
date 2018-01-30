@@ -120,17 +120,18 @@ class UserData extends Component {
   isRequierd(formData) {
     if (formData === undefined) {
       return false;
-    }
-    if (
-      formData.firstName === " " ||
-      formData.lastName === " " ||
-      formData.formDataemail === " " ||
-      formData.password === " " ||
-      formData.newPassword === " " ||
-      formData.dateOfBirth === " "
+    } else if (
+      formData.firstName === undefined ||
+      formData.lastName === undefined ||
+      formData.formDataemail === undefined ||
+      formData.password === undefined ||
+      formData.newPassword === undefined ||
+      formData.dateOfBirth === undefined
     ) {
+      console.log(FormData.lastName);
       return false;
     } else {
+      console.log("FormData.lastName");
       return true;
     }
   }
