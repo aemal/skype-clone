@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
+import Emoji from './emoji'
 // import InsertEmoticon from 'material-ui-icons/InsertEmoticon';
 
 const styles = theme => ({
@@ -49,6 +50,7 @@ class NewMessage extends Component {
          // } - cannot figure out why the emoticon is not stretching until the end. Not sure if you even need it if everyone has it on their mobiles.
           />
         </FormControl>
+        <Emoji/ >
       </div>
     );
   }
