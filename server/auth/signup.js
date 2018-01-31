@@ -6,7 +6,6 @@ module.exports = class {
     };
     
     signup(req, res, next){
-        console.log(req.body)
         if(!req.body.password){
             return res.json({ success : false, message : 'Password is required' });
         }
@@ -17,7 +16,6 @@ module.exports = class {
                     return next(err);
                 }
                 if (user) {
-                    console.log(user);
                     return res.json({ success : false, message : 'Singin failed, email is already exist' });
                 } else {
                     let password = req.body.password;

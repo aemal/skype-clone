@@ -58,9 +58,9 @@ app.use((err, req, res, next) =>{
 	next();
 });
 
-mockData(User, Message, (err) => {
+// mockData(User, Message, (err) => {
   
     app.listen(port, () => {
         console.log('Server started on port.....' + port);
     });
-});
+// });
