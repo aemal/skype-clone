@@ -6,26 +6,25 @@ import Checkbox from "material-ui/Checkbox";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
 
-import Avatar from './skypeAvatar';
-import {login} from '../actions/login';
-import {connect} from 'react-redux';
-
+import Avatar from "./skypeAvatar";
+import { login } from "../actions/login";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   formWrapper: {
     display: "flex",
     flexDirection: "column",
     position: "relative",
-    top: "2rem",
+    top: "2rem"
   },
-    registerNow: {
+  registerNow: {
     textDecoration: "none",
     color: "#FF6A6F"
   },
   forgotPassword: {
     textDecoration: "none",
     color: "#777777"
-  },
+  }
 });
 
 class SignIn extends Component {
@@ -33,53 +32,58 @@ class SignIn extends Component {
     super();
     this.state = {
       checked: false,
-      email:'',
-      password:'',
+      email: "",
+      password: ""
     };
   }
 
   handleChange = event => {
-    this.setState({ 
-      checked: event.target.checked,
-      
-     })
-    
+    this.setState({
+      checked: event.target.checked
+    });
   };
 
-  handleEmailChange = event =>{
-    this.setState({email: event.target.value});
-  }
+  handleEmailChange = event => {
+    this.setState({ email: event.target.value });
+  };
 
-  handlePasswordChange = event =>{
-    this.setState({password: event.target.value});
-  }
+  handlePasswordChange = event => {
+    this.setState({ password: event.target.value });
+  };
 
-  handleSubmit(e){
-   e.preventDefault();
-   let url = 'http://localhost:3001/auth/login';
-   const formData = {
-     checked:this.state.checked,
-     username:this.state.email,
-     password:this.state.password
-   }
-   console.log(formData);
+  handleSubmit(e) {
+    e.preventDefault();
+    let url = "http://localhost:3001/auth/login";
+    const formData = {
+      checked: this.state.checked,
+      username: this.state.email,
+      password: this.state.password
+    };
+    console.log(formData);
 
-   if(formData){
-        const searchParams = Object.keys(formData).map((key) => {
-          return encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]);
-        }).join('&');
+    if (formData) {
+      const searchParams = Object.keys(formData)
+        .map(key => {
+          return (
+            encodeURIComponent(key) + "=" + encodeURIComponent(formData[key])
+          );
+        })
+        .join("&");
 
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          },
-          body: searchParams
-        }).then(res=>res.json()).then(data=>console.log(data)).catch(err=>console.log(err));
-    }else{
-      console.log({Error: 'Fields are required'}); //Handle errors here...
-    } 
-   /* let url = 'localhost:3001/login';
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body: searchParams
+      })
+        .then(res => res.json())
+        .then(data => this.props.history.push('/auth'))
+        .catch(err => console.log(err));
+    } else {
+      console.log({ Error: "Fields are required" }); //Handle errors here...
+    }
+    /* let url = 'localhost:3001/login';
    let email = this.state.email;
    let password = this.state.password;
    loginRequest(url,email,password)
@@ -88,17 +92,27 @@ class SignIn extends Component {
   this.props.login(this.state).then(
     (res) => this.context.router.push('/auth'),
   )*/
- }
+  }
   render() {
     const { classes } = this.props;
     return (
       <div className="main-container">
         <div className={classes.avatar}>
-          <Avatar avatar={'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png'} size={150} />
+          <Avatar
+            avatar={
+              "https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png"
+            }
+            size={150}
+          />
         </div>
         <h3 className="sign-in-header">Sign in</h3>
         <div className="sign-in-details">
-          <form className={classes.formWrapper} noValidate autoComplete="off" onSubmit={this.handleSubmit.bind(this)}>
+          <form
+            className={classes.formWrapper}
+            noValidate
+            autoComplete="off"
+            onSubmit={this.handleSubmit.bind(this)}
+          >
             <TextField
               id="email"
               label="Email"
@@ -112,15 +126,17 @@ class SignIn extends Component {
               placeholder="Password"
               onChange={this.handlePasswordChange}
             />
-            <Button 
-              raised 
+            <Button
+              raised
               color="secondary"
               type="submit"
-              className="login-button">
+              className="login-button"
+            >
               Login
             </Button>
             <div className="additional-options">
-              <Checkbox className="color-checkbox"
+              <Checkbox
+                className="color-checkbox"
                 checked={this.state.checked}
                 onChange={this.handleChange}
               />
@@ -134,11 +150,10 @@ class SignIn extends Component {
             </div>
           </form>
           <SocialMedia />
-          </div>
         </div>
-
+      </div>
     );
   }
 }
 
-export default withStyles(styles)(connect(null,{login})(SignIn))
+export default withStyles(styles)(connect(null, { login })(SignIn));

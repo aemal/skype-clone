@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 module.exports = class {
     constructor(userModel){
@@ -52,10 +52,9 @@ module.exports = class {
                             });
                         });   
                     }else{
-                        return res.json({ success : false, message : 'Password is min 8 and max 20 characters' });;
+                        return res.json({ success : false, message : 'Password is min 8 and max 20 characters' });
                     }
-                    
                 }
             });
-        };
-}
+        }
+};

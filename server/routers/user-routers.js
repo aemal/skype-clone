@@ -21,8 +21,8 @@ const messageHandler = new MessageHandler(Message, Chat);
 module.exports = ()=>{
 
     const isAuthenticated = (req, res, next)=>{
-        if (req.isAuthenticated()) return next();
-        else res.redirect('/auth/login');
+        // if (req.isAuthenticated()) return next();
+        // else res.redirect('/auth/login');
     };
 
     router.post('/message/get_history', isAuthenticated, messageHandler.messageHistory.bind(messageHandler));
