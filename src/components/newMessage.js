@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Input, { InputAdornment } from 'material-ui/Input';
 import InsertEmoticon from 'material-ui-icons/InsertEmoticon';
 import { FormControl } from 'material-ui/Form';
 import Emoji from './emoji'
@@ -64,10 +64,6 @@ class NewMessage extends Component {
 }
   
   render() {
-    let settings = {
-      imageType: 'png',
-      sprites: true
-    };
     const { classes, handleSubmit } = this.props;
 
     return (

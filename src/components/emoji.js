@@ -1,72 +1,53 @@
 import React, {Component} from 'react';
 import EmojiPicker from 'emoji-picker-react';
-import JSEMOJI from 'emoji-js';
 import {emojify} from 'react-emojione';
 
 
 class Emoji extends Component {
   constructor(props){
     super(props);
-   /* this.state = {
-      emoji:[]
-    }*/
-       this.logEmoji = this.logEmoji.bind(this);
-       this.insertEmoji = this.insertEmoji.bind(this);
-       this.addSpecialChar = this.addSpecialChar.bind(this);
+
+    this.logEmoji = this.logEmoji.bind(this);
+    this.insertEmoji = this.insertEmoji.bind(this);
+    this.addSpecialChar = this.addSpecialChar.bind(this);
   }
 
   logEmoji (data,emoji) {
-   /* const jsemoji = new JSEMOJI();
-    // set the style to emojione (default - apple)
-        jsemoji.img_set = 'emojione';
-    // set the storage location for all emojis
-        jsemoji.img_sets.emojione.path = 'https://cdn.jsdelivr.net/emojione/assets/3.0/png/32/';
+    this.insertEmoji(":"+emoji.name+":")
+  }
 
-    // some more settings...
-        jsemoji.supports_css = false;
-        jsemoji.allow_native = false;
-        jsemoji.replace_mode = 'unified';
-
-    this.setState({
-     emoji: [...this.state.emoji, jsemoji.replace_colons(`:${emoji.name}:`)]
-
- })*/
-
-this.insertEmoji(":"+emoji.name+":")
-console.log("abc")
-
-}
  insertEmoji(emoji) {
     var input = this.props.txtMessage;
     console.log(input);
-    if (input == undefined) { return; }
+    if (input === undefined) { return; }
     var scrollPos = input.scrollTop;
     var pos = 0;
-    var browser = ((input.selectionStart || input.selectionStart == "0") ? 
+    var range;
+    var browser = ((input.selectionStart || input.selectionStart === "0") ? 
       "ff" : (document.selection ? "ie" : false ) );
-    if (browser == "ie") { 
+    if (browser === "ie") { 
       input.focus();
-      var range = document.selection.createRange();
+      range = document.selection.createRange();
       range.moveStart ("character", -input.value.length);
       pos = range.text.length;
     }
-    else if (browser == "ff") { pos = input.selectionStart };
+    else if (browser === "ff") { pos = input.selectionStart };
   
     var front = (input.value).substring(0, pos);  
     var back = (input.value).substring(pos, input.value.length); 
     input.value = front+emojify(emoji, {output:"unicode"})+back;
-    pos = parseInt(pos)+ 2//emoji.length;
+    pos = Number(pos) + 2
    console.log("len: "+emoji.length);
    console.log(emoji);
-    if (browser == "ie") { 
+    if (browser === "ie") { 
       input.focus();
-      var range = document.selection.createRange();
+      range = document.selection.createRange();
       range.moveStart ("character", -input.value.length);
       range.moveStart ("character", pos);
       range.moveEnd ("character", 0);
       range.select();
     }
-    else if (browser == "ff") {
+    else if (browser === "ff") {
       input.selectionStart = pos;
       input.selectionEnd = pos;
       input.focus();
@@ -95,7 +76,7 @@ console.log("abc")
    
 
     render() {
-      const {display,emoji} = this.props;
+      const {display} = this.props;
         return (
             <div style={{display}}>
           <EmojiPicker onEmojiClick={this.logEmoji} />
