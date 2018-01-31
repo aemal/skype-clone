@@ -76,10 +76,9 @@ class Emoji extends Component {
    
 
     render() {
-      const {display} = this.props;
         return (
-            <div style={{display}}>
-          <EmojiPicker onEmojiClick={this.logEmoji} />
+          <div>
+            <EmojiPicker onEmojiClick={this.logEmoji} />
           </div>
         )
 
