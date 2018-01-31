@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const Signup = require('../auth/signup');
 const User = require('../models/user.model');
+const crypto = require('crypto');
+const verify = crypto.createVerify('SHA256');
+
 const signup = new Signup(User);
 
 module.exports = (passport)=>{
@@ -15,9 +18,18 @@ module.exports = (passport)=>{
             if (err) { return next(err); }
             if (!user) { return res.json({ success : false, message : 'Login failed, email or password is wrong' }); }
             req.logIn(user, (err)=>{
-              if (err) return next(err);
-              const {emailAddress, profile, gender, dateOfBirth, status} = user;
-              return res.json({emailAddress, profile, gender, dateOfBirth, status});
+                if (err) return next(err);
+
+                const secret = 'abcdefg';
+
+                user.accessToken.token = crypto.createHmac('sha256', secret)
+                                                       .update('I love cupcakes').digest('hex');                                    
+                console.log(user.accessToken.token);
+                console.log(verify.verify(user.accessToken.token, user.accessToken.token ));
+
+                let {emailAddress, profile, gender, dateOfBirth, status} = user;
+                console.log(profile); 
+                return res.json({emailAddress, profile, gender, dateOfBirth, status});
             });
           })(req, res, next);
     });
