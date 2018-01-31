@@ -18,7 +18,6 @@ class Emoji extends Component {
 
  insertEmoji(emoji) {
     var input = this.props.txtMessage;
-    console.log(input);
     if (input === undefined) { return; }
     var scrollPos = input.scrollTop;
     var pos = 0;
