@@ -31,7 +31,7 @@ class ContactDetail extends Component {
               open={this.state.open}
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClose}
-              compo={"hello"}
+              compo={"hello asa"}
               fullScreen={false}
           />
         </div>

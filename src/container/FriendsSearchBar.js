@@ -9,7 +9,9 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { findDOMNode } from 'react-dom';
 import { setFilter }from '../actions/filterAction';
 import { connect } from 'react-redux';
-import Modal from '../components/Modal';
+import FormDialog from '../components/dialog'
+import AddContact from '../components/Addcontact'
+
 
 
 const mapDispatchToProps = dispatch => ({
@@ -20,6 +22,7 @@ class SearchBar extends Component {
 
   state = {
     open: false,
+    contactAddOpen: false,
     anchorEl: null,
     anchorOriginVertical: 'bottom',
     anchorOriginHorizontal: 'center',
@@ -28,16 +31,17 @@ class SearchBar extends Component {
     positionTop: 200, // Just so the popover can be spotted more easily
     positionLeft: 400, // Same as above
     anchorReference: 'anchorEl',
-    showModal: false
   };
 
-  hideModal = () => {
-    this.setState({showModal: false});
+  handleClickOpen = () => {
+    this.setState({ contactAddOpen: true });
+  };
+  handleClickClose = () => {
+    this.setState({
+      contactAddOpen: false,
+    });
   };
 
-  showModal = () => {
-    this.setState({showModal: true});
-  };
 
   handleClickButton = () => {
     this.setState({
@@ -113,10 +117,16 @@ class SearchBar extends Component {
       <IconButton
         aria-label="Menu"
         style={{position:'absolute',top:7,right:2}}
-        onClick={this.showModal.bind(this)}>
-      <i className="material-icons">add_circle</i>
+        onClick={this.handleClickOpen}>
+        <i className="material-icons">add_circle</i>
       </IconButton>
-      {this.state.showModal ? <Modal onClose={this.hideModal}> </Modal> : null}
+        <FormDialog
+              open={this.state.contactAddOpen}
+              handleClickOpen={this.handleClickOpen}
+              handleClose={this.handleClickClose}
+              compo={<AddContact friendsList={this.props.friendsList}/>}
+              autoScrollBodyContent={false}
+          />
       </Toolbar>
       </AppBar>
       </div>

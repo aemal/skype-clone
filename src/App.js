@@ -55,7 +55,7 @@ class App extends Component {
     this.setState({
       socketId: this.socket.id,
     });
-  
+
   }
 
   handleSubmit(event) {
@@ -91,7 +91,7 @@ class App extends Component {
                       <ContactList friendsList={this.props.contactList}/>
                     </Grid>
                     <Grid item sm={12}>
-                      <SearchBar/>
+                      <SearchBar friendsList={this.props.contactList}/>
                     </Grid>
                   </Paper>
                 </Grid>
