@@ -52,6 +52,7 @@
     "react-chat-bubble": "^0.8.7",
     "react-dom": "^16.2.0",
     "react-emoji-picker": "^1.0.13",
+    "react-emojione": "^5.0.0",
     "react-page-click": "^4.0.2",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
