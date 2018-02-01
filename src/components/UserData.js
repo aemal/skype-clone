@@ -99,7 +99,7 @@ class UserData extends Component {
         email: "",
         password: "",
         newPassword: "",
-        dateOfBirth: moment(),
+        dateOfBirth: "",
         gender: ""
       },
       generalerror: " ",
@@ -122,6 +122,7 @@ class UserData extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.isRequierd = this.isRequierd.bind(this);
+    this.isPasswordMatch = this.isPasswordMatch.bind(this);
   }
 
   handleChange = (event, value) => {
@@ -144,7 +145,9 @@ class UserData extends Component {
       errorMessagelastName: " ",
       errorMessagePassword: " ",
       errorMessageEmail: "",
-      errorMessagedateOfBirth: ""
+      errorMessagedateOfBirth: "",
+      errorMessageGender: "",
+      errorMessagerepeatPassword: "",
     });
 
     if (this.state.newUser === undefined) {
@@ -184,7 +187,7 @@ class UserData extends Component {
       });
       bool = false;
     }
-    if (this.state.newUser.newPasssword === "") {
+    if (this.state.newUser.newPassword === "") {
       console.log("form repeat password");
       this.setState({
         errorMessagerepeatPassword: "please repeat your password "
@@ -229,15 +232,27 @@ class UserData extends Component {
       }
     });
   }
+  isPasswordMatch = (formData) => {
+    let password = formData.password;
+    let repeatPassword = formData.newPassword;
+    if(password === repeatPassword) {
+      return true;
+    } else {
+     this.setState({
+        errorMessagerepeatPassword:'password is not match'
+      })
+    }
+  }
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state.newUser);
     let formData = this.state.newUser;
     let url = "http://localhost:3001/auth/signup";
 
-    console.log(this.isRequierd(formData));
+    
 
     if (this.isRequierd(formData)) {
+       
       const searchParams = Object.keys(formData)
         .map(key => {
           return (
@@ -245,15 +260,6 @@ class UserData extends Component {
           );
         })
         .join("&");
-      console.log(searchParams);
-      fetch(url, {
-        CORS: "disabled",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-        },
-        body: searchParams
-      }).join("&");
       console.log(searchParams);
       fetch(url, {
         method: "POST",
