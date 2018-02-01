@@ -270,7 +270,7 @@ class UserData extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          console.dir(data);
+          
           if (data.success) {
             this.props.history.push("/wellcome");
           } else {
@@ -398,17 +398,17 @@ class UserData extends Component {
                 className={classes.RadioGroup}
               >
                 <FormControlLabel
-                  value="male"
+                  value="Male"
                   control={<Radio />}
                   label="Male"
                 />
                 <FormControlLabel
-                  value="female"
+                  value="Female"
                   control={<Radio />}
                   label="Female"
                 />
                 <FormControlLabel
-                  value="other"
+                  value="Other"
                   control={<Radio />}
                   label="Other"
                 />

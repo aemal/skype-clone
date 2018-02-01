@@ -84,18 +84,17 @@ const userSchema = new Schema({
         requested: [contact],
         pending: [contact],
         decline: [contact]
-    },
-    accessToken:{
-    	token: {
-	        type: String,
-	        unique: true,
-	        required: true
-	    },
-	    created: {
-	        type: Date,
-	        default: Date.now
-	    }
-	}
+    }
+    // accessToken:{
+    // 	token: {
+	//         type: String
+	        
+	//     },
+	//     created: {
+	//         type: Date,
+	//         default: Date.now
+	//     }
+	// }
 });
 
 userSchema.virtual('fullName').get(()=>{
