@@ -17,16 +17,17 @@ class AddContact extends Component {
   }
 
   btnSearchClicked() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    let searchValue = this.txtSearchInput.value;
+    fetch(`http://user/contacts/search/:${searchValue}`)
     .then(res=>res.json())
     .then(data=>{
-      if(this.txtSearchInput.value){
+      if(searchValue){
         this.setState({
           friendsList: data.filter(
-            el=> el.name.toLowerCase().indexOf(this.txtSearchInput.value.toLowerCase())> -1)
+            el=> el.name.toLowerCase().indexOf(searchValue.toLowerCase())> -1)
         });
       }else{
-        this.txtSearchInput.value = "Please insert a Name";
+        searchValue = "Please insert a Name";
       }
     })
     .catch(err=>console.log(err));
