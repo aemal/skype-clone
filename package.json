@@ -4,6 +4,9 @@
   "description":
     "Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB & WebRTC",
   "main": "app.js",
+  "engines": {
+    "node": "v8.6.0"
+  },
   "scripts": {
     "start":
       "concurrently --kill-others  \"npm run server\"  \"npm run socket\" \"npm run react\"",
