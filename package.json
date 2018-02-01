@@ -8,6 +8,7 @@
     "start":
       "concurrently --kill-others  \"npm run server\"  \"npm run socket\" \"npm run react\"",
     "heroku-postbuild": "npm run build:prod",
+    "build:prod": "webpack -p --env production",
     "server": "nodemon app.js",
     "socket": "nodemon index.js",
     "react": "react-scripts start",
