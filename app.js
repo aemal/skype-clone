@@ -1,4 +1,3 @@
-import { setInterval } from "timers";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -69,12 +68,12 @@ app.listen(port, () => {
 });
 // });
 
-function sessionCleanup() {
-  sessionStore.all(function(err, sessions) {
-    for (var i = 0; i < sessions.length; i++) {
-      sessionStore.get(sessions[i], function() {});
-    }
-  });
-}
+// function sessionCleanup() {
+//   sessionStorage.all(function(err, sessions) {
+//     for (var i = 0; i < sessions.length; i++) {
+//       sessionStore.get(sessions[i], function() {});
+//     }
+//   });
+// }
 
-setInterval(sessionCleanup(), 3000);
+// setInterval(sessionCleanup(), 3000);
