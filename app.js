@@ -1,3 +1,5 @@
+import { setInterval } from "timers";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongo = require("mongodb");
@@ -19,8 +21,8 @@ const Message = require("./server/models/message.model");
 const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
-const db ="mongodb://test:test@ds119988.mlab.com:19988/skypeclone"
- // "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+// "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
 
 const port = process.env.PORT || 3001;
 
@@ -66,3 +68,13 @@ app.listen(port, () => {
   console.log("Server started on port....." + port);
 });
 // });
+
+function sessionCleanup() {
+  sessionStore.all(function(err, sessions) {
+    for (var i = 0; i < sessions.length; i++) {
+      sessionStore.get(sessions[i], function() {});
+    }
+  });
+}
+
+setInterval(sessionCleanup(), 3000);
