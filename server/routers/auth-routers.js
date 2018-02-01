@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const Signup = require('../auth/signup');
+const Signin = require('../auth/signin');
 const User = require('../models/user.model');
-const crypto = require('crypto');
-const verify = crypto.createVerify('SHA256');
 
 const signup = new Signup(User);
+const signin = new Signin(User); 
 
 module.exports = (passport)=>{
 
@@ -13,17 +13,7 @@ module.exports = (passport)=>{
         res.json({ success : true, message : 'Logout succeeded' });
     });
 
-    router.post('/login',(req, res, next)=>{
-          passport.authenticate('signin', (err, user, info)=>{
-            if (err) { return next(err); }
-            if (!user) { return res.json({ success : false, message : 'Login failed, email or password is wrong' }); }
-            req.logIn(user, (err)=>{
-                if (err) return next(err);
-                let {emailAddress, profile, gender, dateOfBirth, status} = user;
-                return res.json({emailAddress, profile, gender, dateOfBirth, status});
-            });
-          })(req, res, next);
-    });
+    router.post('/login', signin.signin.bind(signin));
 
     router.post('/signup', signup.signup.bind(signup));
 
