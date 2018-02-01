@@ -251,7 +251,7 @@ class UserData extends Component {
 
     
 
-    if (this.isRequierd(formData)) {
+    if (this.isRequierd(formData)&& this.isPasswordMatch(formData)) {
        
       const searchParams = Object.keys(formData)
         .map(key => {
