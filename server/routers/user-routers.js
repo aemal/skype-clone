@@ -23,6 +23,7 @@ module.exports = ()=>{
     const isAuthenticated = (req, res, next)=>{
         // if (req.isAuthenticated()) return next();
         // else res.redirect('/auth/login');
+        return next();
     };
 
     router.post('/message/get_history', isAuthenticated, messageHandler.messageHistory.bind(messageHandler));

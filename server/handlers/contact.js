@@ -6,7 +6,7 @@ module.exports = class {
     this.userModel.find({$text:{$search:req.params.keyword}})
     .exec((err, contacts)=>{
       if(err){
-        res.send('Error');
+        return res.json({ success : false,message: 'User has no contact or sth went wrong' });
       }else{
         res.json(contacts);
       }

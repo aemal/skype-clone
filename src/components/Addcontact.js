@@ -18,9 +18,10 @@ class AddContact extends Component {
 
   btnSearchClicked() {
     let searchValue = this.txtSearchInput.value;
-    fetch(`http://user/contacts/search/:${searchValue}`)
+    fetch(`http://localhost:3001/user/contacts/search/sareh`)
     .then(res=>res.json())
     .then(data=>{
+      console.log(data)
       if(searchValue){
         this.setState({
           friendsList: data.filter(
