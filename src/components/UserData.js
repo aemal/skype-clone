@@ -84,7 +84,6 @@ class UserData extends Component {
   constructor() {
     super();
     this.state = {
-      dateOfBirth: moment(),
       formTitle: "Sing Up",
       buttonTitle: "Sing Up",
       settingUserData: {
@@ -100,7 +99,7 @@ class UserData extends Component {
         email: "",
         password: "",
         newPassword: "",
-        dateOfBirth: "",
+        dateOfBirth: moment(),
         gender: ""
       },
       generalerror: " ",
@@ -131,7 +130,8 @@ class UserData extends Component {
 
   handleDataChange = date => {
     let checketDate = date.format().substring(0, 10);
-    console.log("date", checketDate);
+    console.log(date.format());
+
     this.setState({
       newUser: { ...this.state.newUser, dateOfBirth: checketDate }
     });
@@ -376,7 +376,7 @@ class UserData extends Component {
               </Typography>
               <DatePicker
                 keyboard
-                value={this.state.selectedDate}
+                value={this.state.newUser.dateOfBirth}
                 labelFunc={date => moment(date).format("Do MMMM YYYY")}
                 onChange={this.handleDataChange}
                 className={classes.DatePicker}
