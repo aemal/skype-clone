@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = class {
   constructor(userModel) {
     this.userModel = userModel;
@@ -6,7 +8,7 @@ module.exports = class {
     this.userModel.find({$text:{$search:req.params.keyword}})
     .exec((err, contacts)=>{
       if(err){
-        res.send('Error');
+        res.json({ success : false, message : 'Access denied' });
       }else{
         res.json(contacts);
       }
