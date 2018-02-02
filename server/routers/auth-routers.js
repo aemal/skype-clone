@@ -43,5 +43,13 @@ module.exports = (passport)=>{
             res.json({ success : true, message : 'You are loged in through your twitter account' });
     });
 
+    router.get('/google', 
+        passport.authenticate('google', {scope: ['email']}));
+    router.get('/google/callback',
+        passport.authenticate('google', {failureRedirect: '/auth/login'}),
+        (req, res) => {
+            res.json({ success : true, message : 'You are loged in through your twitter account' });
+    });
+
     return router;
 }

@@ -3,7 +3,8 @@ const authStrategies = {
   local : require('../auth/local'),
   facebook : require('../auth/facebook'),
   github : require('../auth/github'),
-  twitter: require('../auth/twitter')
+  twitter: require('../auth/twitter'),
+  google: require('../auth/google')
 };
 
 module.exports = (passport)=>{
@@ -23,4 +24,5 @@ module.exports = (passport)=>{
   authStrategies.facebook(User, passport);
   authStrategies.github(User, passport);
   authStrategies.twitter(User, passport);
+  authStrategies.google(User, passport);
 };
