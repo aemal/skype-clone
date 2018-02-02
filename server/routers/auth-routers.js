@@ -3,17 +3,15 @@
 const router = require('express').Router();
 const Signup = require('../auth/signup');
 const Signin = require('../auth/signin');
+const logout = require('../auth/logout');
 const User = require('../models/user.model');
 
 const signup = new Signup(User);
-const signin = new Signin(User); 
+const signin = new Signin(User);
 
 module.exports = (passport)=>{
 
-    router.get('/logout', (req, res, next) => {
-        req.logout();
-        res.json({ success : true, message : 'Logout succeeded' });
-    });
+    router.get('/logout', logout);
 
     router.post('/login', signin.signin.bind(signin));
 

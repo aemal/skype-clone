@@ -1,5 +1,6 @@
 'use strict';
 
+const logout = require('../auth/logout');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 
@@ -36,7 +37,8 @@ module.exports = class {
                           }
                         },{upsert: false}, (err, user)=>{
                                  if(err) return next(err);
-                                 else return res.json({ success : true, message : 'Password is changed successfully' });
+                                 logout(req, res, next);
+                                 return res.json({ success : true, message : 'Password is changed successfully, please login with new password...' });
             });
         }));
     }else{
@@ -79,8 +81,8 @@ module.exports = class {
                                                 deleteAvatar(req, next);
                                                 return next(err);
                                               };
-                                             const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL} = user;
-                                             return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL });
+                                             logout(req, res, next);
+                                             return res.json({ success : true, message : 'profile is edited successfully, please login with new email...'});
                     });
                 }
               }
@@ -92,12 +94,12 @@ module.exports = class {
                                   dateOfBirth : dateOfBirth
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
-                                     if(err){
-                                        deleteAvatar(req, next); 
-                                        return next(err);
-                                     };
-                                     const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
-                                     return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
+                                       if(err){
+                                          deleteAvatar(req, next); 
+                                          return next(err);
+                                       };
+                                       const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
+                                       return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
             });
         }
         
