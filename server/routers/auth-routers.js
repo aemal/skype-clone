@@ -1,3 +1,5 @@
+'use strict';
+
 const router = require('express').Router();
 const Signup = require('../auth/signup');
 const Signin = require('../auth/signin');
