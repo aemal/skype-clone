@@ -1,6 +1,12 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
+
+function deleteAvatar(req, next){
+    let uploadDir = __dirname + '/../../public/avatars';
+    fs.unlink(`${uploadDir}/${req.filename}`, err=>{if(err) next(err);});
+}
 
 module.exports = class {
   constructor(userModel) {
@@ -54,8 +60,12 @@ module.exports = class {
             this.userModel.findOne({
                 'emailAddress': req.body.emailAddress.toLowerCase()
             }, (err, user) => {
-                if (err)return next(err);
+                if (err){
+                  deleteAvatar(req, next);
+                  return next(err);
+                };
                 if (user) {
+                    deleteAvatar(req, next);
                     return res.json({ success : false, message : 'This email is already exist' });
                 } else {
                     this.userModel.findOneAndUpdate({_id: id},
@@ -65,8 +75,12 @@ module.exports = class {
                                           dateOfBirth : dateOfBirth
                                       }
                                     },{upsert: false ,multi: true}, (err, user)=>{
-                                             if(err) return next(err);
-                                             else return res.json({ success : true, message : 'profile is edited successfully' });
+                                              if (err){
+                                                deleteAvatar(req, next);
+                                                return next(err);
+                                              };
+                                             const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL} = user;
+                                             return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL });
                     });
                 }
               }
@@ -78,8 +92,12 @@ module.exports = class {
                                   dateOfBirth : dateOfBirth
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
-                                     if(err) return next(err);
-                                     else return res.json({ success : true, message : 'profile is edited successfully' });
+                                     if(err){
+                                        deleteAvatar(req, next); 
+                                        return next(err);
+                                     };
+                                     const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
+                                     return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
             });
         }
         
