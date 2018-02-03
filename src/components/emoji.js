@@ -18,7 +18,6 @@ class Emoji extends Component {
 
  insertEmoji(emoji) {
     var input = this.props.txtMessage;
-    console.log(input);
     if (input === undefined) { return; }
     var scrollPos = input.scrollTop;
     var pos = 0;
@@ -76,10 +75,9 @@ class Emoji extends Component {
    
 
     render() {
-      const {display} = this.props;
         return (
-            <div style={{display}}>
-          <EmojiPicker onEmojiClick={this.logEmoji} />
+          <div>
+            <EmojiPicker onEmojiClick={this.logEmoji} />
           </div>
         )
 

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 'use strict';
+=======
+>>>>>>> d7fb07aee28f0b75dfe7cc7c3606cd69b768ccdb
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -21,8 +24,10 @@ const Message = require("./server/models/message.model");
 const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
-const db = config.DB_Connection.URL;
-const port = config.SERVER_PORT.PORT;
+
+const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+
+const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
@@ -60,8 +65,7 @@ app.use((err, req, res, next) => {
 });
 
 // mockData(User, Message, (err) => {
-  
-    app.listen(port, () => {
-        console.log('Server started on port.....' + port);
-    });
-// });
+
+app.listen(port, () => {
+  console.log("Server started on port....." + port);
+});

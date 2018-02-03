@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import SkypeAvatar from './skypeAvatar';
-import SearchList from '../components/searchList'
-
 
 const styles = theme => ({
   root: {
@@ -11,20 +9,20 @@ const styles = theme => ({
   },
 });
 
-class ContactList extends Component {
+class SearchList extends Component {
 
   render() {
-  	const { classes } = this.props;
-  	const listItems = this.props.friendsList.map((item) => {
-  		return (
-  			<ListItem key={item.id} dense button className="list-item">
+    const { classes } = this.props;
+    const listItems = this.props.friendsList.map((item) => {
+      return (
+        <ListItem key={item.id} dense button className="list-item">
           <SkypeAvatar
           avatar={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYezaoFgT-pfb5wpqDXxzKXzhQnTLPU5JW5eUvBaKL1H8Rtmu' }
           size={ 45 }/>
-  				<ListItemText primary={item.name} />
-  			</ListItem>
-  			)
-  	})
+          <ListItemText primary={item.name} />
+        </ListItem>
+        )
+    })
 
     return (
      <div id="friend-list" className={classes.root}>
@@ -36,4 +34,4 @@ class ContactList extends Component {
   }
 }
 
-export default withStyles(styles)(ContactList);
+export default withStyles(styles)(SearchList);

@@ -249,7 +249,7 @@ button.login-button:hover {
 }
 
 .sideBarContactListComponent {
-  height: calc(75vh - 64px);
+  height: calc(65vh - 64px);
   width: 100%;
   overflow: auto;
   display: block;
@@ -358,7 +358,7 @@ button.login-button:hover {
 
 .messagesLogComponent {
   overflow: auto;
-  height: 90vh;
+  height: calc(100vh - 190px);
   width: 100%;
   float: left;
   display: block;
@@ -438,19 +438,13 @@ button.login-button:hover {
 .messagesNewMessageComponent{
   width: 100%;
   float: left;
-  display: block;
-  position: fixed;
   bottom: 2%;
-  margin-left: -15px;
-
+ 
 }
 
 .texting-area {
-  width: 80%;
   padding: .5rem;
-  position: fixed;
   bottom: 2%;
-  margin-left: -15px;
 }
 
 .emoticon:hover {

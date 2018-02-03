@@ -34,48 +34,45 @@ class NewMessage extends Component {
       value: ''
     }
     this.emojiHandle = this.emojiHandle.bind(this);
-    this.logEmoji = this.logEmoji.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleEnterKey = this.handleEnterKey.bind(this);
+
   }
 
   emojiHandle() {
+
     this.setState({
       emojiClicked: !this.state.emojiClicked
     });
   }
   
-  logEmoji(data,emoji){
-    /*let currentEmoji = jsemoji.replace_unified(`:${emoji.name}:`);
-   
-    this.setState({
-      selectedEmoji: currentEmoji,
-    });*/
-    console.log(emoji);
-    console.log(this.data);
-    
+
+    handleChange(evt) {
+      if (this.state.selectedEmoji) {
+        this.addSpecialChar(evt);
+      }
+  }
   
-    
+  handleEnterKey(e) {
+    const body = e.target.value
+
+    if (e.keyCode === 13 && body) {
+      this.setState({
+        emojiClicked: false
+      });
+  
+      this.props.handleSubmit(e);
+    }
   }
 
-  handleChange(evt) {
-    if (this.state.selectedEmoji) {
-      this.addSpecialChar(evt);
-    }
-}
-  
   render() {
-    const { classes, handleSubmit } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className="texting-area">
         <FormControl className="form-control">
         
-        <InputAdornment position="end">
-                <IconButton>
-                <InsertEmoticon onClick={this.emojiHandle} />
-                {this.state.emojiClicked ? <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}><Emoji onEmojiClick={this.logEmoji} txtMessage = {this.txtMessage}/></div> : null}
-                </IconButton>
-            </InputAdornment>
+           
             
           <Input
             id="multiline-flexible"
@@ -83,12 +80,22 @@ class NewMessage extends Component {
             multiline
             rowsMax="4"
             placeholder="Type your message here"
-            onKeyUp={(e) => handleSubmit(e)}
+            //onKeyUp={(e) => handleSubmit(e)}
+            onKeyUp={(e) => this.handleEnterKey(e)}
             classes={{
               inkbar: classes.inputInkbar,
             }}
             inputRef={(thisInput) => {this.txtMessage = thisInput}}
+            endAdornment={
+              <InputAdornment position="end">
+              <IconButton onClick={this.emojiHandle} >
+                <InsertEmoticon   />
+              </IconButton>
+              {this.state.emojiClicked ? <div style={{ position: 'absolute', bottom: '20px', right: '20px'}}><Emoji txtMessage = {this.txtMessage}/></div> : null}
+             </InputAdornment>
+            }
             />
+            
             
         </FormControl>
       </div>
