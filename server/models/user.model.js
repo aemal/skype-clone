@@ -1,5 +1,6 @@
+'use strict';
+
 const mongoose = require('mongoose');
-const textSearch = require('text-search');
 const Schema = mongoose.Schema;
 
 const emailValidation = email => {
@@ -88,12 +89,9 @@ const userSchema = new Schema({
     accessToken:{
     	token: {
 	        type: String,
-	        unique: true,
-	        required: true
 	    },
 	    created: {
-	        type: Date,
-	        default: Date.now
+	        type: Date
 	    }
 	}
 });
@@ -111,12 +109,5 @@ User.schema.path('emailAddress').validate((value, done)=>{
       done(!user);                                                                                                                         
     });                                                                                                                                                  
 }, 'This email address is already registered');
-
-userSchema.plugin(textSearch);
-
-userSchema.index({
-    "profile.firstName": "text",
-    "profile.lastName": "text"
-});
 
 module.exports = User;
