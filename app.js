@@ -1,10 +1,11 @@
+'use strict';
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongo = require("mongodb");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
-const flash = require("connect-flash");
 const cors = require("cors");
 
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 const router = express.Router();
 
 const mockData = require("./server/mock-data");
+const config = require("./server/config/config");
 const SerialAuthenticator = require("./server/auth/index");
 const User = require("./server/models/user.model");
 const Message = require("./server/models/message.model");
@@ -19,9 +21,8 @@ const Message = require("./server/models/message.model");
 const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
-const db = "mongodb://localhost:27017/skypeClone";
-
-const port = process.env.PORT || 3001;
+const db = config.DB_Connection.URL;
+const port = config.SERVER_PORT.PORT;
 
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
@@ -38,7 +39,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(
   require("express-session")({
-    secret: "FIXME: I should be retrieved from env var ;(",
+    secret: config.SESSION_SECRET.SECRET_KEY,
     resave: true,
     saveUninitialized: true
   })
@@ -46,7 +47,6 @@ router.use(
 
 router.use(passport.initialize());
 router.use(passport.session());
-// router.use(flash());
 
 // passport de/serialize and local strategy
 SerialAuthenticator(passport);
