@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 'use strict';
-=======
->>>>>>> d7fb07aee28f0b75dfe7cc7c3606cd69b768ccdb
 
 const express = require("express");
 const bodyParser = require("body-parser");
