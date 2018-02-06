@@ -5,10 +5,8 @@ const User = require("../models/user.model");
 const jwtSecret = require("../config/config").JWT_Secret;
 
 module.exports = (req, res, next) => {
-  console.log(req.headers.authorization.split(" ")[0]);
   if (req.headers.authorization.split(" ")[0] === "TOKEN") {
     let token = req.headers.authorization.split(" ")[1];
-    console.log(token);
     jwt.verify(token, jwtSecret.SECRET_KEY, (err, decoded) => {
       req.params.id = decoded._id;
       req.user = decoded;

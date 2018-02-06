@@ -4,11 +4,12 @@ module.exports = class {
   constructor(userModel) {
     this.userModel = userModel;
   };
-  
+
   searchContact(req, res){
+    console.log(req.params)
       let regex = new RegExp(req.params.keyword, 'i');
       let query = this.userModel.find({$or:[{'profile.firstName': regex}, {'profile.lastName': regex}]});
-            
+
       query.exec((err, users)=>{
           if(err || !users){
             res.json({ success : false, message : 'Can not find any match names' });
