@@ -78,7 +78,7 @@ class SignIn extends Component {
         body: searchParams
       })
         .then(res => res.json())
-        .then(data => this.props.history.push('/auth'))
+        .then(data => this.props.history.push("/auth"))
         .catch(err => console.log(err));
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
@@ -105,7 +105,7 @@ class SignIn extends Component {
             size={150}
           />
         </div>
-        <h3 className="sign-in-header">Sign in</h3>
+
         <div className="sign-in-details">
           <form
             className={classes.formWrapper}
