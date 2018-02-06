@@ -14,6 +14,7 @@ import createHistory from "history/createBrowserHistory";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 import SingUp from "./components/SingUp";
 import WellcomePage from "./components/WellcomePage";
+import Favicon from 'react-favicon';
 
 
 const history = createHistory();
@@ -21,7 +22,8 @@ const history = createHistory();
 ReactDOM.render(
 <Provider store={store}>
  <ConnectedRouter history={history}>
-	  <div>
+      <div>
+        <Favicon url="http://localhost:3001/images/favicon/favicon.ico" />
         <Route exact path="/" component={SingIn}/> 
         <Route exact path="/auth" component={App}/> 
         <Route exact path="/auth/profile" component={ProfileSettings}/>
