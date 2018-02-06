@@ -8,7 +8,6 @@ module.exports = (userModel, passport)=>{
       if (!user) return done(null,false, { message : 'Invalid e-mail address or password' });
       bcrypt.compare(password, user.password, (err, result)=>{
          if (err) { return done(err); }
-         console.log(result === true);
          if(result === true){
            user.status.lastSeen = Date.now(); 
            user.active = true;

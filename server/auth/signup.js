@@ -1,3 +1,5 @@
+'use strict';
+
 const bcrypt = require("bcryptjs");
 
 module.exports = class {
@@ -10,13 +12,13 @@ module.exports = class {
             return res.json({ success : false, message : 'Password is required' });
         }
             this.userModel.findOne({
-                'emailAddress': req.email
+                'emailAddress': req.body.email.toLowerCase()
             }, (err, user) => {
                 if (err) {
                     return next(err);
                 }
                 if (user) {
-                    return res.json({ success : false, message : 'Singin failed, email is already exist' });
+                    return res.json({ success : false, message : 'Signup failed, email is already exist' });
                 } else {
                     let password = req.body.password;
                     if(password.length >= 8 && password.length <= 20){
@@ -26,7 +28,7 @@ module.exports = class {
                             bcrypt.hash(req.body.password, salt, (err, hash) => {
                                 if(err) return next(err);
                                 let user = new this.userModel({
-                                        emailAddress: req.body.email,
+                                        emailAddress: req.body.email.toLowerCase(),
                                         password: hash,
                                         dateOfBirth: new Date(req.body.dateOfBirth),
                                         profile: {
@@ -42,7 +44,7 @@ module.exports = class {
                                         if (err){
                                             return next(err);
                                         }else{
-                                            const {emailAddress, profile, gender, dateOfBirth} = user;
+                                            const {emailAddress, profile, gender, dateOfBirth, _id} = user;
                                             return res.json({emailAddress, profile, gender, dateOfBirth});
                                         };
                                     });
@@ -56,5 +58,5 @@ module.exports = class {
                     }
                 }
             });
-        }
+    }
 };

@@ -1,6 +1,10 @@
-const router = require('express').Router();
+'use strict';
 
-const multiparty = require('../handlers/file-upload');
+const router = require('express').Router();
+//middlewares
+const isAuthenticated = require('../middleware/authenticated');
+const multiparty = require('../middleware/file-upload');
+
 const Message = require('../models/message.model');
 const User = require('../models/user.model');
 const Chat = require('../models/chat.model');
@@ -19,12 +23,6 @@ const contactHandler = new ContactHandler(User);
 const messageHandler = new MessageHandler(Message, Chat);
 
 module.exports = ()=>{
-
-    const isAuthenticated = (req, res, next)=>{
-        // if (req.isAuthenticated()) return next();
-        // else res.redirect('/auth/login');
-        return next();
-    };
 
     router.post('/message/get_history', isAuthenticated, messageHandler.messageHistory.bind(messageHandler));
     router.get('/contacts/search/:keyword', isAuthenticated, contactHandler.searchContact.bind(contactHandler));
