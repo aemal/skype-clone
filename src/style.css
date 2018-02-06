@@ -35,48 +35,48 @@ body {
   height: 400;
   margin: 0 auto;
   padding: 10%;
-	color: #fff;
-	background: linear-gradient(-45deg, #7d8fe0, #7dc7e0, #23A6D5, #23D5AB);
-	background-size: 200% 200%;
-	-webkit-animation: Gradient 15s ease infinite;
-	-moz-animation: Gradient 15s ease infinite;
-	animation: Gradient 15s ease infinite;
+  color: #fff;
+  background: linear-gradient(-45deg, #7d8fe0, #7dc7e0, #23a6d5, #23d5ab);
+  background-size: 200% 200%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
 }
 
 @-webkit-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @-moz-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .sign-in-header {
@@ -86,33 +86,29 @@ body {
 }
 
 .sign-in-details {
-  width: 60%;
-  min-width: 300px;
-  margin: 0 auto;
-  border: 2px solid white;
-  padding: 1rem 3rem;
+  display: flex;
+  padding: 0 3rem;
   border-radius: 30px;
-  background-color: #FCF9FF;
-  box-shadow: 0px 1px 15px grey;
+  background-color: #fcf9ff;
 }
 
 .sign-in-details .MuiFormControl-root-12 {
-  margin-top: .7rem;
+  margin-top: 0.7rem;
 }
 
 .sign-in-details input,
 .sign-in-details label {
-  color: #3BA8C6;
+  color: #3ba8c6;
   margin-top: 1rem;
 }
 
 .sign-in-h3 {
   letter-spacing: 1px;
-  color: #726F6F;
+  color: #726f6f;
 }
 
 .sign-in-details .MuiButton-raised-48 {
-  background-color: #3BA8C6;
+  background-color: #3ba8c6;
   color: white;
   border-radius: 10px;
 }
@@ -131,7 +127,7 @@ body {
 .additional-options .link {
   display: flex;
   flex-wrap: wrap;
-  color: #726F6F;
+  color: #726f6f;
   text-decoration: none;
 }
 
@@ -140,19 +136,23 @@ body {
 }
 
 .color-checkbox.MuiCheckbox-checked-58 {
-  color: #726F6F;
+  color: #726f6f;
 }
 .color-checkbox.MuiCheckbox-checked-66 {
-  color: #726F6F;
+  color: #726f6f;
 }
 
 .register-forgot-password {
   padding: 1rem;
 }
 
+.social {
+  width: 20px;
+}
+
 .social-media-login-main button {
   width: 100%;
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 .social-media-login {
@@ -171,7 +171,7 @@ body {
 }
 
 span.MuiTypography-body1-52 {
-  color: #3BA8C6;
+  color: #3ba8c6;
   font-size: 1rem;
 }
 
@@ -179,22 +179,22 @@ span.MuiTypography-body1-52 {
 
 legend.MuiFormLabel-focused-24,
 legend.MuiFormLabel-focused-25 {
-  color: #79848E;
+  color: #79848e;
 }
 
 /* Tried to change the purple colour of the default, but doesn't seem to work */
 span.MuiRadio-checked-112,
 span.MuiRadio-checked-113 {
-  color: #79848E;
+  color: #79848e;
 }
 
 button.login-button {
-  background-color: #3BA8C6;
+  background-color: #3ba8c6;
   color: white;
 }
 
 button.login-button:hover {
-  background-color: #79848E;
+  background-color: #79848e;
   color: white;
 }
 
@@ -210,7 +210,7 @@ button.login-button:hover {
 }
 
 .sideBarAvatarComponent {
-  height: 'auto';
+  height: "auto";
   width: 100%;
   /*position: relative;  creates the shadow above the contact list */
 }
@@ -239,12 +239,12 @@ button.login-button:hover {
 
 .icons i {
   font-size: 1.8rem;
-  color: #726F6F;
-  transition: all .1s ease-in;
+  color: #726f6f;
+  transition: all 0.1s ease-in;
 }
 
 .icons i:hover {
-  color: #3BA8C6;
+  color: #3ba8c6;
   transform: scale(1.3);
 }
 
@@ -253,28 +253,28 @@ button.login-button:hover {
   width: 100%;
   overflow: auto;
   display: block;
-  background-color: #EBEAED;
+  background-color: #ebeaed;
 }
 
 .list-item h3 {
-  color: #79848E;
-  font-size: .85rem;
+  color: #79848e;
+  font-size: 0.85rem;
 }
 
 .list-item:hover h3 {
   font-weight: 700;
-  color: #3BA8C6;
+  color: #3ba8c6;
 }
 
 .list-item .avatar {
   font-weight: 700;
-  border: 2px solid #79848E;
-  transition: all .1s ease-in;
+  border: 2px solid #79848e;
+  transition: all 0.1s ease-in;
 }
 
 .list-item:hover .avatar {
   font-weight: 700;
-  border: 2px solid #3BA8C6;
+  border: 2px solid #3ba8c6;
   transform: scale(1.3);
 }
 
@@ -289,21 +289,21 @@ button.login-button:hover {
 }*/
 
 .search-bar i {
-  color: #FCF9FF;
+  color: #fcf9ff;
 }
 
 .open-search-bar {
-  background-color: #FCF9FF;
-  box-shadow: 0 0 15px #FCF9FF;
-  color: #FCF9FF;
+  background-color: #fcf9ff;
+  box-shadow: 0 0 15px #fcf9ff;
+  color: #fcf9ff;
   border-radius: 3rem;
 }
 
 .open-search-bar > div,
 .open-search-bar > label {
-  color: #726F6F;
+  color: #726f6f;
   font-size: 1rem;
-  padding: 0 1rem .3rem 1rem;
+  padding: 0 1rem 0.3rem 1rem;
 }
 
 #searchContact {
@@ -327,7 +327,7 @@ button.login-button:hover {
 .contact-list {
   display: flex;
   justify-content: space-between;
-  padding: .5rem;
+  padding: 0.5rem;
   margin: 0;
   margin-left: -15px;
   margin-right: -16px;
@@ -336,22 +336,22 @@ button.login-button:hover {
 
 .contact-list i {
   font-size: 1.5rem;
-  color: #726F6F;
-  transition: all .1s ease-in;
-  margin-top: .4rem;
-  background-color: #EBEAED;
+  color: #726f6f;
+  transition: all 0.1s ease-in;
+  margin-top: 0.4rem;
+  background-color: #ebeaed;
   border-radius: 50%;
-  padding: .7rem;
+  padding: 0.7rem;
 }
 
 .contact-list i:hover {
-  color: #3BA8C6;
+  color: #3ba8c6;
   transform: scale(1.2);
 }
 
 .contact-list .avatar {
-  margin-right: .8rem;
-  margin-top: .6rem;
+  margin-right: 0.8rem;
+  margin-top: 0.6rem;
 }
 
 /* Messages area */
@@ -368,7 +368,7 @@ button.login-button:hover {
   margin-top: 2rem;
 }
 
-.messagesContactDetailComponent{
+.messagesContactDetailComponent {
   height: 65px;
   width: 100%;
   float: left;
@@ -376,37 +376,37 @@ button.login-button:hover {
   position: relative;
 }
 
-.bubble{
-  background-color: #FCF9FF;
+.bubble {
+  background-color: #fcf9ff;
   border-radius: 5px;
   box-shadow: 0 0 10px grey;
   display: inline-block;
   padding: 10px 15px;
   position: relative;
   vertical-align: top;
-  color: #726F6F;
+  color: #726f6f;
 }
 
 .timer {
   display: block;
-  color: #3BA8C6;
-  font-size: .8rem;
-  margin-top: .5rem;
+  color: #3ba8c6;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
 }
 
 .bubble::before {
-  background-color: #FCF9FF;
+  background-color: #fcf9ff;
   content: "\00a0";
   display: block;
   height: 13px;
   position: absolute;
-  margin-left: .3rem;
-  transform:             rotate( 29deg ) skew( -35deg );
-  -moz-transform:    rotate( 29deg ) skew( -35deg );
-  -ms-transform:     rotate( 29deg ) skew( -35deg );
-  -o-transform:      rotate( 29deg ) skew( -35deg );
-  -webkit-transform: rotate( 29deg ) skew( -35deg );
-  width:  13px;
+  margin-left: 0.3rem;
+  transform: rotate(29deg) skew(-35deg);
+  -moz-transform: rotate(29deg) skew(-35deg);
+  -ms-transform: rotate(29deg) skew(-35deg);
+  -o-transform: rotate(29deg) skew(-35deg);
+  -webkit-transform: rotate(29deg) skew(-35deg);
+  width: 13px;
 }
 
 .me {
@@ -415,7 +415,7 @@ button.login-button:hover {
 }
 
 .me::before {
-  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+  box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -9px;
 }
 
@@ -425,7 +425,7 @@ button.login-button:hover {
 }
 
 .you::before {
-  box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+  box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
   right: -9px;
 }
 
@@ -435,20 +435,19 @@ button.login-button:hover {
 
 /* Typing the text area */
 
-.messagesNewMessageComponent{
+.messagesNewMessageComponent {
   width: 100%;
   float: left;
   bottom: 2%;
- 
 }
 
 .texting-area {
-  padding: .5rem;
+  padding: 0.5rem;
   bottom: 2%;
 }
 
 .emoticon:hover {
-  color: #3BA8C6;
+  color: #3ba8c6;
 }
 
 .form-control {

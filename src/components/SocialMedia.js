@@ -5,7 +5,9 @@ import classNames from "classnames";
 import Button from "material-ui/Button";
 
 const styles = theme => ({
-
+  social: {
+    width: "20px"
+  }
 });
 
 class SocialMedia extends Component {
@@ -19,7 +21,7 @@ class SocialMedia extends Component {
               className={classNames(classes.social, classes.facebook)}
               raised
             >
-              <i className="fa fa-facebook-square fa-2x"/> Sign in with
+              <i className="fa fa-facebook-square fa-2x" /> Sign in with
               facebook
             </Button>
           </Tooltip>
