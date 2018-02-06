@@ -5,7 +5,7 @@ import Button from "material-ui/Button";
 import Checkbox from "material-ui/Checkbox";
 import { Link } from "react-router-dom";
 import SocialMedia from "./SocialMedia";
-
+import decode from "jwt-decode";
 import Avatar from "./skypeAvatar";
 import { login } from "../actions/login";
 import { connect } from "react-redux";
@@ -78,7 +78,12 @@ class SignIn extends Component {
         body: searchParams
       })
         .then(res => res.json())
-        .then(data => this.props.history.push("/auth"))
+        .then(data => {
+          let user = decode(data.token);
+          console.log(user);
+          localStorage.setItem("token", data.token);
+          //this.props.history.push("/auth");
+        })
         .catch(err => console.log(err));
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
