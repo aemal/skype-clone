@@ -1,15 +1,13 @@
 {
   "name": "skypeclone",
   "version": "1.0.0",
-  "description":
-    "Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB & WebRTC",
+  "description": "Building SkypeClone using Material-UI, React.js, Express.js, Node.js, MongoDB & WebRTC",
   "main": "app.js",
   "engines": {
     "node": "v8.6.0"
   },
   "scripts": {
-    "start":
-      "concurrently --kill-others  \"npm run server\"  \"npm run socket\" \"npm run react\"",
+    "start": "concurrently --kill-others  \"npm run server\"  \"npm run socket\" \"npm run react\"",
     "heroku-postbuild": "npm run build",
     "server": "nodemon app.js",
     "socket": "nodemon index.js",
@@ -61,6 +59,7 @@
     "react-dom": "^16.2.0",
     "react-emoji-picker": "^1.0.13",
     "react-emojione": "^5.0.0",
+    "react-favicon": "0.0.13",
     "react-page-click": "^4.0.2",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
