@@ -9,7 +9,7 @@ import decode from "jwt-decode";
 import Avatar from "./skypeAvatar";
 import { login } from "../actions/login";
 import { connect } from "react-redux";
-import config from './config/config.js';
+import config from '../config/config.js';
 
 const styles = theme => ({
   formWrapper: {
