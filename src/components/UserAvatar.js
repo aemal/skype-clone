@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
-import {withStyles} from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
-import Avatar from './skypeAvatar';
-import ProfileSettings from './ProfileSettings';
-import FormDialog from './dialog';
+import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
+import IconButton from "material-ui/IconButton";
+import Avatar from "./skypeAvatar";
+import ProfileSettings from "./ProfileSettings";
+import FormDialog from "./dialog";
 
-
-const styles =  {
+const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   row: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center"
   },
   avatar: {
-    position: 'relative',
-    padding: '1rem',
+    position: "relative",
+    padding: "1rem"
   },
   img: {
-    width: '100%',
+    width: "100%"
   }
 };
 
 class UserAvatar extends Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleClickOpen = () => {
@@ -33,28 +32,28 @@ class UserAvatar extends Component {
   };
 
   handleClose = () => {
-    this.setState({open: false });
+    this.setState({ open: false });
   };
 
   render() {
-    const{classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.avatar}>
-          <Avatar avatar={'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png'} size={120} />
+          <Avatar avatar={this.props.avatarURL} />
         </div>
         <div className="icons">
           <IconButton onClick={this.handleClickOpen}>
             <i className="material-icons">settings</i>
-            </IconButton>
-            <FormDialog
-                open={this.state.open}
-                handleClose={this.handleClose}
-                compo={<ProfileSettings/>}
-                fullScreen={true}
-            />
-          
+          </IconButton>
+          <FormDialog
+            open={this.state.open}
+            handleClose={this.handleClose}
+            compo={<ProfileSettings />}
+            fullScreen={true}
+          />
+
           <IconButton>
             <i className="material-icons">notifications</i>
           </IconButton>
