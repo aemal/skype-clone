@@ -83,7 +83,7 @@ class SignIn extends Component {
           let user = decode(data.token);
           console.log(user);
           localStorage.setItem("token", data.token);
-          //this.props.history.push("/auth");
+          this.props.history.push("/auth");
         })
         .catch(err => console.log(err));
     } else {

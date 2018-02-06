@@ -14,9 +14,9 @@ module.exports = class {
             if (err || !user) { return res.json({ success : false, message : 'Login failed, email or password is wrong' }); }
             req.logIn(user, (err)=>{
                 if (err) return next(err);
-                let {emailAddress, profile, gender, dateOfBirth, status, _id, accessToken, avatarURL} = user;
+                let {emailAddress, profile, gender, dateOfBirth, status, _id, accessToken, avatarURL, contact} = user;
                 let token = jwt.sign(
-                            {emailAddress, profile, gender, dateOfBirth, status, _id, avatarURL},
+                            {emailAddress, profile, gender, dateOfBirth, status, _id, avatarURL, contact},
                             jwtSecret.SECRET_KEY, 
                             { expiresIn: 14 * 24 * 60 * 60 }); 
                 

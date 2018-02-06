@@ -13,6 +13,7 @@ import "./App.css";
 import "./style.css";
 import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
+import decode from "jwt-decode";
 
 function mapStateToProps(state, filter) {
   return {
@@ -80,6 +81,10 @@ class App extends Component {
 
   render() {
     const { alignItems, direction, justify } = this.state;
+
+    // Getting the information from the loged user
+    let user = decode(localStorage.getItem("token"));
+
     return (
       <Grid
         container
@@ -94,7 +99,7 @@ class App extends Component {
           <Grid>
             <Paper>
               <Grid item sm={12} className="sideBarAvatarComponent">
-                <UserAvatar />
+                <UserAvatar avatarURL={user.avatarURL} />
               </Grid>
               <Grid item sm={12} className="sideBarContactListComponent">
                 <ContactList friendsList={this.props.contactList} />
