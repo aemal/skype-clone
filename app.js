@@ -29,6 +29,8 @@ const port = process.env.PORT || 3001;
 mongoose.Promise = global.Promise;
 mongoose.connection.openUri(db);
 
+app.use(express.static('public'))
+
 //Enable all CORS requests
 app.use(cors());
 
