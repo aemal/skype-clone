@@ -23,7 +23,7 @@ ReactDOM.render(
 <Provider store={store}>
  <ConnectedRouter history={history}>
       <div>
-        <Favicon url="{config.BASE_URL}images/favicon/favicon.ico" />
+        <Favicon url={config.BASE_URL + "images/favicon/favicon.ico"} />
         <Route exact path="/" component={SingIn}/> 
         <Route exact path="/auth" component={App}/> 
         <Route exact path="/auth/profile" component={ProfileSettings}/>
