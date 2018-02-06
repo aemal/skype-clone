@@ -16,6 +16,7 @@ import SingUp from "./components/SingUp";
 import WellcomePage from "./components/WellcomePage";
 
 
+
 const history = createHistory();
 
 ReactDOM.render(
