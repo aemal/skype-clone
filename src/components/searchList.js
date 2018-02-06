@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import SkypeAvatar from './skypeAvatar';
+import IconButton from 'material-ui/IconButton';
 
 const styles = theme => ({
   root: {
@@ -20,6 +21,10 @@ class SearchList extends Component {
           avatar={ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYezaoFgT-pfb5wpqDXxzKXzhQnTLPU5JW5eUvBaKL1H8Rtmu' }
           size={ 45 }/>
           <ListItemText primary={item.name} />
+          <IconButton style= {{position:'relative', float:'right'}}
+          >
+          <i class="material-icons">add_circle_outline</i>
+          </IconButton>
         </ListItem>
         )
     })
@@ -35,3 +40,5 @@ class SearchList extends Component {
 }
 
 export default withStyles(styles)(SearchList);
+
+

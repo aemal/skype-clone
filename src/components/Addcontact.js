@@ -18,7 +18,7 @@ class AddContact extends Component {
 
   btnSearchClicked() {
     let searchValue = this.txtSearchInput.value;
-    fetch(`http://localhost:3001/user/contacts/search/sareh`)
+    fetch(`https://jsonplaceholder.typicode.com/users`)
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
