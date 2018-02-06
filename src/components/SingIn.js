@@ -9,6 +9,7 @@ import decode from "jwt-decode";
 import Avatar from "./skypeAvatar";
 import { login } from "../actions/login";
 import { connect } from "react-redux";
+import config from './config/config.js';
 
 const styles = theme => ({
   formWrapper: {
@@ -53,7 +54,7 @@ class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let url = "http://localhost:3001/auth/login";
+    let url = "{config.BASE_URL}auth/login";
     const formData = {
       checked: this.state.checked,
       username: this.state.email,
