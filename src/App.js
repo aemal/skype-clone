@@ -16,7 +16,6 @@ import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 
 function mapStateToProps(state, filter) {
-  console.log(state);
   return {
     contactList: state.contactListReducers.contactList.filter(c => {
       return (
