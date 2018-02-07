@@ -88,10 +88,10 @@ class NewMessage extends Component {
             inputRef={(thisInput) => {this.txtMessage = thisInput}}
             endAdornment={
               <InputAdornment position="end">
-              <IconButton onClick={this.emojiHandle} >
+              <IconButton onClick={this.emojiHandle} id="emoji" >
                 <InsertEmoticon   />
               </IconButton>
-              {this.state.emojiClicked ? <div style={{ position: 'absolute', bottom: '20px', right: '20px'}}><Emoji txtMessage = {this.txtMessage}/></div> : null}
+              {this.state.emojiClicked ? <div id="emoji1" style={{ position: 'absolute', bottom: '20px', right: '20px'}}><Emoji txtMessage = {this.txtMessage}/></div> : null}
              </InputAdornment>
             }
             />
