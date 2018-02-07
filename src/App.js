@@ -44,6 +44,10 @@ class App extends Component {
         .fromNow()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.socket = io(config.SOCKET_URL); 
+    this.socket.on("connect", socket => this.connect(socket));
+  
   }
 
   componentWillMount() {
@@ -51,11 +55,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.socket = io(config.SOCKET_URL); //FIXME: This should come from settings/env variable.
-    this.socket.on("connect", socket => this.connect(socket));
-    this.socket.on("message", message => {
+     //this.socket.on("message", message => {
+    this.socket.on(this.state.socketChanelId, message => {
       this.setState({ messages: [...this.state.messages, message] });
     });
+ 
+    
+   
+
+   
+  this.socket.on('conversation private post', function(data) {
+      //display data.message
+      console.log(data);
+  });
+
     
   }
 
@@ -68,30 +81,66 @@ class App extends Component {
   socketSignal(Sbody){
      
 
-   const body = Sbody;
+    const body = {roomID: this.state.socketChanelId, message: Sbody};
+
+    console.log("cccccc", body);
+
     let id = this.state.socketId;
     let moment = <p>this.state.moment</p>;
+    
     const message = {
       body,
       id,
       socketId: this.state.socketId,
       moment
     };
+
     this.setState({ messages: [...this.state.messages, message] });
-    this.socket.emit("message", body);
-   
+    
+    this.socket.emit("privateMessage", body);
+    
   }
-  getSocketChanelId(socketId){
+
+  getSocketChanelId(roomID){
+    
     this.setState({
-      socketChanelId:socketId
+      socketChanelId: roomID
     })
+
     this.socketSignal(this.state.socketChanelId)
     console.log(this.state.socketChanelId)
+
+       
+    console.log("roomID", roomID)
+
+    this.socket.emit('joinRoom', {
+      roomID,
+      userID: roomID.split("--")[0],
+      friendID: roomID.split("--")[1]
+    });
+
+
+
+    this.socket.on('joinRoom', function(roomInfo) {
+        console.log('joining room', roomInfo.roomID);
+        
+        let user = decode(localStorage.getItem("token"));
+
+        if(user._id === roomInfo.friendID || user._id === roomInfo.userID) {
+          this.socket.join(roomInfo.roomID);
+        }
+    });
+
+
+    
   }
 
   handleSubmit(event) {
    this.socketSignal(event.target.value)
-   event.target.value = ''
+   event.target.value = '';
+
+
+   
   }
 
   render() {

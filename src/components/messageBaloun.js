@@ -17,9 +17,12 @@ class ContactDetail extends Component {
               <div className="chat">
                 <div className={align}>
                   {message.body}
-                  <span className="timer">
+                  
+
+                  {/*
+                     <span className="timer">
                     {time}
-                  </span>
+                  </span> */}
                 </div>
               
                 

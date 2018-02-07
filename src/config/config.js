@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = {
-	BASE_URL: "http://10.0.1.167:3001/",
-	SOCKET_URL:"http://10.0.1.167:8080/"
+	BASE_URL: "http://172.16.94.245:3001/",
+	SOCKET_URL:"http://172.16.94.245:3001/"
 }
