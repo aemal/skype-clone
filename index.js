@@ -10,7 +10,7 @@ const server = app.listen(8080);
 const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', socket => {
-        const sessionid = socket.id;
+    const sessionid = socket.id;
     console.log("Socket Connected: %s",  sessionid);
     socket.on('message', body => {
       socket.broadcast.emit('message', {
