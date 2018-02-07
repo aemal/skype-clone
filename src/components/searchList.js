@@ -3,6 +3,7 @@ import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import SkypeAvatar from './skypeAvatar';
 import IconButton from "material-ui/IconButton";
+import uuidv1 from "uuid/v1";
 
 const styles = theme => ({
   root: {
@@ -11,7 +12,45 @@ const styles = theme => ({
 });
 
 class SearchList extends Component {
+    constructor() {
+      super();
+      this.requestFriends = this.requestFriends.bind(this);
+    }
 
+    requestFriends(user) {
+    let token = localStorage.getItem("token");
+    let url = `http://localhost:3001/user/friend/add/${uuidv1()}`;
+    let formData = {
+      fullName: user.profile.firstName + ' ' + user.profile.lastName,
+      avatarURL: user.profile.avatarURL,
+      userId: user._id
+    }
+    if (user) {
+    const searchParams = Object.keys(formData)
+      .map(key => {
+        return (
+          encodeURIComponent(key) + "=" + encodeURIComponent(formData[key])
+        );
+    })
+    .join("&");
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `TOKEN ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      body: searchParams
+    })
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data );
+      })
+      .catch(err => console.log(err));
+    } else {
+      console.log({ Error: "Fields are required" }); //Handle errors here...
+    }
+  }
   render() {
     const { classes } = this.props;
     let listItems = "Search a new friend";
@@ -22,12 +61,14 @@ class SearchList extends Component {
           <SkypeAvatar
             avatar={
               // the image will be item.avatarURL
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYezaoFgT-pfb5wpqDXxzKXzhQnTLPU5JW5eUvBaKL1H8Rtmu"
+                `images/avatar/${item.profile.avatarURL}`
             }
             size={45}
           />
           <ListItemText primary={item.profile.firstName + ' ' + item.profile.lastName} />
-        <IconButton>
+        <IconButton onClick={()=>
+          this.requestFriends(item)
+        }>
           <i className="material-icons">add_circle_outline</i>
         </IconButton>
         </ListItem>
