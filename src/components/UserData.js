@@ -272,14 +272,14 @@ class UserData extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          
-          if (data.success) {
-            this.props.history.push("/wellcome");
+          console.log(data);
+          if (data) {
+            this.props.history.push("/");
           } else {
             this.setState({
               generalerror: data.message
             });
-            console.log(data);
+           
           }
         })
         .catch(err => console.log(err));
