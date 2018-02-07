@@ -36,7 +36,7 @@ module.exports = ()=>{
     router.post('/profile_edit/:id', isAuthenticated, multiparty, profileHandler.editProfile.bind(profileHandler));
     router.post('/profile/update_password/:id', isAuthenticated, profileHandler.updatePassword.bind(profileHandler));
 
-    router.get('/friend/add/:id', isAuthenticated, friendHandler.add.bind(friendHandler));
+    router.post('/friend/add/:id', isAuthenticated, friendHandler.add.bind(friendHandler));
     router.get('/friend/accept/:id', isAuthenticated, friendHandler.accept.bind(friendHandler))
     router.get('/friend/decline/:id', isAuthenticated, friendHandler.decline.bind(friendHandler))
     router.get('/friend/remove/:id', isAuthenticated, friendHandler.remove.bind(friendHandler));
