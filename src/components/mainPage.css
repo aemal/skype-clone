@@ -1,0 +1,65 @@
+.background {
+    height: 800px;
+    widows: 100%;
+    background-image: url('mainPage.jpg');
+    background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.container {
+    width: 100%;
+    height: 900px;
+    background-color: rgba(161, 148, 148, 0.383)
+}
+
+.wellcomeMessageContainer {
+    position: relative;
+    top:30%;
+    margin: 0 auto;
+    
+    text-align: center;
+}
+
+.wellcomeMessage {
+    color: aliceblue;
+    font-family: 'Raleway', sans-serif;
+    font-size: 57px;
+    letter-spacing: 2px;
+    margin: 0;
+
+}
+
+.about {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: rgb(236, 236, 227);
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+.loginButoon ,.signUpButton {
+    background-color: rgba(8, 6, 6, 0);
+    width: 90px;
+    padding: 5px;
+    border-radius: 15px;
+    margin: 25px;
+    color:white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    line-height: 1.2em;
+    cursor: pointer;
+    
+    border: 1px solid  rgba(8, 6, 6, 0);
+    
+}
+ .signUpButton:hover {
+    background-color: rgba(43, 40, 40, 0.883);
+    font-size: 25px;
+    width: 110px;
+
+}
+.loginButoon:hover {
+    background-color: rgba(43, 40, 40, 0.883);
+    font-size: 25px;
+    width: 110px;
+
+}

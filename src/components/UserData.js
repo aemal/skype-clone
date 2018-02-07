@@ -15,6 +15,8 @@ import moment from "moment";
 import { signup } from "../actions/signup";
 import { connect } from "react-redux";
 import Avatar from "./skypeAvatar";
+import config from '../config/config.js';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   container: {
@@ -270,14 +272,14 @@ class UserData extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          
-          if (data.success) {
-            this.props.history.push("/wellcome");
+          console.log(data);
+          if (data) {
+            this.props.history.push("/");
           } else {
             this.setState({
               generalerror: data.message
             });
-            console.log(data);
+           
           }
         })
         .catch(err => console.log(err));
@@ -311,117 +313,122 @@ class UserData extends Component {
 
     return (
       <div className="main-container">
-        <div className={classes.avatar}>
-          <Avatar
-            avatar={
-              "https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png"
-            }
-            size={80}
-          />
-        </div>
-        <h3 className="sign-in-header">Sign up</h3>
-        <div className="sign-in-details">
-          <form
-            className={classes.formWrapper}
-            noValidate
-            autoComplete="off"
-            onSubmit={this.handleSubmit.bind(this)}
-          >
-            <TextField
-              id="firstName"
-              className={classes.textField}
-              label={this.state.settingUserData.firstName}
-              onChange={this.handleInputChange}
-              name="firstName"
-              helperText={this.state.errorMessageFirstName}
-            />
-
-            <TextField
-              id="lastName"
-              className={classes.textField}
-              label={this.state.settingUserData.lastName}
-              onChange={this.handleInputChange}
-              name="lastName"
-              helperText={this.state.errorMessagelastName}
-            />
-
-            <TextField
-              id="email"
-              className={classes.textField}
-              label={this.state.settingUserData.email}
-              onChange={this.handleInputChange}
-              name="email"
-              helperText={this.state.errorMessageEmail}
-            />
-            <TextField
-              id="password"
-              className={classes.textField}
-              label={this.state.settingUserData.password}
-              onChange={this.handleInputChange}
-              name="password"
-              helperText={this.state.errorMessagePassword}
-              type="password"
-            />
-            <TextField
-              id="newPassword"
-              className={classes.textField}
-              label={this.state.settingUserData.newPassword}
-              onChange={this.handleInputChange}
-              name="newPassword"
-              helperText={this.state.errorMessagerepeatPassword}
-              type="password"
-            />
-            <div className="picker">
-              <Typography
-                type="caption"
-                align="left"
-                gutterBottom
-                className={classes.Typography}
-              >
-                Date of Birth
-              </Typography>
-              <DatePicker
-                keyboard
-                value={this.state.newUser.dateOfBirth}
-                labelFunc={date => moment(date).format("Do MMMM YYYY")}
-                onChange={this.handleDataChange}
-                className={classes.DatePicker}
-                helperText={this.state.errorMessagedateOfBirth}
+        <div className="middle-container">
+          <div className="sign-in-details">
+            <div className={classes.avatar}>
+              <img src={config.BASE_URL + "images/who_logo.png"} className="logo" />
+            </div>
+            <h3 className="sign-in-header">Sign Up</h3>
+            <form
+              className={classes.formWrapper}
+              noValidate
+              autoComplete="off"
+              onSubmit={this.handleSubmit.bind(this)}
+            >
+              <TextField
+                id="firstName"
+                className={classes.textField}
+                label={this.state.settingUserData.firstName}
+                onChange={this.handleInputChange}
+                name="firstName"
+                helperText={this.state.errorMessageFirstName}
               />
-            </div>
-            <FormControl component="fieldset" className={classes.FormControl}>
-              <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup
-                aria-label="gender"
-                value={this.state.newUser.gender}
-                onChange={this.handleChange}
-                className={classes.RadioGroup}
-              >
-                <FormControlLabel
-                  value="Male"
-                  control={<Radio />}
-                  label="Male"
+
+              <TextField
+                id="lastName"
+                className={classes.textField}
+                label={this.state.settingUserData.lastName}
+                onChange={this.handleInputChange}
+                name="lastName"
+                helperText={this.state.errorMessagelastName}
+              />
+
+              <TextField
+                id="email"
+                className={classes.textField}
+                label={this.state.settingUserData.email}
+                onChange={this.handleInputChange}
+                name="email"
+                helperText={this.state.errorMessageEmail}
+              />
+              <TextField
+                id="password"
+                className={classes.textField}
+                label={this.state.settingUserData.password}
+                onChange={this.handleInputChange}
+                name="password"
+                helperText={this.state.errorMessagePassword}
+                type="password"
+              />
+              <TextField
+                id="newPassword"
+                className={classes.textField}
+                label={this.state.settingUserData.newPassword}
+                onChange={this.handleInputChange}
+                name="newPassword"
+                helperText={this.state.errorMessagerepeatPassword}
+                type="password"
+              />
+              <div className="picker">
+                <Typography
+                  type="caption"
+                  align="left"
+                  gutterBottom
+                  className={classes.Typography}
+                >
+                  Date of Birth
+                </Typography>
+                <DatePicker
+                  keyboard
+                  value={this.state.newUser.dateOfBirth}
+                  labelFunc={date => moment(date).format("Do MMMM YYYY")}
+                  onChange={this.handleDataChange}
+                  className={classes.DatePicker}
+                  helperText={this.state.errorMessagedateOfBirth}
                 />
-                <FormControlLabel
-                  value="Female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="Other"
-                  control={<Radio />}
-                  label="Other"
-                />
-              </RadioGroup>
-              <FormHelperText>{this.state.errorMessageGender}</FormHelperText>
-            </FormControl>
-            <Button type="submit" className="login-button">
-              {this.state.buttonTitle}
-            </Button>
-            <div>
-              <p className={classes.text}>{this.state.generalerror}</p>
-            </div>
-          </form>
+              </div>
+              <FormControl component="fieldset" className={classes.FormControl}>
+                <FormLabel component="legend">Gender</FormLabel>
+                <RadioGroup
+                  aria-label="gender"
+                  value={this.state.newUser.gender}
+                  onChange={this.handleChange}
+                  className={classes.RadioGroup}
+                >
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio />}
+                    label="Male"
+                  />
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Other"
+                    control={<Radio />}
+                    label="Other"
+                  />
+                </RadioGroup>
+                <FormHelperText>{this.state.errorMessageGender}</FormHelperText>
+              </FormControl>
+              <Button type="submit" className="login-button">
+                {this.state.buttonTitle}
+              </Button>
+
+              <div className="additional-options text-center" style={{"text-align": "center"}}>
+                <Link className="link" to="/" style={{"display": "block"}}>
+                  <p>Login</p>
+                </Link>
+                
+              </div>
+
+              <div>
+                <p className={classes.text}>{this.state.generalerror}</p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

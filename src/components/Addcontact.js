@@ -7,21 +7,19 @@ class AddContact extends Component {
   constructor() {
     super();
     this.state = {
-      friendsList: []
+      users: '',
     };
     this.btnSearchClicked = this.btnSearchClicked.bind(this);
   }
 
   btnSearchClicked() {
+    let token = localStorage.getItem("token");
     let searchValue = this.txtSearchInput.value;
-    fetch(`http://localhost:3001/user/contacts/search/sareh`)
+    fetch(`http://localhost:3001/user/contacts/search/${searchValue}`,{headers: {Authorization: `TOKEN ${token}` }} )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (searchValue) {
-          this.setState({
-            friendsList: data
-          });
+          this.setState({users: data });
         } else {
           searchValue = "Please insert a Name";
         }
@@ -36,13 +34,13 @@ class AddContact extends Component {
           inputRef={thisInput => {
             this.txtSearchInput = thisInput;
           }}
+          style={{width:"80%"}}
         />
-        <br />
         <IconButton
           style={{
             position: "absolute",
-            top: 70,
-            right: 2,
+            top: 20,
+            right: 70,
             backgroundColor: "#726F6F"
           }}
           aria-label="Menu"
@@ -50,7 +48,7 @@ class AddContact extends Component {
         >
           <i className="material-icons">search</i>
         </IconButton>
-        <SearchList friendsList={this.state.friendsList} />
+        <SearchList users={this.state.users} />
       </div>
     );
   }

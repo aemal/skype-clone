@@ -124,8 +124,9 @@ class SearchBar extends Component {
               open={this.state.contactAddOpen}
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClickClose}
-              compo={<AddContact friendsList={this.props.friendsList}/>}
+              compo={<AddContact />}
               autoScrollBodyContent={false}
+              fullScreen= {true}
           />
       </Toolbar>
       </AppBar>

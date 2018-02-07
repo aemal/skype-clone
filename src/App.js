@@ -13,6 +13,8 @@ import "./App.css";
 import "./style.css";
 import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
+import decode from "jwt-decode";
+import config from "./config/config.js";
 
 function mapStateToProps(state, filter) {
   return {
@@ -35,6 +37,7 @@ class App extends Component {
       justify: "flex-start",
       alignItems: "stretch",
       socketId: "",
+      socketChanelId:'',
       messages: [],
       moment: moment()
         .startOf("day")
@@ -48,11 +51,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.socket = io("http://localhost:8080"); //FIXME: This should come from settings/env variable.
+    this.socket = io(config.SOCKET_URL); //FIXME: This should come from settings/env variable.
     this.socket.on("connect", socket => this.connect(socket));
     this.socket.on("message", message => {
       this.setState({ messages: [...this.state.messages, message] });
     });
+    
   }
 
   connect(socket) {
@@ -60,26 +64,42 @@ class App extends Component {
       socketId: this.socket.id
     });
   }
+  
+  socketSignal(Sbody){
+     
 
-  handleSubmit(event) {
-    const body = event.target.value;
+   const body = Sbody;
     let id = this.state.socketId;
     let moment = <p>this.state.moment</p>;
-    if (event.keyCode === 13 && body) {
-      const message = {
-        body,
-        id,
-        socketId: this.state.socketId,
-        moment
-      };
-      this.setState({ messages: [...this.state.messages, message] });
-      this.socket.emit("message", body);
-      event.target.value = "";
-    }
+    const message = {
+      body,
+      id,
+      socketId: this.state.socketId,
+      moment
+    };
+    this.setState({ messages: [...this.state.messages, message] });
+    this.socket.emit("message", body);
+   
+  }
+  getSocketChanelId(socketId){
+    this.setState({
+      socketChanelId:socketId
+    })
+    this.socketSignal(this.state.socketChanelId)
+    console.log(this.state.socketChanelId)
+  }
+
+  handleSubmit(event) {
+   this.socketSignal(event.target.value)
+   event.target.value = ''
   }
 
   render() {
     const { alignItems, direction, justify } = this.state;
+
+    // Getting the information from the loged user
+    let user = decode(localStorage.getItem("token"));
+
     return (
       <Grid
         container
@@ -94,10 +114,12 @@ class App extends Component {
           <Grid>
             <Paper>
               <Grid item sm={12} className="sideBarAvatarComponent">
-                <UserAvatar />
+                <UserAvatar avatarURL={user.avatarURL} />
               </Grid>
               <Grid item sm={12} className="sideBarContactListComponent">
-                <ContactList friendsList={this.props.contactList} />
+                <ContactList 
+                 friendsList={this.props.contactList}
+                 getId={this.getSocketChanelId.bind(this)} />
               </Grid>
               <Grid item sm={12}>
                 <SearchBar friendsList={this.props.contactList} />
