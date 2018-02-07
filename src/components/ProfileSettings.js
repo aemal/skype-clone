@@ -10,8 +10,6 @@ const styles = theme => ({
     height: "auto",
     margin: "1% auto",
     boxShadow: "3px 3px 9px 3px #777777",
-   
-   
   },
   separatorWrapper: {
     display: "flex",
@@ -31,7 +29,7 @@ const styles = theme => ({
   },
 });
 class ProfileSettings extends Component {
-  
+
 
 
   render() {
@@ -40,14 +38,14 @@ class ProfileSettings extends Component {
       <Grid container spacing={24} className={classes.container}>
           <Grid item xs>
              <UserData place={"setting"}/>
-          </Grid> 
+          </Grid>
           <Grid item xs>
             <div className={classes.separatorWrapper}>
               <div className={classes.separator} />
             </div>
           </Grid>
           <Grid item xs>
-             <UserPictureAndState/> 
+             <UserPictureAndState/>
           </Grid>
       </Grid>
     );
