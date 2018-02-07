@@ -5,25 +5,34 @@ module.exports = class {
 
   add(req,res, next) {
     
-    const pending = {
+    const friendRequest = {
       fullName: req.body.fullName,
       avatarURL: req.body.avatarURL,
       userId: req.body.userId
     }
-    
-    this.userModel.findOneAndUpdate({_id: req.id},
-                    {
-                     $set:{contacts : {
-                            friends: [],
+
+    this.userModel.findById({_id: req.id}, (err, user)=>{
+        if (err || !user)return next(err);
+        let friend = user.contacts.friends;
+        friend.push(friendRequest);
+        if(friend.length>0){
+          let contacts = {
+                            friends: friend,
                             blocked: [],
                             requested: [],
-                            pending: [pending],
+                            pending: [],
                             decline: []
-                        }
-                      }
-                    },{upsert: false ,multi: true}, (err, user)=>{
-                            if (err)return next(err);
-                            return res.json({ success : true, message : 'Request is sentd successfully...'});
+                        };
+            this.userModel.findOneAndUpdate({_id: req.id},
+                            {
+                             $set:{contacts : contacts
+                              }
+                            },{upsert: false ,multi: true}, (err, user)=>{
+                                    if (err || !user)return next(err);
+                                    return res.json({ success : true, message : 'Request is sentd successfully...'});
+            });
+        }
+
     });
   }
   accept(req,res) {

@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   if (req.headers.authorization.split(" ")[0] === "TOKEN") {
     let token = req.headers.authorization.split(" ")[1];
     jwt.verify(token, jwtSecret.SECRET_KEY, (err, decoded) => {
-      req.params.id = decoded._id;
+      req.id = decoded._id;
       req.user = decoded;
       if (err) return next(err);
       User.findById(decoded._id, (err, user) => {

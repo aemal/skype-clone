@@ -6,7 +6,7 @@ module.exports = class {
   }
 
   get(req,res,next) {
-    this.userModel.findOne({_id: req.params.id}).exec((err, user)=>{
+    this.userModel.findOne({_id: req.id}).exec((err, user)=>{
       if(err || !user){
           res.json({success : false, message : "Friends are not available..."})
       }else{

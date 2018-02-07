@@ -15,7 +15,7 @@ module.exports = class {
   }
 
   getProfile(req,res) {
-    this.userModel.findOne({_id: req.params.id}).exec((err, user)=>{
+    this.userModel.findOne({_id: req.id}).exec((err, user)=>{
     if(err||!user){
           res.json({ success : false, message : 'User not found' });
       }else{
@@ -26,7 +26,7 @@ module.exports = class {
   }
   
   updatePassword(req,res,next){
-    let id = req.params.id;
+    let id = req.id;
     let password = req.body.password;
     if(password.length >= 8 && password.length <= 20){
         bcrypt.genSalt(10,(err, salt)=>bcrypt.hash(password, salt, (err, hash)=>{
@@ -47,7 +47,7 @@ module.exports = class {
   };
 
   editProfile(req,res, next) {
-        let id = req.params.id,
+        let id = req.id,
             user = req.user,
             body = req.body,
             emailAddress = body.emailAddress.toLowerCase() || user.emailAddress,
