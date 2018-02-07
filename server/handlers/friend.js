@@ -3,30 +3,28 @@ module.exports = class {
     this.userModel = userModel;
   }
 
-  add(req,res) {
-    const requestObject = {
+  add(req,res, next) {
+    
+    const pending = {
       fullName: req.body.fullName,
       avatarURL: req.body.avatarURL,
       userId: req.body.userId
     }
-
-    try {
-      req.user.contacts.requested.push(requestObject);
-      req.user.save((err)=> {
-        if (err) throw(err);
-        this.userModel.findById(requestObject.userId,(err, user)=>{
-          if (err) throw(err);
-          user.contacts.pending.push(req.user.id)
-          user.save((err)=>{
-            if (err) throw(err);
-            res.sendStatus(200)
-          })
-        })
-      })
-    }catch(err){
-      res.sendStatus(500)
-      console.log(err);
-    }
+    
+    this.userModel.findOneAndUpdate({_id: req.id},
+                    {
+                     $set:{contacts : {
+                            friends: [],
+                            blocked: [],
+                            requested: [],
+                            pending: [pending],
+                            decline: []
+                        }
+                      }
+                    },{upsert: false ,multi: true}, (err, user)=>{
+                            if (err)return next(err);
+                            return res.json({ success : true, message : 'Request is sentd successfully...'});
+    });
   }
   accept(req,res) {
     try{
