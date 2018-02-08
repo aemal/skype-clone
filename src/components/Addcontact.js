@@ -17,20 +17,24 @@ class AddContact extends Component {
     let searchValue = this.txtSearchInput.value;
     fetch(`http://localhost:3001/user/contacts/search/${searchValue}`,{headers: {Authorization: `TOKEN ${token}` }} )
       .then(res => res.json())
-      .then(data => {
-        if (searchValue) {
-          this.setState({users: data });
-        } else {
-          searchValue = "Please insert a Name";
-        }
-      })
+      .then((data) => {
+                      if (searchValue) {
+                        this.setState({users: data });
+                      } else {
+                        searchValue = "Please insert a Name";
+                      }                      })
       .catch(err => console.log(err));
-  }
-
+}
   render() {
     return (
       <div>
         <Input
+          onKeyDown={(e)=>{
+            if(e.keyCode === 13){
+              this.btnSearchClicked()
+                }
+              }
+            }
           inputRef={thisInput => {
             this.txtSearchInput = thisInput;
           }}

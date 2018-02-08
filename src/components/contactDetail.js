@@ -21,9 +21,16 @@ class ContactDetail extends Component {
     return (
       <div className="contact-list">
         <div>
-          <Button>
+          <Button onClick={this.handleClickOpen}>
             <i className= 'material-icons'>phone</i>
           </Button>
+          <FormDialog
+              open={this.state.open}
+              handleClickOpen={this.handleClickOpen}
+              handleClose={this.handleClose}
+              compo={"Comming soon..."}
+              fullScreen={false}
+          />
           <Button onClick={this.handleClickOpen}>
               <i className='material-icons' >videocam</i>
           </Button>
@@ -31,7 +38,7 @@ class ContactDetail extends Component {
               open={this.state.open}
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClose}
-              compo={"hello asa"}
+              compo={"Comming soon..."}
               fullScreen={false}
           />
         </div>
