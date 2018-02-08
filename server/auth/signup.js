@@ -35,7 +35,7 @@ module.exports = class {
                                             firstName: req.body.firstName,
                                             lastName: req.body.lastName,
                                             gender: req.body.gender,
-                                            avatarURL: 'avatar.jpg'
+                                            avatarURL: ''
                                         },
                                         loginStrategy: 'signin'
                                 });

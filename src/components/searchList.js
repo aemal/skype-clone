@@ -4,6 +4,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import SkypeAvatar from './skypeAvatar';
 import IconButton from "material-ui/IconButton";
 import uuidv1 from "uuid/v1";
+import FriendConfirmation from "./addFriendConfirmation";
 
 const styles = theme => ({
   root: {
@@ -51,13 +52,23 @@ class SearchList extends Component {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
   }
+  handleClickOpen = () => {
+    console.log(this.state)
+    this.setState({ open: true });
+  };
   render() {
     const { classes } = this.props;
     let listItems = "Search a new friend";
     if(this.props.users !== ''){
      listItems = this.props.users.map(item => {
       return (
-        <ListItem key={item._id} dense button className="list-item">
+        <ListItem key={item._id} dense button className="list-item" onClick={()=>{
+          this.requestFriends(item);
+          // this.handleClickOpen();
+          <FriendConfirmation handleClickOpen={this.handleClickOpen} />
+        }
+
+        }>
           <SkypeAvatar
             avatar={
               // the image will be item.avatarURL
@@ -66,8 +77,12 @@ class SearchList extends Component {
             size={45}
           />
           <ListItemText primary={item.profile.firstName + ' ' + item.profile.lastName} />
-        <IconButton onClick={()=>
-          this.requestFriends(item)
+        <IconButton onClick={()=>{
+          this.requestFriends(item);
+          // this.handleClickOpen();
+          <FriendConfirmation handleClickOpen={this.handleClickOpen} />
+        }
+
         }>
           <i className="material-icons">add_circle_outline</i>
         </IconButton>

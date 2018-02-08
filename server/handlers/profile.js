@@ -12,8 +12,7 @@ function deleteAvatar(req, next){
 module.exports = class {
   constructor(userModel) {
     this.userModel = userModel;
-  }
-
+  } 
   getProfile(req,res,next) {
     this.userModel.findOne({_id: req.id}).exec((err, user)=>{
     if(err||!user){
@@ -47,6 +46,7 @@ module.exports = class {
   };
 
   editProfile(req,res,next) {
+      console.log(req.body)
         let id = req.id,
             user = req.user,
             body = req.body,

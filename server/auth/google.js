@@ -27,7 +27,7 @@ module.exports = (userModel, passport) => {
                         firstName: profile.name.givenName || profile.displayName,
                         lastName: profile.name.familyName || 'none',
                         gender: profile.gender.charAt(0).toUpperCase() + profile.gender.slice(1) || 'Other',
-                        avatarURL: profile.photos ? profile.photos[0].value : 'avatar.jpg'
+                        avatarURL: profile.photos ? profile.photos[0].value : ''
                     },
                     loginStrategy: 'google'
                 });

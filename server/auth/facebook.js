@@ -25,7 +25,7 @@ module.exports = (userModel, passport)=>{
                             firstName: profile.displayName,
                             lastName: profile.name.familyName || 'Noun',
                             gender: profile.gender.charAt(0).toUpperCase() + profile.gender.slice(1) || 'Other', 
-                            avatarURL: profile.photos?profile.photos[0].value: 'avatar.jpg'
+                            avatarURL: profile.photos?profile.photos[0].value: ''
                         },
                         loginStrategy: 'facebook'
                     });

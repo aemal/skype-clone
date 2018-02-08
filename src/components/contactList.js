@@ -4,6 +4,8 @@ import List, { ListItem, ListItemText } from "material-ui/List";
 import SkypeAvatar from "./skypeAvatar";
 import SearchList from "../components/searchList";
 import decode from 'jwt-decode';
+import config from '../config/config'
+
 const styles = theme => ({
   root: {
     width: "100%"
@@ -36,19 +38,19 @@ class ContactList extends Component {
   render() {
     const { classes } = this.props;
     const listItems = this.props.friendsList.map(item => {
+      
+      let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
+console.log(avatarURL)
       //console.log(item);
       return (
         <ListItem key={item.userId}
           dense button className="list-item"
            onClick={() => this.socketChanel(item.userId) }>
           <SkypeAvatar
-            avatar={
-              // the image will be item.avatarURL
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYezaoFgT-pfb5wpqDXxzKXzhQnTLPU5JW5eUvBaKL1H8Rtmu"
-            }
+            avatar={avatarURL}
             size={45}
           />
-          <ListItemText primary={item.fullName} />
+          <ListItemText primary={item.fullName}  />
         </ListItem>
       );
     });

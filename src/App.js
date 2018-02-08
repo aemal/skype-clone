@@ -14,7 +14,7 @@ import "./style.css";
 import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
-import config from "./config/config.js";
+import config from "./config/config";
 
 function mapStateToProps(state, filter) {
   return {
@@ -148,6 +148,7 @@ class App extends Component {
 
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
+    let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
 
     return (
       <Grid
@@ -163,7 +164,7 @@ class App extends Component {
           <Grid>
             <Paper>
               <Grid item sm={12} className="sideBarAvatarComponent">
-                <UserAvatar avatarURL={user.avatarURL} />
+                <UserAvatar avatarURL={avatarURL} />
               </Grid>
               <Grid item sm={12} className="sideBarContactListComponent">
                 <ContactList 
