@@ -50,7 +50,7 @@ console.log(avatarURL)
             avatar={avatarURL}
             size={45}
           />
-          <ListItemText primary={item.fullName} />
+          <ListItemText primary={item.fullName}  />
         </ListItem>
       );
     });
