@@ -1,7 +1,6 @@
 module.exports = class {
 
   constructor(userModel) {
-    
     this.userModel = userModel;
   }
 

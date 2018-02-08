@@ -14,7 +14,7 @@ module.exports = class {
     this.userModel = userModel;
   }
 
-  getProfile(req,res) {
+  getProfile(req,res,next) {
     this.userModel.findOne({_id: req.id}).exec((err, user)=>{
     if(err||!user){
           res.json({ success : false, message : 'User not found' });
@@ -36,7 +36,7 @@ module.exports = class {
                            password: hash
                           }
                         },{upsert: false}, (err, user)=>{
-                                 if(err) return next(err);
+                                 if(err || !user) return next(err);
                                  logout(req, res, next);
                                  return res.json({ success : true, message : 'Password is changed successfully, please login with new password...' });
             });
@@ -46,7 +46,7 @@ module.exports = class {
     }
   };
 
-  editProfile(req,res, next) {
+  editProfile(req,res,next) {
         let id = req.id,
             user = req.user,
             body = req.body,
@@ -77,7 +77,7 @@ module.exports = class {
                                           dateOfBirth : dateOfBirth
                                       }
                                     },{upsert: false ,multi: true}, (err, user)=>{
-                                              if (err){
+                                              if (err || !user){
                                                 deleteAvatar(req, next);
                                                 return next(err);
                                               };
@@ -94,7 +94,7 @@ module.exports = class {
                                   dateOfBirth : dateOfBirth
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
-                                       if(err){
+                                       if(err || !user){
                                           deleteAvatar(req, next); 
                                           return next(err);
                                        };
