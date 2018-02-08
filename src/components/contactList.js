@@ -18,20 +18,25 @@ class ContactList extends Component {
     }
   }
   socketChanel(friendId){
+    
    let user = decode(localStorage.getItem('token')) ;
    let userId = user._id;
-   let socketChanelId = userId+friendId
-   console.log(socketChanelId)
+   let socketChanelId = userId+"--"+friendId
+   //console.log(socketChanelId)
+   
    this.setState({
-    socketChanelId:socketChanelId
+    socketChanelId: socketChanelId
    })
-   this.props.getId(socketChanelId)
+
+   console.log("AAAAAA", socketChanelId);
+
+    this.props.getId(socketChanelId)
 
   }
   render() {
     const { classes } = this.props;
     const listItems = this.props.friendsList.map(item => {
-      console.log(item);
+      //console.log(item);
       return (
         <ListItem key={item.userId}
           dense button className="list-item"

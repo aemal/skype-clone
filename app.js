@@ -63,6 +63,38 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("Server started on port....." + port);
 });
+
+
+const io = require('socket.io').listen(server);
+
+io.sockets.on('connection', socket => {
+    const sessionid = socket.id;
+    console.log("Socket Connected: %s",  sessionid);
+    socket.on('message', body => {
+      socket.broadcast.emit('message', {
+        body,
+        id: sessionid,
+      })
+    })
+
+    socket.on('joinRoom', function(roomInfo) {
+      console.log('joining room', roomInfo);
+      //Save into chatmodel.
+      socket.join(roomInfo.roomID);
+    });
+  
+    socket.on('privateMessage', function(data) {
+        console.log('sending room post', data.roomID);
+        socket.broadcast.to(data.roomID).emit('conversation private post', {
+            message: data.message
+        });
+    });
+
+});
+
+
+console.log(`SkypeClone's Socket server is running at port 8080...
+Wait! for a while to start client side server.`);
