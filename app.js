@@ -23,7 +23,7 @@ const userRoutes = require("./server/routers/user-routers")();
 
 
 const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
-
+// const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
@@ -62,8 +62,6 @@ app.use((err, req, res, next) => {
   res.send(err);
   next();
 });
-
-// mockData(User, Message, (err) => {
 
 app.listen(port, () => {
   console.log("Server started on port....." + port);
