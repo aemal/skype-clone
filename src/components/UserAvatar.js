@@ -41,7 +41,7 @@ class UserAvatar extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.avatar}>
-          <Avatar avatar={this.props.avatarURL} />
+          <Avatar size="100px" avatar={this.props.avatarURL} />
         </div>
         <div className="icons">
           <IconButton onClick={this.handleClickOpen}>

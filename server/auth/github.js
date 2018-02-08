@@ -24,7 +24,7 @@ module.exports = function (userModel, passport){
                         profile: {
                             firstName: profile.displayName,
                             lastName: profile.displayName || 'Noun',
-                            avatarURL: profile.photos?profile.photos[0].value: 'avatar.jpg'
+                            avatarURL: profile.photos?profile.photos[0].value: ''
                         },
                         loginStrategy: 'github',
                         loginObject: {}, //We do not really need it for local strateggy so far 
