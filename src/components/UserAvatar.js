@@ -7,7 +7,7 @@ import FormDialog from "./dialog";
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   row: {
     display: "flex",
@@ -15,10 +15,10 @@ const styles = {
   },
   avatar: {
     position: "relative",
-    padding: "1rem"
+    padding: "1rem",
   },
   img: {
-    width: "100%"
+    width: "100%",
   }
 };
 
@@ -28,6 +28,7 @@ class UserAvatar extends Component {
   };
 
   handleClickOpen = () => {
+    console.log("AAA");
     this.setState({ open: true });
   };
 
@@ -40,12 +41,9 @@ class UserAvatar extends Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.avatar}>
-          <Avatar size="100px" avatar={this.props.avatarURL} />
-        </div>
-        <div className="icons">
-          <IconButton onClick={this.handleClickOpen}>
-            <i className="material-icons">settings</i>
+        <div className="icons" style={{padding: 0, color: "#fff"}}>
+          <IconButton onClick={this.handleClickOpen} style={{zIndex:1}}>
+            <i className="material-icons" style={{color: "#fff"}}>settings</i>
           </IconButton>
           <FormDialog
             open={this.state.open}
@@ -55,12 +53,13 @@ class UserAvatar extends Component {
           />
 
           <IconButton>
-            <i className="material-icons">notifications</i>
-          </IconButton>
-          <IconButton>
-            <i className="material-icons">exit_to_app</i>
+            <i className="material-icons" style={{color: "#fff"}}>exit_to_app</i>
           </IconButton>
         </div>
+        <div className={classes.avatar} style={{padding: 10, marginTop: -60}}>
+          <Avatar size="100px" avatar={this.props.avatarURL} />
+        </div>
+
       </div>
     );
   }
