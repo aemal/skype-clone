@@ -57,19 +57,16 @@ class App extends Component {
   componentDidMount() {
      //this.socket.on("message", message => {
     this.socket.on(this.state.socketChanelId, message => {
+      console.log("received messages...")
       this.setState({ messages: [...this.state.messages, message] });
     });
  
-    
    
+    this.socket.on('conversation private post', function(data) {
+        //display data.message
+        console.log(data);
+    });
 
-   
-  this.socket.on('conversation private post', function(data) {
-      //display data.message
-      console.log(data);
-  });
-
-    
   }
 
   connect(socket) {
@@ -78,12 +75,12 @@ class App extends Component {
     });
   }
   
-  socketSignal(Sbody){
+  socketSignal(roomID, Sbody) {
      
+    console.log("asdfasdf", roomID)
+    const body = Sbody;
 
-    const body = {roomID: this.state.socketChanelId, message: Sbody};
-
-    console.log("cccccc", body);
+    console.log(body);
 
     let id = this.state.socketId;
     let moment = <p>this.state.moment</p>;
@@ -92,33 +89,36 @@ class App extends Component {
       body,
       id,
       socketId: this.state.socketId,
-      moment
+      moment,
+      roomID
     };
+
+    console.log("-----------")
+    console.log(message)
 
     this.setState({ messages: [...this.state.messages, message] });
     
-    this.socket.emit("privateMessage", body);
+    this.socket.emit("privateMessage", message);
     
   }
 
-  getSocketChanelId(roomID){
+  getSocketChanelId(roomID) {
     
     this.setState({
       socketChanelId: roomID
     })
 
-    this.socketSignal(this.state.socketChanelId)
-    console.log(this.state.socketChanelId)
+    this.socketSignal(roomID, "asdfasdf");
+
+    console.log(roomID)
 
        
     console.log("roomID", roomID)
 
     this.socket.emit('joinRoom', {
       roomID,
-      userID: roomID.split("--")[0],
-      friendID: roomID.split("--")[1]
+      participants: [roomID.split("--")[0], roomID.split("--")[1]]
     });
-
 
 
     this.socket.on('joinRoom', function(roomInfo) {
@@ -136,7 +136,7 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-   this.socketSignal(event.target.value)
+   this.socketSignal(this.state.socketChanelId, event.target.value)
    event.target.value = '';
 
 

@@ -90,7 +90,7 @@ io.sockets.on('connection', socket => {
   
     socket.on('privateMessage', function(data) {
         console.log('sending room post', data.roomID);
-        socket.broadcast.to(data.room).emit('conversation private post', {
+        socket.broadcast.to(data.roomID).emit('conversation private post', {
             message: data.message
         });
     });

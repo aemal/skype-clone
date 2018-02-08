@@ -18,6 +18,7 @@ class ContactList extends Component {
     }
   }
   socketChanel(friendId){
+    
    let user = decode(localStorage.getItem('token')) ;
    let userId = user._id;
    let socketChanelId = userId+"--"+friendId
@@ -27,9 +28,9 @@ class ContactList extends Component {
     socketChanelId: socketChanelId
    })
 
-   //console.log("AAAAAA", socketChanelId);
+   console.log("AAAAAA", socketChanelId);
 
-   this.props.getId(socketChanelId)
+    this.props.getId(socketChanelId)
 
   }
   render() {
