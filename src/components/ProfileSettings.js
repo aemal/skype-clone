@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
@@ -8,6 +9,7 @@ import config from "../config/config.js";
 import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
+import Grid from "material-ui/Grid";
 const styles = theme => ({
   row: {
     display: 'flex',
@@ -170,7 +172,8 @@ const styles = theme => ({
     render() {
         const { classes } = this.props;
         return (
-           <div className={classes.row}>
+          <Grid container spacing={24} className={classes.row}>
+           <Grid item xs>
             <form
               noValidate
               autoComplete="off"
@@ -243,8 +246,8 @@ const styles = theme => ({
               </Button>
             </form>
           
-        </div>
-     
+          </Grid>
+        </Grid>
         )
     }
 }
