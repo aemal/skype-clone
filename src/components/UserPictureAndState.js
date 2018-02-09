@@ -66,7 +66,7 @@ const styles = theme => ({
       newUser:{
         firstName:'',
         lastName:'',
-        email:'',
+        emailAddress:'',
         dateOfBirth:'',
         gender:'',
         avatarURL:''
@@ -80,25 +80,24 @@ const styles = theme => ({
   }
   componentWillMount(){
    let user = decode(localStorage.getItem('token'))
-   console.log(user)
    this.setState({
     userCurrentData:{
       firstName:user.profile.firstName,
       lastName:user.profile.lastName,
-      email:user.emailAddress,
+      emailAddress:user.emailAddress,
       dateOfBirth:user.dateOfBirth,
       gender:user.profile.gender,
       avatarURL:user.profile.avatarURL
     }
    })
   }
+
   componentDidMount(){
-    console.log(this.state.userCurrentData)
+    // console.log(this.state.userCurrentData)
   }
+
   handleDataChange = date => {
     let checketDate = date.format().substring(0, 10);
-    console.log(date.format());
-
     this.setState({
       newUser: { ...this.state.newUser, dateOfBirth: checketDate }
     });
@@ -107,11 +106,8 @@ const styles = theme => ({
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-    console.log(file)
-    console.log(reader)
     
     reader.onloadend = () => {
-      console.log(reader.result)
       this.setState({
        newUser:{
         ...this.state.newUser,
@@ -133,7 +129,6 @@ const styles = theme => ({
     }) */
   }
   handleRadioChange = (e, value) => {
-    console.log(value);
     this.setState({
       newUser: {
         ...this.state.newUser,
@@ -153,107 +148,33 @@ const styles = theme => ({
       }
     });
   }
+
   handleSubmit(e) {
     e.preventDefault();
-
-
-    var formData  = new FormData();
-    console.log(this.state.newUser);
+    var formData  = new FormData(e.target);
     let data = this.state.newUser;
 
-    console.log(data);
-
-    for(var name in data) {
-      formData.append(name, data[name]);
-    }
-
-
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
     let token = localStorage.getItem("token");
-    console.log(token)
-    
-
-
 
     if (data) {
-
-console.log(data)
-
       fetch(url, {
         method: "POST",
         headers: { 
-          'Content-Type': 'multipart/form-data',
           'Authorization': `TOKEN ${token}`
         },
-        body: data
+        body: formData
       })
         .then(res => res.json())
-         .then(data => {
-          console.log('ther is hsit');
-          console.log(data)
-          let user = decode(data);
-         
-          //localStorage.setItem("token", data.token);
-          this.props.history.push("/auth");
+        .then(data => {
+          console.log("Json Data: ", data);        
+          // this.props.history.push("/auth");
         }) 
         .catch(err => console.log(err));
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
-  }
-
-
-  /*
-
-   handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.state.newUser);
-    let formData = this.state.newUser;
-    let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
-    let token = localStorage.getItem("token");
-    console.log(token)
-    
-
-
-
-    if (formData) {
-      const searchParams = Object.keys(formData)
-        .map(key => {
-          return (
-            encodeURIComponent(key) + "=" + encodeURIComponent(formData[key])
-          );
-        })
-        .join("&");
-
-
-        console.log(searchParams)
-
-      fetch(url, {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `TOKEN ${token}`
-        },
-        body: searchParams
-      })
-        .then(res => res.json())
-         .then(data => {
-          console.log('ther is hsit');
-          console.log(data)
-          let user = decode(data);
-         
-          //localStorage.setItem("token", data.token);
-          this.props.history.push("/auth");
-        }) 
-        .catch(err => console.log(err));
-    } else {
-      console.log({ Error: "Fields are required" }); //Handle errors here...
-    }
-
-  }
-
-  */
-    
+  };
      
     render() {
       let {imagePreviewUrl} = this.state;
@@ -288,21 +209,30 @@ console.log(data)
               />
 
               <TextField
-                id="email"
+                id="emailAddress"
                 className={classes.textField}
-                label={this.state.userCurrentData.email}
+                label={this.state.userCurrentData.emailAddress}
                 onChange={this.handleInputChange}
-                name="email"
-                
+                name="emailAddress"
               />
+
               <TextField
                 id="file"
                 className={classes.textField}
                 label={'change Pic'}
                 onChange={this.handleImageChange}
-                name="picture"
+                name="avatar"
                 type='file'
                 className={classes.Typography}
+              />
+
+              <TextField
+                id="dateOfBirth"
+                className={classes.textField}
+                value={this.state.newUser.dateOfBirth || this.state.userCurrentData.dateOfBirth}
+                onChange={this.handleInputChange}
+                name="dateOfBirth"
+                type="hidden" 
               />
               
               <div className="picker">
@@ -322,36 +252,9 @@ console.log(data)
                   className={classes.DatePicker}
                 />
               </div>
-              <FormControl component="fieldset" className={classes.FormControl}>
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  aria-label="gender"
-                  value={this.state.value}
-                  onChange={this.handleRadioChange}
-                  className={classes.RadioGroup}
-                >
-                  <FormControlLabel
-                    value="Male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="Female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="Other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                </RadioGroup>
-              </FormControl>
               <Button type="submit" className="login-button" >
                SAVE
               </Button>
-
-             
             </form>
           
         </div>
