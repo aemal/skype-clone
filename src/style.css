@@ -472,3 +472,6 @@ button.login-button:hover {
 .form-control {
   width: 100%;
 }
+.highlightedFriend {
+  background-color: #ffaadd;
+}

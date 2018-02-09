@@ -21,15 +21,18 @@ class ContactList extends Component {
   constructor() {
     super();
     this.state={
-      socketChanelId:''
+      socketChanelId:'',
+      selectedIndex: null,    
     }
   }
 
-  socketChanel(friend){
+  socketChanel(friend, e, i){
     
+    this.setState({ selectedIndex: i });
+
     this.props.setCurrentFriend(friend);
 
-    console.log(friend);
+   // console.log(friend);
 
    let user = decode(localStorage.getItem('token')) ;
    let userId = user._id;
@@ -45,15 +48,17 @@ class ContactList extends Component {
   }
   render() {
     const { classes } = this.props;
-    const listItems = this.props.friendsList.map(item => {
+    const listItems = this.props.friendsList.map((item, index) => {
       
       let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-       console.log(avatarURL)
-      console.log(item);
+      
+      let highlightedFriend = (index === this.state.selectedIndex) ? "#01062e" : "";
+
       return (
         <ListItem key={item.userId}
           dense button className="list-item"
-           onClick={() => this.socketChanel(item) }>
+          style={{backgroundColor: highlightedFriend}}
+          onClick={event => this.socketChanel(item, event, index)} >
           <SkypeAvatar
             avatar={avatarURL}
             size={45}
