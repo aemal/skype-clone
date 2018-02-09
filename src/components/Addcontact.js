@@ -28,7 +28,7 @@ class AddContact extends Component {
   render() {
     return (
       <div>
-        <Input
+        <Input id="cypress-add-new"
           onKeyDown={(e)=>{
             if(e.keyCode === 13){
               this.btnSearchClicked()
@@ -40,7 +40,7 @@ class AddContact extends Component {
           }}
           style={{width:"80%"}}
         />
-        <IconButton
+        <IconButton id="cypress-ser-new-freind"
           style={{
             position: "absolute",
             top: 20,
