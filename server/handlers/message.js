@@ -6,17 +6,19 @@ module.exports = class {
     this.chatModel = chatModel;
   };
   get(req,res,next) {
-     this.chatModel.findOne({
-      participants: req.params.id
-    })
+    console.log(req.body);
+    let userID = req.body.userID;
+    let friendID = req.body.friendID;
+
+    this.chatModel.findOne({$or:[{'participants.userID': userID ,'participants.friendID': friendID}, {'participants.userID': friendID ,'participants.friendID': userID}]})
     .exec((err, chat) => {
       if(err) next(err);
       if(!chat) {
-        this.chatModel.create({participants: req.params.id})
+        this.chatModel.create({participants:{userID: userID, friendID: friendID}})
         .then(data=> res.json(data))
         .catch(err=> console.log(err));
       } else {
-        res.json(chat);
+        res.json({chat: chat});
       }
     });
   };

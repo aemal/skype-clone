@@ -28,7 +28,7 @@ module.exports = ()=>{
     router.get('/contacts/search/:keyword', isAuthenticated, contactHandler.searchContact.bind(contactHandler));
 
     router.post('/message/send', isAuthenticated, messageHandler.send.bind(messageHandler));
-    router.get('/message/get/:id', isAuthenticated, messageHandler.get.bind(messageHandler));
+    router.post('/message/get/:id', isAuthenticated, messageHandler.get.bind(messageHandler));
 
     router.get('/get_friends/:id', isAuthenticated, userHandler.get.bind(userHandler));
 
