@@ -56,7 +56,7 @@ function incomingForm(req, res, next) {
             return;
         };
 
-        if (part.filename && type === 'image/jpeg' || type === 'image/png' || type === 'image/gif') {
+        if (part.filename && type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png' || type === 'image/gif') {
 
             const name = uuidv1() + '_' + Date.now() + '-' + part.filename;
             const path = form.uploadDir + "/" + name;

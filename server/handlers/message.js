@@ -1,17 +1,22 @@
+'use strict';
+
 module.exports = class {
   constructor(messageModel, chatModel) {
     this.messageModel = messageModel;
     this.chatModel = chatModel;
   };
   get(req,res,next) {
-    this.messageModel.findOne({
-      message: req.params.id
+     this.chatModel.findOne({
+      participants: req.params.id
     })
-    .exec((err, message) => {
-      if(err) {
-        next(err);
+    .exec((err, chat) => {
+      if(err) next(err);
+      if(!chat) {
+        this.chatModel.create({participants: req.params.id})
+        .then(data=> res.json(data))
+        .catch(err=> console.log(err));
       } else {
-        res.json(message);
+        res.json(chat);
       }
     });
   };

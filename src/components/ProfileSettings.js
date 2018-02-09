@@ -37,14 +37,6 @@ class ProfileSettings extends Component {
     return (
       <Grid container spacing={24} className={classes.container}>
           <Grid item xs>
-             <UserData place={"setting"}/>
-          </Grid>
-          <Grid item xs>
-            <div className={classes.separatorWrapper}>
-              <div className={classes.separator} />
-            </div>
-          </Grid>
-          <Grid item xs>
              <UserPictureAndState/>
           </Grid>
       </Grid>
