@@ -4,7 +4,11 @@ import List, { ListItem, ListItemText } from "material-ui/List";
 import SkypeAvatar from "./skypeAvatar";
 import SearchList from "../components/searchList";
 import decode from 'jwt-decode';
-import config from '../config/config'
+import config from '../config/config';
+import { setCurrentFriend } from "../actions/setCurrentFriendAction";
+import compose from 'recompose/compose';
+import { connect } from "react-redux";
+
 
 const styles = theme => ({
   root: {
@@ -13,14 +17,18 @@ const styles = theme => ({
 });
 
 class ContactList extends Component {
-  constructor(){
-    super()
+  
+  constructor() {
+    super();
     this.state={
       socketChanelId:''
     }
   }
+
   socketChanel(friend){
     
+    this.props.setCurrentFriend(friend);
+
     console.log(friend);
 
    let user = decode(localStorage.getItem('token')) ;
@@ -63,4 +71,16 @@ class ContactList extends Component {
   }
 }
 
-export default withStyles(styles)(ContactList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+      setCurrentFriend: (user) => {
+          dispatch(setCurrentFriend(user));
+      }
+  };
+};
+
+
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps)
+)(ContactList);

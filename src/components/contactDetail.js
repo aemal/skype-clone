@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Avatar from './skypeAvatar';
 import FormDialog from './dialog'
-import config from "../config/config.js";
+import config from "../config/config";
+import {connect} from "react-redux";
 
 
 class ContactDetail extends Component {
@@ -24,7 +25,7 @@ class ContactDetail extends Component {
         <div style={{width: "100%"}}>
           <div>
             <div style={{float: "left", marginLeft: 10}}>
-            <Avatar avatar={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf5Q3vh1Q4betCuCMiH_rfjdGYUeH8OR-t-8xArUYHKh-MX1O0'} size={50} />  
+            <Avatar avatar={`${config.BASE_URL}/images/avatars/${this.props.setCurrentFriend.avatarURL}`} size={50} />
             </div>
 
             <Button onClick={this.handleClickOpen} style={{float: "left"}}>
@@ -61,4 +62,11 @@ class ContactDetail extends Component {
   }
 }
 
-export default (ContactDetail);
+
+const mapStateToProps = (state) => {
+  return {
+      setCurrentFriend: state.setCurrentFriendReducer,
+  };
+};
+
+export default connect(mapStateToProps)(ContactDetail);
