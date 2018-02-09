@@ -58,7 +58,7 @@ function incomingForm(req, res, next) {
 
         if (part.filename && type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png' || type === 'image/gif') {
 
-            const name = uuidv1() + '_' + Date.now() + '-' + part.filename;
+            const name = uuidv1() + '-' + Date.now() + '-' + part.filename;
             const path = form.uploadDir + "/" + name;
             req.filename = name;
             part.pipe(fs.createWriteStream(path));
