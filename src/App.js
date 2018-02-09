@@ -149,7 +149,7 @@ class App extends Component {
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
     let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-
+    console.log(user)
     return (
       <Grid
         container

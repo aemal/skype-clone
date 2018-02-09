@@ -27,6 +27,10 @@ const styles = theme => ({
     '&:focus': {
       borderColor: '#80bdff',
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      padding: 0,
+    'label + &': {
+      marginTop: theme.spacing.unit * 3,
+    },
     },
     Typography: {
       fontSize: "20px",
@@ -94,6 +98,7 @@ const styles = theme => ({
     this.setState({
       newUser: { ...this.state.newUser, dateOfBirth: checketDate }
     });
+    console.log(checketDate)
   };
   handleImageChange (e) {
     e.preventDefault();
@@ -209,7 +214,7 @@ const styles = theme => ({
                 id="file"
                 className={classes.textField}
                 label={'change Pic'}
-                onChange={this.handleImageChange}
+                
                 name="avatar"
                 type='file'
                

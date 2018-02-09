@@ -6,7 +6,7 @@ const fs = require('fs');
 
 function deleteAvatar(req, next){
     let uploadDir = __dirname + '/../../public/images/avatars';
-    fs.unlink(`${uploadDir}/${req.filename}`, err=>{if(err) throw (err);});
+    fs.unlink(`${uploadDir}/${req.filename}`, err=>{if(err) next();});
 }
 
 module.exports = class {
@@ -97,11 +97,11 @@ module.exports = class {
                                     deleteAvatar(req, next); 
                                     return res.json({ success : false, message : 'profile is not edited....', Error: err});
                                   };
+                                  
                                   const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
                                   return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
             });
-        }
-        
+        }       
   }
 };
 
