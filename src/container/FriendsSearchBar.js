@@ -75,7 +75,7 @@ class SearchBar extends Component {
       <div>
       <AppBar style={{position: 'relative', height:65, backgroundColor: '#726F6F',
       color: 'white', boxShadow: 'none'}}>
-      <Toolbar className="search-bar">
+      <Toolbar className="friend-search-bar">
       <IconButton
         ref={node => {
           this.button = node;

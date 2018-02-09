@@ -19,11 +19,13 @@ class ContactList extends Component {
       socketChanelId:''
     }
   }
-  socketChanel(friendId){
+  socketChanel(friend){
     
+    console.log(friend);
+
    let user = decode(localStorage.getItem('token')) ;
    let userId = user._id;
-   let socketChanelId = userId+"--"+friendId
+   let socketChanelId = userId+"--"+friend.userId;
    //console.log(socketChanelId)
    
    this.setState({
@@ -45,7 +47,7 @@ console.log(avatarURL)
       return (
         <ListItem key={item.userId}
           dense button className="list-item"
-           onClick={() => this.socketChanel(item.userId) }>
+           onClick={() => this.socketChanel(item) }>
           <SkypeAvatar
             avatar={avatarURL}
             size={45}
