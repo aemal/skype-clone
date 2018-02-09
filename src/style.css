@@ -303,12 +303,12 @@ button.login-button:hover {
   width: 100%;
 }
 
-.search-bar {
-  background-color:#ed7033;
+.friend-search-bar {
+  background-color:#01062e;
   color: white;
 }
 
-.search-bar i {
+.friend-search-bar i {
   color: #fcf9ff;
 }
 
@@ -443,6 +443,7 @@ button.login-button:hover {
 }
 
 .you::before {
+
   box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
   right: -9px;
 }
@@ -465,7 +466,7 @@ button.login-button:hover {
 }
 
 .emoticon:hover {
-  color: #3ba8c6;
+  color: #a5a5a5;
 }
 
 .form-control {
