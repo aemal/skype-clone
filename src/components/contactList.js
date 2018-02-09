@@ -32,8 +32,6 @@ class ContactList extends Component {
     socketChanelId: socketChanelId
    })
 
-   console.log("AAAAAA", socketChanelId);
-
     this.props.getId(socketChanelId)
 
   }
@@ -42,8 +40,8 @@ class ContactList extends Component {
     const listItems = this.props.friendsList.map(item => {
       
       let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-console.log(avatarURL)
-      //console.log(item);
+       console.log(avatarURL)
+      console.log(item);
       return (
         <ListItem key={item.userId}
           dense button className="list-item"

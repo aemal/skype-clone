@@ -34,7 +34,7 @@ function incomingForm(req, res, next) {
     form.maxFilesSize = 1 * 1024 * 1024;
 
     form.on('error', (err)=>{
-        res.header('Connection', 'close');
+        // res.header('Connection', 'close');
         if(req.filename){
         	fs.unlink(`${form.uploadDir}/${req.filename}`, err=>{if(err) return netx(err);});
         }
