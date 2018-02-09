@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 
 function deleteAvatar(req, next){
-    let uploadDir = __dirname + '/../../public/avatars';
-    fs.unlink(`${uploadDir}/${req.filename}`, err=>{if(err) next(err);});
+    let uploadDir = __dirname + '/../../public/images/avatars';
+    fs.unlink(`${uploadDir}/${req.filename}`, err=>{if(err) throw (err);});
 }
 
 module.exports = class {
@@ -46,13 +46,12 @@ module.exports = class {
   };
 
   editProfile(req,res,next) {
-      console.log(req.body)
-        let id = req.id,
-            user = req.user,
-            body = req.body,
-            emailAddress = body.emailAddress.toLowerCase() || user.emailAddress,
-            dateOfBirth = new Date(body.dateOfBirth) || user.dateOfBirth,
-            profile = {
+        let id = req.id;
+        let user = req.user;
+        let body = req.body;
+        var emailAddress = body.emailAddress || user.emailAddress;
+        let dateOfBirth = new Date(body.dateOfBirth) || user.dateOfBirth;
+        let profile = {
                        firstName: body.firstName || user.profile.firstName,
                        lastName: body.lastName || user.profile.lastName,
                        gender: body.gender || user.profile.gender,
@@ -73,33 +72,33 @@ module.exports = class {
                     this.userModel.findOneAndUpdate({_id: id},
                                     {
                                      $set:{profile : profile,
-                                          emailAddress : emailAddress,
+                                          emailAddress : emailAddress.toLowerCase(),
                                           dateOfBirth : dateOfBirth
                                       }
                                     },{upsert: false ,multi: true}, (err, user)=>{
-                                              if (err || !user){
-                                                deleteAvatar(req, next);
-                                                return next(err);
-                                              };
-                                             logout(req, res, next);
-                                             return res.json({ success : true, message : 'profile is edited successfully, please login with new email...'});
+                                          if (err || !user){
+                                            deleteAvatar(req, next);
+                                            return res.json({ success : false, message : 'profile is not edited....', Error: err});
+                                          };
+                                          logout(req, res, next);
+                                          return res.json({ success : true, message : 'profile is edited successfully, please login with new email...'});
                     });
                 }
               }
             );    
-        }else{
+        } else {
             this.userModel.findOneAndUpdate({_id: id},
                             {
                              $set:{profile : profile,
                                   dateOfBirth : dateOfBirth
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
-                                       if(err || !user){
-                                          deleteAvatar(req, next); 
-                                          return next(err);
-                                       };
-                                       const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
-                                       return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
+                                  if(err || !user){
+                                    deleteAvatar(req, next); 
+                                    return res.json({ success : false, message : 'profile is not edited....', Error: err});
+                                  };
+                                  const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
+                                  return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
             });
         }
         
