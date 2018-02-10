@@ -21,11 +21,12 @@ class ContactDetail extends Component {
   render() {
     let friendDetail = null;
     console.log(this.props.setCurrentFriend.avatarURL);
-
+    let avatarURL = this.props.setCurrentFriend.avatarURL !== "" ? `${config.BASE_URL}/images/avatars/${this.props.setCurrentFriend.avatarURL}` : `${config.BASE_URL}/images/avatar_placeholder.png`;
+    
     if(this.props.setCurrentFriend.avatarURL !== undefined) {
       friendDetail = <div>
                         <div style={{float: "right", marginLeft: 10}}>
-                        <Avatar avatar={`${config.BASE_URL}/images/avatars/${this.props.setCurrentFriend.avatarURL}`} size={50} />
+                        <Avatar avatar={avatarURL} size={50} />
                         </div>
 
                         <Button onClick={this.handleClickOpen} style={{float: "right"}}>

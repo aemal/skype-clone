@@ -269,7 +269,7 @@ button.login-button:hover {
 }
 
 .sideBarContactListComponent {
-  height: calc(100vh - 225px);
+  height: calc(100vh - 207px);
   width: 100%;
   overflow: auto;
   display: block;
@@ -376,7 +376,7 @@ button.login-button:hover {
 
 .messagesLogComponent {
   overflow: auto;
-  height: calc(100vh - 210px);
+  height: calc(100vh - 183px);
   width: 100%;
   float: left;
   display: block;
