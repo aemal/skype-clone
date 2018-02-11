@@ -49,7 +49,7 @@ module.exports = class {
         let id = req.id;
         let user = req.user;
         let body = req.body;
-        var emailAddress = body.emailAddress || user.emailAddress;
+        let emailAddress = body.emailAddress || user.emailAddress;
         let dateOfBirth = new Date(body.dateOfBirth) || user.dateOfBirth;
         let profile = {
                        firstName: body.firstName || user.profile.firstName,
@@ -58,6 +58,7 @@ module.exports = class {
                        avatarURL: req.filename || user.profile.avatarURL
                      };
         if(body.emailAddress){
+            console.log("req.id");
             this.userModel.findOne({
                 'emailAddress': req.body.emailAddress.toLowerCase()
             }, (err, user) => {
@@ -87,6 +88,7 @@ module.exports = class {
               }
             );    
         } else {
+            console.log(req.filename);
             this.userModel.findOneAndUpdate({_id: id},
                             {
                              $set:{profile : profile,
@@ -94,12 +96,15 @@ module.exports = class {
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
                                   if(err || !user){
+                                    console.log("err");
                                     deleteAvatar(req, next); 
                                     return res.json({ success : false, message : 'profile is not edited....', Error: err});
                                   };
-                                  
-                                  const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
-                                  return res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
+                                  // setTimeout(()=>{
+                                  //   console.log('Sendin response');
+                                    const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
+                                    res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
+                                  // }, 5000)
             });
         }       
   }

@@ -34,7 +34,11 @@ function incomingForm(req, res, next) {
     form.maxFilesSize = 1 * 1024 * 1024;
 
     form.on('error', (err)=>{
+<<<<<<< HEAD
+        //res.header('Connection', 'close');
+=======
         // res.header('Connection', 'close');
+>>>>>>> b5876b15a71fe9f7bad57412e66b5694ac4df876
         if(req.filename){
         	fs.unlink(`${form.uploadDir}/${req.filename}`, err=>{if(err) return netx(err);});
         }
@@ -57,8 +61,8 @@ function incomingForm(req, res, next) {
         };
 
         if (part.filename && type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png' || type === 'image/gif') {
-
-            const name = uuidv1() + '-' + Date.now() + '-' + part.filename;
+            const mimeType = type.substring('6');
+            const name = uuidv1() + '-' + Date.now() + '.' + mimeType;
             const path = form.uploadDir + "/" + name;
             req.filename = name;
             part.pipe(fs.createWriteStream(path));
