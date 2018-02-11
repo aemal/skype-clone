@@ -1,5 +1,7 @@
 'use strict';
 
+let ObjectId= require('mongoose').Types.ObjectId;
+
 module.exports = class {
   constructor(messageModel, chatModel) {
     this.messageModel = messageModel;
@@ -9,36 +11,40 @@ module.exports = class {
     let userID = req.body.userID;
     let friendID = req.body.friendID;
     
-    this.chatModel.findOne({'participants.userID': userID})
+    this.chatModel.findOne({participants:{ "$in" : [userID]}})
     .exec((err, chat) => {
+      console.log(chat);
       if(err) next(err);
       if(!chat) {
-          this.chatModel.create({participants:{userID: userID, friendID: friendID}})
+          console.log('doesnot exist');
+          this.chatModel.create({participants:[ userID, friendID ]})
           .then(data=> res.json(data))
           .catch(err=> console.log(err));
       } else {
-          if(chat.participants.friendID !== friendID){
-            this.chatModel.create({participants:{userID: userID, friendID: friendID}})
-            .then(data=> res.json(data))
-            .catch(err=> console.log(err));
-          }else{
-            res.json({chat: chat});
-          }
+          let friendObjId = new ObjectId(friendID);
+          console.log(JSON.stringify(chat.participants[1]) === JSON.stringify(friendID));
+              if(JSON.stringify(chat.participants[1]) !== JSON.stringify(friendID) && JSON.stringify(chat.participants[0]) !== JSON.stringify(friendID) ){
+                this.chatModel.create({participants:[ userID, friendID ]})
+                .then(data=> res.json(data))
+                .catch(err=> console.log(err));
+              }else{
+                res.json({chat: chat});
+              }
       }
     });
   };
   send(req,res,next) {
-    console.log(req.body);
 
     let roomID = req.body.roomID;
     let newMessage = {userID: req.body.userID, message: req.body.message};
+
     this.messageModel.findOne({roomID: roomID})
     .exec((err, chat) => {
       if(err) next(err);
       if(!chat) {
           this.messageModel.create({
             roomID: roomID,
-            messages: newMessage, 
+            messages: [newMessage], 
           })
           .then(data=> res.json(data))
           .catch(err=> console.log(err));         
@@ -50,8 +56,8 @@ module.exports = class {
                             {
                              $set:{messages : messages
                               }
-                            },{upsert: false ,multi: true}, (err, user)=>{
-                                    if (err || !user)return next(err);
+                            },{upsert: false ,multi: true}, (err, chat)=>{
+                                    if (err || !chat)return next(err);
                                     return res.json({ success : true, message : 'message is updated successfully...'});
             });
         }
