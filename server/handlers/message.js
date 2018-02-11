@@ -21,8 +21,6 @@ module.exports = class {
           .then(data=> res.json(data))
           .catch(err=> console.log(err));
       } else {
-          let friendObjId = new ObjectId(friendID);
-          console.log(JSON.stringify(chat.participants[1]) === JSON.stringify(friendID));
               if(JSON.stringify(chat.participants[1]) !== JSON.stringify(friendID) && JSON.stringify(chat.participants[0]) !== JSON.stringify(friendID) ){
                 this.chatModel.create({participants:[ userID, friendID ]})
                 .then(data=> res.json(data))
