@@ -1,7 +1,5 @@
 'use strict';
 
-let ObjectId= require('mongoose').Types.ObjectId;
-
 module.exports = class {
   constructor(messageModel, chatModel) {
     this.messageModel = messageModel;
@@ -11,23 +9,19 @@ module.exports = class {
     let userID = req.body.userID;
     let friendID = req.body.friendID;
     
-    this.chatModel.findOne({participants:{ "$in" : [userID]}})
+    this.chatModel.findOne({$and:[{participants:{ "$in" : [userID]}}, {participants:{ "$in" : [friendID]}}]})
     .exec((err, chat) => {
-      console.log(chat);
       if(err) next(err);
       if(!chat) {
-          console.log('doesnot exist');
           this.chatModel.create({participants:[ userID, friendID ]})
           .then(data=> res.json(data))
           .catch(err=> console.log(err));
       } else {
-              if(JSON.stringify(chat.participants[1]) !== JSON.stringify(friendID) && JSON.stringify(chat.participants[0]) !== JSON.stringify(friendID) ){
-                this.chatModel.create({participants:[ userID, friendID ]})
-                .then(data=> res.json(data))
-                .catch(err=> console.log(err));
-              }else{
-                res.json({chat: chat});
-              }
+          this.messageModel.findOne({roomID: chat._id})
+          .exec((err, messages)=>{
+                if(err || !messages)next(err);
+                res.json({chat, messages});
+          })
       }
     });
   };
