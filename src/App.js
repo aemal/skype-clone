@@ -15,10 +15,10 @@ import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 import config from "./config/config";
-import store from "./store";
+import store from "./store"; 
 function mapStateToProps(state, filter) {
   return {
-    currentUserData:state.changeSettingReducer.currentUserData,
+    //currentUserData:state.changeSettingReducer.currentUserData,
     contactList: state.contactListReducers.contactList.filter(c => {
       return (
         c.fullName
@@ -56,10 +56,10 @@ class App extends Component {
   componentWillMount() {
     this.props.dispatch(fetchContactList());
   }
-
+ 
   componentDidMount() {
     console.log(store.getState())
-    console.log(this.props.currentUserData)
+    console.log(this.props)
     console.log(this.props.contactList)
      //this.socket.on("message", message => {
     this.socket.on(this.state.socketChanelId, message => {
@@ -159,8 +159,7 @@ class App extends Component {
     }else{
       let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
     } */
-    console.log(this.props.currentUserData)
-    let avatarURL = this.props.currentUserData.profile === undefined ? `${config.BASE_URL}images/avatar_placeholder.png` :  `${config.BASE_URL}images/avatars/${this.props.currentUserData.profile.avatarURL}`;
+    let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
     console.log(user)
     return (
       <Grid

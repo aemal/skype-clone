@@ -1,6 +1,7 @@
 
-export function changeSetting(url,formData,token) {
+export function changeSetting(url,formData) {
     return dispatch => {
+        let token = localStorage.getItem("token");
         fetch(url, {
                 method: "POST",
                 headers: { 

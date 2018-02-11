@@ -25,7 +25,6 @@ class ContactList extends Component {
       selectedIndex: null,    
     }
   }
-
   socketChanel(friend, e, i){
     
     this.setState({ selectedIndex: i });
@@ -48,8 +47,9 @@ class ContactList extends Component {
   }
   render() {
     const { classes } = this.props;
+    
     const listItems = this.props.friendsList.map((item, index) => {
-      
+      console.log(item)
       let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
       
       let highlightedFriend = (index === this.state.selectedIndex) ? "#01062e" : "";

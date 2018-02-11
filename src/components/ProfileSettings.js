@@ -94,7 +94,7 @@ const styles = theme => ({
   }
 
   componentDidMount(){
-    // console.log(this.state.userCurrentData)
+  console.log(this.props)
   }
 
   handleDataChange = date => {
@@ -146,6 +146,7 @@ const styles = theme => ({
 
     this.setState({
       newUser: {
+        ...this.state.newUser,
         [name]: value
       }
     });
@@ -155,13 +156,14 @@ const styles = theme => ({
     e.preventDefault();
     var formData  = new FormData(e.target);
     let data = this.state.newUser;
+    console.log(formData)
     console.log(data)
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
-    let token = localStorage.getItem("token");
+    //let token = localStorage.getItem("token");
 
-    if (data) {
+    if (this.state.newUser.avatarURL !== '') {
       console.log('hi')
-      this.props.changeUserSetting(url,formData,token)
+      this.props.changeUserSetting(url,formData)
      
        /* fetch(url, {
         method: "POST",
@@ -221,7 +223,7 @@ const styles = theme => ({
                 id="file"
                 className={classes.textField}
                 label={'change Pic'}
-               
+                onChange={this.handleImageChange}
                 name="avatar"
                 type='file'
                
@@ -266,7 +268,7 @@ const styles = theme => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeUserSetting:(url,formData,token) => {dispatch(changeSetting(url,formData,token))} 
+    changeUserSetting:(url,formData) => {dispatch(changeSetting(url,formData))} 
   }
   };
 
