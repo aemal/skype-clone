@@ -382,12 +382,9 @@ button.login-button:hover {
   display: block;
 }
 
-.MuiGrid-typeItem-2.messagesLogComponent {
-  margin-top: 2rem;
-}
 
 .messagesContactDetailComponent {
-  height: 65px;
+  height: auto;
   width: 100%;
   float: left;
   display: block;

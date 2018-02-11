@@ -10,6 +10,10 @@ import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
 import Grid from "material-ui/Grid";
+import { changeSetting } from "../actions/changeSetting";
+import compose from 'recompose/compose';
+import { connect } from "react-redux";
+
 const styles = theme => ({
   row: {
     display: 'flex',
@@ -27,6 +31,10 @@ const styles = theme => ({
     '&:focus': {
       borderColor: '#80bdff',
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      padding: 0,
+    'label + &': {
+      marginTop: theme.spacing.unit * 3,
+    },
     },
     Typography: {
       fontSize: "20px",
@@ -86,7 +94,7 @@ const styles = theme => ({
   }
 
   componentDidMount(){
-    // console.log(this.state.userCurrentData)
+  console.log(this.props)
   }
 
   handleDataChange = date => {
@@ -94,6 +102,7 @@ const styles = theme => ({
     this.setState({
       newUser: { ...this.state.newUser, dateOfBirth: checketDate }
     });
+    console.log(checketDate)
   };
   handleImageChange (e) {
     e.preventDefault();
@@ -137,6 +146,7 @@ const styles = theme => ({
 
     this.setState({
       newUser: {
+        ...this.state.newUser,
         [name]: value
       }
     });
@@ -146,12 +156,16 @@ const styles = theme => ({
     e.preventDefault();
     var formData  = new FormData(e.target);
     let data = this.state.newUser;
+    console.log(formData)
     console.log(data)
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
-    let token = localStorage.getItem("token");
+    //let token = localStorage.getItem("token");
 
-    if (data) {
-      fetch(url, {
+    if (this.state.newUser.avatarURL !== '') {
+      console.log('hi')
+      this.props.changeUserSetting(url,formData)
+     
+       /* fetch(url, {
         method: "POST",
         headers: { 
           'Authorization': `TOKEN ${token}`
@@ -163,7 +177,7 @@ const styles = theme => ({
           console.log("Json Data: ", data);        
           // this.props.history.push("/auth");
         }) 
-        .catch(err => console.log(err));
+        .catch(err => console.log(err));  */
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
@@ -192,7 +206,7 @@ const styles = theme => ({
                 id="lastName"
                 className={classes.textField}
                 label={this.state.userCurrentData.lastName}
-                onChange={this.handleChange}
+                onChange={this.handleInputChange}
                 name="lastName"
                 helperText={this.state.errorMessagelastName}
               />
@@ -251,4 +265,16 @@ const styles = theme => ({
         )
     }
 }
-export default  withStyles(styles)(UserPictureAndState);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeUserSetting:(url,formData) => {dispatch(changeSetting(url,formData))} 
+  }
+  };
+
+
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps)
+)(UserPictureAndState);
+ 

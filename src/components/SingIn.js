@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import Checkbox from "material-ui/Checkbox";
 import { Link } from "react-router-dom";
-import SocialMedia from "./SocialMedia";
 import decode from "jwt-decode";
-import Avatar from "./skypeAvatar";
 import { login } from "../actions/login";
 import { connect } from "react-redux";
 import config from "../config/config.js";
@@ -106,7 +103,7 @@ class SignIn extends Component {
         <div className="middle-container">
           <div className="sign-in-details">
             <div className={classes.avatar}>
-              <img src={config.BASE_URL + "images/who_logo.png"} className="logo" />
+              <img src={config.BASE_URL + "images/who_logo.png"} className="logo" alt="logo" />
             </div>
             <form
               className={classes.formWrapper}

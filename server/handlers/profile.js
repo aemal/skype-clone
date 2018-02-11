@@ -106,8 +106,7 @@ module.exports = class {
                                     res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
                                   // }, 5000)
             });
-        }
-        
+        }       
   }
 };
 

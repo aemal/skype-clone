@@ -15,19 +15,22 @@ import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 import config from "./config/config";
-
+import store from "./store"; 
 function mapStateToProps(state, filter) {
   return {
+    //currentUserData:state.changeSettingReducer.currentUserData,
     contactList: state.contactListReducers.contactList.filter(c => {
       return (
         c.fullName
           .toLowerCase()
           .indexOf(state.contactListFilterReducer.toLowerCase()) > -1
       );
+       
       //return c.name.toLowerCase().indexOf(state.contactListFilterReducer.toLowerCase()) > -1
     })
   };
 }
+
 
 class App extends Component {
   constructor(props) {
@@ -53,8 +56,11 @@ class App extends Component {
   componentWillMount() {
     this.props.dispatch(fetchContactList());
   }
-
+ 
   componentDidMount() {
+    console.log(store.getState())
+    console.log(this.props)
+    console.log(this.props.contactList)
      //this.socket.on("message", message => {
     this.socket.on(this.state.socketChanelId, message => {
       console.log("received messages...")
@@ -145,11 +151,16 @@ class App extends Component {
 
   render() {
     const { alignItems, direction, justify } = this.state;
-
+    
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
+    /* if(!this.props.currentUserData.profile.avatarURL === undefined){
+      let avatarURL = this.props.currentUserData.profile.avatarURL
+    }else{
+      let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
+    } */
     let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-
+    console.log(user)
     return (
       <Grid
         container
