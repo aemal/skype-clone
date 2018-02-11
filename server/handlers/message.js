@@ -6,35 +6,59 @@ module.exports = class {
     this.chatModel = chatModel;
   };
   get(req,res,next) {
-    console.log(req.body);
     let userID = req.body.userID;
     let friendID = req.body.friendID;
-
-    this.chatModel.findOne({$or:[{'participants.userID': userID ,'participants.friendID': friendID}, {'participants.userID': friendID ,'participants.friendID': userID}]})
+    
+    this.chatModel.findOne({'participants.userID': userID})
     .exec((err, chat) => {
       if(err) next(err);
       if(!chat) {
-        this.chatModel.create({participants:{userID: userID, friendID: friendID}})
-        .then(data=> res.json(data))
-        .catch(err=> console.log(err));
+          this.chatModel.create({participants:{userID: userID, friendID: friendID}})
+          .then(data=> res.json(data))
+          .catch(err=> console.log(err));
       } else {
-        res.json({chat: chat});
+          if(chat.participants.friendID !== friendID){
+            this.chatModel.create({participants:{userID: userID, friendID: friendID}})
+            .then(data=> res.json(data))
+            .catch(err=> console.log(err));
+          }else{
+            res.json({chat: chat});
+          }
       }
     });
   };
   send(req,res,next) {
-    var newMessage = new Message ({
-      senderUserID: req.body.sendUserId,
-      receiverUserID: req.body.receiveUserId,
-      message: req.body.textMessage
-    });
-    newMessage.save((err, message) => {
-      if(err) {
-          next(err)
-        } else {
-          res.send(message);
+    console.log(req.body);
+
+    let roomID = req.body.roomID;
+    let newMessage = {userID: req.body.userID, message: req.body.message};
+    this.messageModel.findOne({roomID: roomID})
+    .exec((err, chat) => {
+      if(err) next(err);
+      if(!chat) {
+          this.messageModel.create({
+            roomID: roomID,
+            messages: newMessage, 
+          })
+          .then(data=> res.json(data))
+          .catch(err=> console.log(err));         
+      } else {
+         let messages = chat.messages;
+         messages.push(newMessage);
+         if(messages.length>0){
+            this.messageModel.findOneAndUpdate({_id: chat._id},
+                            {
+                             $set:{messages : messages
+                              }
+                            },{upsert: false ,multi: true}, (err, user)=>{
+                                    if (err || !user)return next(err);
+                                    return res.json({ success : true, message : 'message is updated successfully...'});
+            });
         }
+
+      }
     });
+
   };
   messageHistory (req, res, next){
     this.chatModel.collection.findOne({participants: {$all: [req.body.sender, req.body.receiver]}}, (err, chat) => {
