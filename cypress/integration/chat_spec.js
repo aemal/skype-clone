@@ -1,7 +1,7 @@
 describe('Send and receive messages over the chat', function() {
   it('Types messages in the input and see the message appear in the chat protocol', function() {
     //be sure the viewport is big enough to show all the friends
-    cy.viewport(1600, 1300)
+    cy.viewport(1600, 2700)
     cy.visit('localhost:3000/')
 
 
@@ -62,6 +62,17 @@ describe('Send and receive messages over the chat', function() {
       .wait(1000)
       .type('Jo')
       .should('have.value', 'Jo')
+      .wait(1000)
+
+      cy.get('#cypress-add-freind')
+      .wait(1000)
+      .click({force: true})
+
+      cy.get('#cypress-add-new')
+      .type('jose', {force: true},{delay:2000})
+      .wait(1000)
+      .get('#cypress-ser-new-freind')
+      .click()
       /*.find('')
       .click('center', {force: true})
       .should('have.value', ':smiley:')
