@@ -32,7 +32,6 @@ class UserAvatar extends Component {
   };
 
   handleClickOpen = () => {
-    console.log("AAA");
     this.setState({ open: true });
   };
 
@@ -67,27 +66,25 @@ class UserAvatar extends Component {
     if(this.state.redirect){
       return <Redirect to='/'/>
     }else{
-      return (
-        <div className={classes.root}>
-          <div className="icons" style={{padding: 0, color: "#fff"}}>
-            <IconButton onClick={this.handleClickOpen} style={{zIndex:1}}>
-              <i className="material-icons" style={{color: "#fff"}}>settings</i>
-            </IconButton>
-            <FormDialog
-              open={this.state.open}
-              handleClose={this.handleClose}
-              compo={<ProfileSettings />}
-              fullScreen={true}
-            />
+    return (
+      <div className={classes.root}>
+        <div className="icons" style={{ padding: 0, color: "#fff" }}>
+          <IconButton onClick={this.handleClickOpen} style={{ zIndex: 1 }}>
+            <i className="material-icons" style={{ color: "#fff" }}>settings</i>
+          </IconButton>
+          <FormDialog
+            open={this.state.open}
+            handleClose={this.handleClose}
+            compo={<ProfileSettings />}
+            fullScreen={true}
+          />
 
-            <IconButton onClick={this.logOut} style={{zIndex:1}}>
-              <i className="material-icons" style={{color: "#fff"}}>exit_to_app</i>
-            </IconButton>
-          </div>
-          <div className={classes.avatar} style={{padding: 10, marginTop: -60}}>
-            <Avatar size="100px" avatar={this.props.avatarURL} />
-          </div>
-
+          <IconButton>
+            <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
+          </IconButton>
+        </div>
+        <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
+          <Avatar size="100px" avatar={this.props.avatarURL} />
         </div>
       );
     }
