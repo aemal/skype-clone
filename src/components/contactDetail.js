@@ -4,6 +4,7 @@ import Avatar from './skypeAvatar';
 import FormDialog from './dialog'
 import config from "../config/config";
 import {connect} from "react-redux";
+import VedioCall from "./vedioCall";
 
 
 class ContactDetail extends Component {
@@ -22,7 +23,7 @@ class ContactDetail extends Component {
     let friendDetail = null;
     console.log(this.props.setCurrentFriend.avatarURL);
     let avatarURL = this.props.setCurrentFriend.avatarURL !== "" ? `${config.BASE_URL}/images/avatars/${this.props.setCurrentFriend.avatarURL}` : `${config.BASE_URL}/images/avatar_placeholder.png`;
-    
+
     if(this.props.setCurrentFriend.avatarURL !== undefined) {
       friendDetail = <div>
                         <div style={{float: "right", marginLeft: 10}}>
@@ -46,8 +47,8 @@ class ContactDetail extends Component {
                           open={this.state.open}
                           handleClickOpen={this.handleClickOpen}
                           handleClose={this.handleClose}
-                          compo={"Comming soon..."}
-                          fullScreen={false}
+                          compo={<VedioCall />}
+                          fullScreen={true}
                         />
 
                         <div>
@@ -61,9 +62,9 @@ class ContactDetail extends Component {
             <img src={config.BASE_URL + "images/who_logo.png"} style={{height: 54, marginTop: 5}} />
           </div>
           {friendDetail}
-          
+
         </div>
-          
+
       </div>
     );
   }
