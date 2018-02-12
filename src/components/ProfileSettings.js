@@ -155,17 +155,17 @@ const styles = theme => ({
   handleSubmit(e) {
     e.preventDefault();
     var formData  = new FormData(e.target);
-    let data = this.state.newUser;
+   // let data = this.state.newUser;
     console.log(formData)
-    console.log(data)
+    
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
-    //let token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
 
     if (this.state.newUser.avatarURL !== '') {
       console.log('hi')
-      this.props.changeUserSetting(url,formData)
+     // this.props.changeUserSetting(url,formData)
      
-       /* fetch(url, {
+        fetch(url, {
         method: "POST",
         headers: { 
           'Authorization': `TOKEN ${token}`
@@ -174,10 +174,14 @@ const styles = theme => ({
       })
         .then(res => res.json())
         .then(data => {
-          console.log("Json Data: ", data);        
-          // this.props.history.push("/auth");
+          console.log("Json Data: ", data); 
+          if(data){
+            localStorage.setItem('updatedUserData',JSON.stringify(data))
+            window.location.reload();
+          }       
+          
         }) 
-        .catch(err => console.log(err));  */
+        .catch(err => console.log(err));  
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
@@ -266,15 +270,15 @@ const styles = theme => ({
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/* const mapDispatchToProps = (dispatch) => {
   return {
     changeUserSetting:(url,formData) => {dispatch(changeSetting(url,formData))} 
   }
-  };
+  }; */
 
 
-export default compose(
-  withStyles(styles),
+export default withStyles(styles)(UserPictureAndState)
+ /*  withStyles(styles),
   connect(null, mapDispatchToProps)
 )(UserPictureAndState);
- 
+  */
