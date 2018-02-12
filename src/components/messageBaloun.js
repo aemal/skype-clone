@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import decode from "jwt-decode";
 
 
 
@@ -7,16 +8,20 @@ class ContactDetail extends Component {
     const {message} = this.props
     let align;
     let time = this.props.time;
-    if(message.socketId === undefined && time) {
-      align = "bubble you"
-    } else {
+
+    let user = decode(localStorage.getItem("token"));
+
+    console.log("message from ballon:", message)
+    if(message.userID === user._id) {
       align = "bubble me"
+    } else {
+      align = "bubble you"
     }
    
     return (
               <div className="chat">
                 <div className={align}>
-                  {message.body}
+                  {message.messageBody}
                   
 
                   {/*

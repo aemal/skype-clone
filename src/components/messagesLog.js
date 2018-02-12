@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import MessageBaloun from './messageBaloun';
 import SkypeAvatar from './skypeAvatar';
 import moment from 'moment';
+import decode from "jwt-decode";
+import config from "../config/config.js";
+import {connect} from "react-redux";
 
 class MessagesLog extends Component {
   constructor(){
@@ -27,14 +30,22 @@ class MessagesLog extends Component {
   render() {
     const {messages} = this.props;
 
+    console.log("aabbddd", messages);
+
     const Message = messages.map((message, index, socketId) => {
-      let order;
+      let order, avatarURL;
 
+      let user = decode(localStorage.getItem("token"));
 
-      if(message.socketId === undefined) {
-        order = 2
-      } else {
+console.log("user", user)
+console.log("message", message)
+      console.log('aaacssssccddee', message)
+      if(message.userID === user._id) {
         order = ''
+        avatarURL = `${config.BASE_URL}images/avatars/${user.profile.avatarURL}`;
+      } else {
+        order = 2;
+        avatarURL = `${config.BASE_URL}images/avatars/${this.props.setCurrentFriend.avatarURL}`; 
       }
 
       return(
@@ -43,7 +54,7 @@ class MessagesLog extends Component {
           <div style={{margin:'1%'}} className="message" >
 
           <div style={{order:order}} >
-              <SkypeAvatar avatar={'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Penguin-512.png'} size={40}/>
+              <SkypeAvatar avatar={avatarURL} size={40}/>
            </div>
               <MessageBaloun message={message} time={this.state.moment} />
              </div>
@@ -60,4 +71,11 @@ class MessagesLog extends Component {
   }
 }
 
-export default MessagesLog;
+
+const mapStateToProps = (state) => {
+  return {
+      setCurrentFriend: state.setCurrentFriendReducer,
+  };
+};
+export default connect(mapStateToProps)(MessagesLog);
+
