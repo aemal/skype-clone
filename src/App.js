@@ -48,14 +48,15 @@ class App extends Component {
         .fromNow()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.chatMessageHandler = this.chatMessageHandler.bind(this);
 
     this.socket = io(config.SOCKET_URL); 
-    this.socket.on("connect", socket => this.connect(socket));
-  
   }
 
   componentWillMount() {
     this.props.dispatch(fetchContactList());
+    this.socket.on("connect", socket => this.connect(socket));
+
   }
  
   componentDidMount() {
@@ -63,17 +64,23 @@ class App extends Component {
     console.log(this.props)
     console.log(this.props.contactList)
      //this.socket.on("message", message => {
-    this.socket.on(this.state.socketChanelId, message => {
+    /*this.socket.on(this.state.socketChanelId, message => {
       console.log("received messages...")
       this.setState({ messages: [...this.state.messages, message] });
-    });
- 
-   
-    this.socket.on('conversation private post', function(data) {
-        //display data.message
-        console.log(data);
-    });
+    });*/
+    
+    //FIXME: this is a hack, try to bind socket.io properly with "this"
+    this.chatMessageHandler(this);
+  }
 
+  chatMessageHandler(thisKeyword) {
+    this.socket.on('chatMessages', function(data) {
+        //display data.message
+        console.log("received: ", data);
+        //console.log(state.messages)
+        thisKeyword.setState({ messages: [...thisKeyword.state.messages, data] });
+        
+    });
   }
 
   connect(socket) {
@@ -128,6 +135,12 @@ class App extends Component {
     this.setState({ messages: oldMessages });
 
     
+
+    this.socket.emit('joinRoom', chatInfo.chatID);
+
+    console.log("joining the roommmmm: ", chatInfo.chatID)
+
+
     //this.socketSignal(chatInfo.chatID, "aaaabbbbccc");
     /*setTimeout(() => {
       this.socketSignal(chatInfo.chatID, "xxddff");
@@ -154,7 +167,24 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-   this.socketSignal(this.state.socketChanelId, event.target.value)
+   //this.socketSignal(this.state.socketChanelId, event.target.value)
+
+    //this.socket.on('privateMessage', function(roomInfo) {
+        //console.log('sending data to channel: ', this.state.socketChanelId);
+        
+        let user = decode(localStorage.getItem("token"));
+
+        let messagePayload = {
+          chatID: this.state.socketChanelId,
+          userID: user._id,
+          messageBody: event.target.value
+        };
+
+        this.socket.emit("privateMessage", messagePayload);
+   // });
+
+        this.setState({ messages: [...this.state.messages, messagePayload] });
+
    event.target.value = '';   
   }
 
@@ -172,7 +202,8 @@ class App extends Component {
     if(localStorage.getItem("updatedUserData")) {
      
       let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
-      let newAvatar = updatedUserData.profile.avatarURL 
+      console.assert.og
+      let newAvatar = updatedUserData.user.avatarURL 
       console.log(updatedUserData)
       avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {

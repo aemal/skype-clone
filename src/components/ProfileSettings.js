@@ -178,7 +178,10 @@ class UserPictureAndState extends Component {
           console.log("Json Data: ", data); 
           if(data){
             localStorage.setItem('updatedUserData',JSON.stringify(data))
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            },2000) 
+            
           }       
           
         }) 
@@ -251,13 +254,22 @@ class UserPictureAndState extends Component {
                 className={classes.DatePicker}
               />
             </div>
+            <TextField
+            id="file"
+            className={classes.textField}
+            label={'change Pic'}
+            onChange={this.handleImageChange}
+            name="avatar"
+            type='file'
+
+          />
             <Button type="submit" className="login-button" >
               SAVE
               </Button>
           </form>
 
         </Grid>
-        <Grid item xs>
+       {/*  <Grid item xs>
           <ImageCropper imgSrc={this.state.newUser.avatarURL} />
           <TextField
             id="file"
@@ -269,8 +281,8 @@ class UserPictureAndState extends Component {
 
           />
 
-        </Grid>
-      </Grid>
+        </Grid>*/}
+      </Grid> 
     )
   }
 }

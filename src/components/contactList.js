@@ -30,37 +30,77 @@ class ContactList extends Component {
 
     this.setState({ selectedIndex: i });
 
-    //AJAX call 
+    let user = decode(localStorage.getItem('token')) ;
+    let userId = user._id;
+    let socketChanelId = userId+"--"+friend.userId;
 
-    let chatInfo = {
-        chatID: 'asdfasdfasdf',     
-        messages: [
-          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
-          {userID: 'bbbasdfasdfasdfasd', messageBody: 'hi'},
-          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
-          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
-          {userID: 'bbbasdfasdfasdfasd', messageBody: 'hi'},
-          {userID: 'aasdfasdfasdfasdf', messageBody: 'hi'},
-        ]
+    //AJAX call 
+    let url = `${config.BASE_URL}user/message/get`;
+
+    const postData = {
+      userID: user._id,
+      friendID: friend.userId
     };
+    
+    if (postData) {
+      const parsedFields = Object.keys(postData)
+        .map(key => {
+          return (
+            encodeURIComponent(key) + "=" + encodeURIComponent(postData[key])
+          );
+        })
+        .join("&");
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          'Authorization': `TOKEN ${localStorage.getItem('token')}`,
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body: parsedFields
+      })
+        .then(res => res.json())
+        .then((data) => {
+          console.log("ChatID Response: ", data);
+          let chatInfo;
+
+          if(data.messages !== undefined) { //old messages exists, should load them
+            chatInfo = {
+              chatID: data.chat._id,     
+              messages: data.messages 
+            };
+          } else { //no old messages to load
+            chatInfo = {
+              chatID: data._id,     
+              messages: []
+            };
+          }
+
+        console.log(chatInfo);
+
+        this.setState({
+          socketChanelId: chatInfo.chatID
+         })
+    
+    
+         this.props.getId(chatInfo)
+        })
+        .catch(err => console.log(err));
+    } else {
+      console.log({ Error: "Fields are required" }); //Handle errors here...
+    }
 
     
+     
     this.props.setCurrentFriend(friend);
 
     // console.log(friend);
 
 
-   let user = decode(localStorage.getItem('token')) ;
-   let userId = user._id;
-   let socketChanelId = userId+"--"+friend.userId;
+  
    //console.log(socketChanelId)
    
-   this.setState({
-    socketChanelId: chatInfo.chatID
-   })
-
-
-    this.props.getId(chatInfo)
+ 
 
   }
   

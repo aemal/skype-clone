@@ -22,8 +22,8 @@ const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
 
- const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
-//const db = config.DB_Connection.URL;
+// const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
@@ -71,7 +71,7 @@ const server = app.listen(port, () => {
 const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', socket => {
-    const sessionid = socket.id;
+    /*const sessionid = socket.id;
     console.log("Socket Connected: %s",  sessionid);
     socket.on('message', body => {
       socket.broadcast.emit('message', {
@@ -85,19 +85,26 @@ io.sockets.on('connection', socket => {
       //Save into chatmodel.
       socket.join(roomInfo.roomID);
     });
+ */ 
 
-    socket.on('privateMessage', (data)=>{
-        console.log('sending room post', data);
-        // Message.create({
-        //   chatID: data.roomID,
-        //   userID: data.userID,
-        //   messages: data.body
-        // })
-        // .then(data=> res.json(data))
-        // .catch(err=> console.log(err));
-        socket.broadcast.to(data.roomID).emit('conversation private post', {
-            message: data.message
-        });
+    socket.on('joinRoom', (chatID)=>{
+      console.log('joining room', chatID);
+      //Save into chatmodel.
+      socket.join(chatID);
+    });
+
+    socket.on('privateMessage', function(data) {
+        console.log('chatMessages', data);
+
+        Message.create({
+          chatID: data.chatID,
+          userID: data.userID,
+          message: data.messageBody
+        })
+        .then(data=> console.log(data))
+        .catch(err=> console.log(err));
+
+        socket.broadcast.to(data.chatID).emit('chatMessages', data);
     });
 
 });
