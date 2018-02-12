@@ -38,7 +38,7 @@ class UserAvatar extends Component {
 
   render() {
     const { classes } = this.props;
-
+  console.log(this.props.avatarURL)
     return (
       <div className={classes.root}>
         <div className="icons" style={{padding: 0, color: "#fff"}}>
