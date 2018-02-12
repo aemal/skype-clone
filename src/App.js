@@ -138,7 +138,7 @@ class App extends Component {
 
     this.socket.emit('joinRoom', chatInfo.chatID);
 
-    
+    console.log("joining the roommmmm: ", chatInfo.chatID)
 
 
     //this.socketSignal(chatInfo.chatID, "aaaabbbbccc");
@@ -202,7 +202,8 @@ class App extends Component {
     if(localStorage.getItem("updatedUserData")) {
      
       let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
-      let newAvatar = updatedUserData.profile.avatarURL 
+      console.assert.og
+      let newAvatar = updatedUserData.user.avatarURL 
       console.log(updatedUserData)
       avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {

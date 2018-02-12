@@ -46,7 +46,7 @@ const styles = {
           <DialogActions>
             <Button className = {classes.closeDialog}
                   onClick={this.props.handleClose}>
-              <i className='material-icons' >close</i>
+              <i className='material-icons' id="close-cypress" >close</i>
           </Button>
           </DialogActions>
         </Dialog>
