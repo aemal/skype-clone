@@ -78,7 +78,7 @@ class UserAvatar extends Component {
             fullScreen={true}
           />
 
-          <IconButton onClick={this.logOut} style={{ zIndex: 1 }}>
+          <IconButton onClick={this.logOut} id='cypress-logout' style={{ zIndex: 1 }}>
             <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
           </IconButton>
         </div>
