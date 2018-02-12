@@ -43,7 +43,7 @@ class ContactList extends Component {
           {userID: 'aasdfasdfasdfasdf', messageBody: 'hi'},
         ]
     };
-
+console.log("chatInfo", chatInfo)
   
     this.props.setCurrentFriend(friend);
 

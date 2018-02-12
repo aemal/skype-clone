@@ -48,14 +48,15 @@ class App extends Component {
         .fromNow()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.chatMessageHandler = this.chatMessageHandler.bind(this);
 
     this.socket = io(config.SOCKET_URL); 
-    this.socket.on("connect", socket => this.connect(socket));
-  
   }
 
   componentWillMount() {
     this.props.dispatch(fetchContactList());
+    this.socket.on("connect", socket => this.connect(socket));
+
   }
  
   componentDidMount() {
@@ -67,13 +68,19 @@ class App extends Component {
       console.log("received messages...")
       this.setState({ messages: [...this.state.messages, message] });
     });*/
- 
-   
-    this.socket.on('conversation private post', function(data) {
+    
+    //FIXME: this is a hack, try to bind socket.io properly with "this"
+    this.chatMessageHandler(this);
+  }
+
+  chatMessageHandler(thisKeyword) {
+    this.socket.on('chatMessages', function(data) {
         //display data.message
         console.log("received: ", data);
+        //console.log(state.messages)
+        thisKeyword.setState({ messages: [...thisKeyword.state.messages, data] });
+        
     });
-
   }
 
   connect(socket) {
@@ -110,11 +117,6 @@ class App extends Component {
 
   getSocketChanelId(chatInfo) {
     
-    console.log("joining the room: ", chatInfo.chatID);
-    console.log(this.socket)
-
-    this.socket.join(chatInfo.chatID);
-
     this.setState({
       socketChanelId: chatInfo.chatID
     })
@@ -133,6 +135,12 @@ class App extends Component {
     this.setState({ messages: oldMessages });
 
     
+
+    this.socket.emit('joinRoom', chatInfo.chatID);
+
+    
+
+
     //this.socketSignal(chatInfo.chatID, "aaaabbbbccc");
     /*setTimeout(() => {
       this.socketSignal(chatInfo.chatID, "xxddff");
@@ -162,7 +170,7 @@ class App extends Component {
    //this.socketSignal(this.state.socketChanelId, event.target.value)
 
     //this.socket.on('privateMessage', function(roomInfo) {
-        console.log('sending data to channel: ', this.state.socketChanelId);
+        //console.log('sending data to channel: ', this.state.socketChanelId);
         
         let user = decode(localStorage.getItem("token"));
 
@@ -174,6 +182,8 @@ class App extends Component {
 
         this.socket.emit("privateMessage", messagePayload);
    // });
+
+        this.setState({ messages: [...this.state.messages, messagePayload] });
 
    event.target.value = '';   
   }
