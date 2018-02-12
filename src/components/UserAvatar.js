@@ -4,6 +4,9 @@ import IconButton from "material-ui/IconButton";
 import Avatar from "./skypeAvatar";
 import ProfileSettings from "./ProfileSettings";
 import FormDialog from "./dialog";
+import config from "../config/config.js";
+import { Route, Redirect } from 'react-router'
+
 
 const styles = {
   root: {
@@ -24,7 +27,8 @@ const styles = {
 
 class UserAvatar extends Component {
   state = {
-    open: false
+    open: false,
+    redirect : false
   };
 
   handleClickOpen = () => {
@@ -35,9 +39,32 @@ class UserAvatar extends Component {
     this.setState({ open: false });
   };
 
+  logOut = () => {
+    let token = localStorage.getItem("token");
+    let url = `${config.BASE_URL}auth/logout`;
+
+
+    fetch(url, {
+      method: "Get",
+      headers: {
+        Authorization: `TOKEN ${token}`,
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+         localStorage.clear();
+         this.setState({ redirect : true })
+      })
+      .catch(err => console.log(err));
+
+  }
+
+
   render() {
     const { classes } = this.props;
-  console.log(this.props.avatarURL)
+    if(this.state.redirect){
+      return <Redirect to='/'/>
+    }else{
     return (
       <div className={classes.root}>
         <div className="icons" style={{ padding: 0, color: "#fff" }}>
@@ -51,16 +78,17 @@ class UserAvatar extends Component {
             fullScreen={true}
           />
 
-          <IconButton>
+          <IconButton onClick={this.logOut} style={{ zIndex: 1 }}>
             <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
           </IconButton>
         </div>
         <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
           <Avatar size="100px" avatar={this.props.avatarURL} />
         </div>
-
       </div>
-    );
+      );
+    }
+
   }
 }
 

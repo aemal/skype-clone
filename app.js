@@ -85,13 +85,13 @@ io.sockets.on('connection', socket => {
       //Save into chatmodel.
       socket.join(roomInfo.roomID);
     });
-  
+
     socket.on('privateMessage', (data)=>{
         console.log('sending room post', data);
         // Message.create({
         //   chatID: data.roomID,
         //   userID: data.userID,
-        //   messages: data.body 
+        //   messages: data.body
         // })
         // .then(data=> res.json(data))
         // .catch(err=> console.log(err));
