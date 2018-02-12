@@ -178,9 +178,9 @@ class UserPictureAndState extends Component {
           console.log("Json Data: ", data); 
           if(data){
             localStorage.setItem('updatedUserData',JSON.stringify(data))
-           /*  setTimeout(() => {
+            setTimeout(() => {
               window.location.reload();
-            },400) */
+            },2000) 
             
           }       
           

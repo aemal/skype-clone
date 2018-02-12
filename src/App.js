@@ -172,7 +172,7 @@ class App extends Component {
     if(localStorage.getItem("updatedUserData")) {
      
       let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
-      let newAvatar = updatedUserData.user.profile.avatarURL 
+      let newAvatar = updatedUserData.user.avatarURL 
       console.log(updatedUserData)
       avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {
