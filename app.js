@@ -22,8 +22,8 @@ const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
 
-const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
-//const db = config.DB_Connection.URL;
+// const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
@@ -94,7 +94,16 @@ io.sockets.on('connection', socket => {
     });
 
     socket.on('privateMessage', function(data) {
-        console.log('chatMessages', data.chatID);
+        console.log('chatMessages', data);
+
+        Message.create({
+          chatID: data.chatID,
+          userID: data.userID,
+          message: data.messageBody
+        })
+        .then(data=> console.log(data))
+        .catch(err=> console.log(err));
+
         socket.broadcast.to(data.chatID).emit('chatMessages', data);
     });
 
