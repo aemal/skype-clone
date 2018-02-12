@@ -1,10 +1,13 @@
-const express = require('express');
+// const express = require('express');
 
-const app = express();
+/* const express = require('express');
+>>>>>>> 8a681bfafd7dc7376ae08305539c03344a0f4ed1
 
-app.use(express.static(__dirname + '/public'));
+// const app = express();
 
+// app.use(express.static(__dirname + '/public'));
 
+ */
 /*const server = app.listen(8080);
 
 const io = require('socket.io').listen(server);

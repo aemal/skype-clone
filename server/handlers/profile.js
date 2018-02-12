@@ -58,7 +58,6 @@ module.exports = class {
                        avatarURL: req.filename || user.profile.avatarURL
                      };
         if(body.emailAddress){
-            console.log("req.id");
             this.userModel.findOne({
                 'emailAddress': req.body.emailAddress.toLowerCase()
             }, (err, user) => {
@@ -88,7 +87,6 @@ module.exports = class {
               }
             );    
         } else {
-            console.log(req.filename);
             this.userModel.findOneAndUpdate({_id: id},
                             {
                              $set:{profile : profile,
@@ -100,11 +98,8 @@ module.exports = class {
                                     deleteAvatar(req, next); 
                                     return res.json({ success : false, message : 'profile is not edited....', Error: err});
                                   };
-                                  // setTimeout(()=>{
-                                  //   console.log('Sendin response');
                                     const {emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status} = user;
                                     res.json({ success : true, message : 'profile is edited successfully', emailAddress, profile, gender, dateOfBirth, _id, avatarURL, status});
-                                  // }, 5000)
             });
         }       
   }

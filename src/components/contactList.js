@@ -9,7 +9,6 @@ import { setCurrentFriend } from "../actions/setCurrentFriendAction";
 import compose from 'recompose/compose';
 import { connect } from "react-redux";
 
-
 const styles = theme => ({
   root: {
     width: "100%"
@@ -25,30 +24,51 @@ class ContactList extends Component {
       selectedIndex: null,
     }
   }
-  socketChanel(friend, e, i) {
+
+  socketChanel(friend, e, i){
+    
 
     this.setState({ selectedIndex: i });
 
+    //AJAX call 
+
+    let chatInfo = {
+        chatID: 'asdfasdfasdf',     
+        messages: [
+          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
+          {userID: 'bbbasdfasdfasdfasd', messageBody: 'hi'},
+          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
+          {userID: '5a7302431e75bdc1c1240c4c', messageBody: 'hi'},
+          {userID: 'bbbasdfasdfasdfasd', messageBody: 'hi'},
+          {userID: 'aasdfasdfasdfasdf', messageBody: 'hi'},
+        ]
+    };
+
+    
     this.props.setCurrentFriend(friend);
 
     // console.log(friend);
 
-    let user = decode(localStorage.getItem('token'));
-    let userId = user._id;
-    let socketChanelId = userId + "--" + friend.userId;
-    //console.log(socketChanelId)
 
-    this.setState({
-      socketChanelId: socketChanelId
-    })
+   let user = decode(localStorage.getItem('token')) ;
+   let userId = user._id;
+   let socketChanelId = userId+"--"+friend.userId;
+   //console.log(socketChanelId)
+   
+   this.setState({
+    socketChanelId: chatInfo.chatID
+   })
 
-    this.props.getId(socketChanelId)
+
+    this.props.getId(chatInfo)
 
   }
+  
   render() {
     const { classes } = this.props;
 
     const listItems = this.props.friendsList.map((item, index) => {
+      
 
       let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
 

@@ -16,6 +16,7 @@ import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 import config from "./config/config";
 import store from "./store"; 
+
 function mapStateToProps(state, filter) {
   return {
     //currentUserData:state.changeSettingReducer.currentUserData,
@@ -83,7 +84,6 @@ class App extends Component {
   
   socketSignal(roomID, Sbody) {
      
-    console.log("asdfasdf", roomID)
     const body = Sbody;
 
     console.log(body);
@@ -108,20 +108,32 @@ class App extends Component {
     
   }
 
-  getSocketChanelId(roomID) {
+  getSocketChanelId(chatInfo) {
     
     this.setState({
-      socketChanelId: roomID
+      socketChanelId: chatInfo.chatID
     })
 
-    this.socketSignal(roomID, "asdfasdf");
+    let oldMessages = [];
 
-    console.log(roomID)
+    chatInfo.messages.map(message => {
+      let oldMessage = {
+        messageBody: message.messageBody,
+        userID: message.userID,
+        roomID: chatInfo.chatID
+      };
+      oldMessages.push(oldMessage);
+    });
 
-       
-    console.log("roomID", roomID)
+    this.setState({ messages: oldMessages });
 
-    this.socket.emit('joinRoom', {
+    
+    //this.socketSignal(chatInfo.chatID, "aaaabbbbccc");
+    /*setTimeout(() => {
+      this.socketSignal(chatInfo.chatID, "xxddff");
+    }, 100)
+*/
+    /*this.socket.emit('joinRoom', {
       roomID,
       participants: [roomID.split("--")[0], roomID.split("--")[1]]
     });
@@ -136,30 +148,36 @@ class App extends Component {
           this.socket.join(roomInfo.roomID);
         }
     });
-
+*/
 
     
   }
 
   handleSubmit(event) {
    this.socketSignal(this.state.socketChanelId, event.target.value)
-   event.target.value = '';
-
-
-   
+   event.target.value = '';   
   }
 
   render() {
     const { alignItems, direction, justify } = this.state;
-    
+    let avatarURL;
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
+    let currentAvatar = user.profile.avatarURL;
     /* if(!this.props.currentUserData.profile.avatarURL === undefined){
       let avatarURL = this.props.currentUserData.profile.avatarURL
     }else{
       let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
     } */
-    let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
+    if(localStorage.getItem("updatedUserData")) {
+     
+      let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
+      let newAvatar = updatedUserData.profile.avatarURL 
+      console.log(updatedUserData)
+      avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
+    } else {
+      avatarURL =  `${config.BASE_URL}images/avatars/${currentAvatar}` ;
+    }
     console.log(user)
     return (
       <Grid
