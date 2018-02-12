@@ -73,6 +73,9 @@ describe('Send and receive messages over the chat', function() {
       .wait(1000)
       .get('#cypress-ser-new-freind')
       .click()
+
+      cy.get('#close-cypress')
+      .click()
       /*.find('')
       .click('center', {force: true})
       .should('have.value', ':smiley:')
