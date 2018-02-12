@@ -63,15 +63,15 @@ class App extends Component {
     console.log(this.props)
     console.log(this.props.contactList)
      //this.socket.on("message", message => {
-    this.socket.on(this.state.socketChanelId, message => {
+    /*this.socket.on(this.state.socketChanelId, message => {
       console.log("received messages...")
       this.setState({ messages: [...this.state.messages, message] });
-    });
+    });*/
  
    
     this.socket.on('conversation private post', function(data) {
         //display data.message
-        console.log(data);
+        console.log("received: ", data);
     });
 
   }
@@ -110,6 +110,10 @@ class App extends Component {
 
   getSocketChanelId(chatInfo) {
     
+    console.log("joining the room: ", chatInfo.chatID);
+console.log(this.socket)
+    this.socket.join(chatInfo.chatID);
+
     this.setState({
       socketChanelId: chatInfo.chatID
     })
@@ -154,7 +158,22 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-   this.socketSignal(this.state.socketChanelId, event.target.value)
+   //this.socketSignal(this.state.socketChanelId, event.target.value)
+
+    //this.socket.on('privateMessage', function(roomInfo) {
+        console.log('sending data to channel: ', this.state.socketChanelId);
+        
+        let user = decode(localStorage.getItem("token"));
+
+        let messagePayload = {
+          chatID: this.state.socketChanelId,
+          userID: user._id,
+          messageBody: event.target.value
+        };
+
+        this.socket.emit("privateMessage", messagePayload);
+   // });
+
    event.target.value = '';   
   }
 

@@ -71,7 +71,7 @@ const server = app.listen(port, () => {
 const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', socket => {
-    const sessionid = socket.id;
+    /*const sessionid = socket.id;
     console.log("Socket Connected: %s",  sessionid);
     socket.on('message', body => {
       socket.broadcast.emit('message', {
@@ -85,12 +85,10 @@ io.sockets.on('connection', socket => {
       //Save into chatmodel.
       socket.join(roomInfo.roomID);
     });
-  
+ */ 
     socket.on('privateMessage', function(data) {
         console.log('sending room post', data.roomID);
-        socket.broadcast.to(data.roomID).emit('conversation private post', {
-            message: data.message
-        });
+        socket.broadcast.to(data.chatID).emit('conversation private post', data);
     });
 
 });

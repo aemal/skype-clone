@@ -43,7 +43,7 @@ class ContactList extends Component {
         ]
     };
 
-    
+  
     this.props.setCurrentFriend(friend);
 
    // console.log(friend);
