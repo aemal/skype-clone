@@ -269,7 +269,7 @@ button.login-button:hover {
 }
 
 .sideBarContactListComponent {
-  height: calc(100vh - 225px);
+  height: calc(100vh - 207px);
   width: 100%;
   overflow: auto;
   display: block;
@@ -303,12 +303,12 @@ button.login-button:hover {
   width: 100%;
 }
 
-.search-bar {
-  background-color:#ed7033;
+.friend-search-bar {
+  background-color:#01062e;
   color: white;
 }
 
-.search-bar i {
+.friend-search-bar i {
   color: #fcf9ff;
 }
 
@@ -376,18 +376,15 @@ button.login-button:hover {
 
 .messagesLogComponent {
   overflow: auto;
-  height: calc(100vh - 210px);
+  height: calc(100vh - 183px);
   width: 100%;
   float: left;
   display: block;
 }
 
-.MuiGrid-typeItem-2.messagesLogComponent {
-  margin-top: 2rem;
-}
 
 .messagesContactDetailComponent {
-  height: 65px;
+  height: auto;
   width: 100%;
   float: left;
   display: block;
@@ -443,6 +440,7 @@ button.login-button:hover {
 }
 
 .you::before {
+
   box-shadow: 2px -2px 2px 0 rgba(178, 178, 178, 0.4);
   right: -9px;
 }
@@ -465,9 +463,12 @@ button.login-button:hover {
 }
 
 .emoticon:hover {
-  color: #3ba8c6;
+  color: #a5a5a5;
 }
 
 .form-control {
   width: 100%;
+}
+.highlightedFriend {
+  background-color: #ffaadd;
 }

@@ -75,7 +75,7 @@ class SearchBar extends Component {
       <div>
       <AppBar style={{position: 'relative', height:65, backgroundColor: '#726F6F',
       color: 'white', boxShadow: 'none'}}>
-      <Toolbar className="search-bar">
+      <Toolbar className="friend-search-bar">
       <IconButton
         ref={node => {
           this.button = node;
@@ -115,12 +115,13 @@ class SearchBar extends Component {
       </FormControl>
       </Popover>
       <IconButton
+        id="cypress-add-freind"
         aria-label="Menu"
         style={{position:'absolute',top:7,right:2}}
         onClick={this.handleClickOpen}>
         <i className="material-icons">add_circle</i>
       </IconButton>
-        <FormDialog
+        <FormDialog 
               open={this.state.contactAddOpen}
               handleClickOpen={this.handleClickOpen}
               handleClose={this.handleClickClose}

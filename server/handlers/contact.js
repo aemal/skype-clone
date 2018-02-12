@@ -1,12 +1,11 @@
 'use strict';
-
+ 
 module.exports = class {
   constructor(userModel) {
     this.userModel = userModel;
   };
 
   searchContact(req, res){
-    console.log(req.params)
       let regex = new RegExp(req.params.keyword, 'i');
       let query = this.userModel.find({$or:[{'profile.firstName': regex}, {'profile.lastName': regex}]});
 

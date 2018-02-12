@@ -12,9 +12,6 @@ import {
 import { DatePicker } from "material-ui-pickers";
 import Typography from "material-ui/Typography/Typography";
 import moment from "moment";
-import { signup } from "../actions/signup";
-import { connect } from "react-redux";
-import Avatar from "./skypeAvatar";
 import config from '../config/config.js';
 import { Link } from "react-router-dom";
 
@@ -316,7 +313,7 @@ class UserData extends Component {
         <div className="middle-container">
           <div className="sign-in-details">
             <div className={classes.avatar}>
-              <img src={config.BASE_URL + "images/who_logo.png"} className="logo" />
+              <img src={config.BASE_URL + "images/who_logo.png"} className="logo" alt="avatar" />
             </div>
             <h3 className="sign-in-header">Sign Up</h3>
             <form
@@ -435,4 +432,4 @@ class UserData extends Component {
   }
 }
 
-export default withStyles(styles)(connect(null, { signup })(UserData));
+export default withStyles(styles)(UserData);

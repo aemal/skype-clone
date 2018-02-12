@@ -29,14 +29,14 @@ function incomingForm(req, res, next) {
     req._body = true;
 
     const form = new multiparty.Form();
-    form.uploadDir = __dirname + '/../../public/avatars';
+    form.uploadDir = __dirname + '/../../public/images/avatars';
     form.maxFieldsSize = 1 * 1024 * 1024; // Memory size
     form.maxFilesSize = 1 * 1024 * 1024;
 
     form.on('error', (err)=>{
-        res.header('Connection', 'close');
+        //res.header('Connection', 'close');
         if(req.filename){
-        	fs.unlink(`${form.uploadDir}/${req.filename}`, err=>{if(err)throw err;});
+        	fs.unlink(`${form.uploadDir}/${req.filename}`, err=>{if(err) return netx(err);});
         }
         next(err);
     });
@@ -56,9 +56,9 @@ function incomingForm(req, res, next) {
             return;
         };
 
-        if (part.filename && type === 'image/jpeg' || type === 'image/png' || type === 'image/gif') {
-
-            const name = uuidv1() + '_' + Date.now() + '-' + part.filename;
+        if (part.filename && type === 'image/jpeg' || type === 'image/jpg' || type === 'image/png' || type === 'image/gif') {
+            const mimeType = type.substring('6');
+            const name = uuidv1() + '-' + Date.now() + '.' + mimeType;
             const path = form.uploadDir + "/" + name;
             req.filename = name;
             part.pipe(fs.createWriteStream(path));
