@@ -4,6 +4,9 @@ import IconButton from "material-ui/IconButton";
 import Avatar from "./skypeAvatar";
 import ProfileSettings from "./ProfileSettings";
 import FormDialog from "./dialog";
+import config from "../config/config.js";
+//import { Route, Redirect } from 'react-router'
+
 
 const styles = {
   root: {
@@ -36,6 +39,30 @@ class UserAvatar extends Component {
     this.setState({ open: false });
   };
 
+  logOut = () => {
+    //console.log('works');
+    let token = localStorage.getItem("token");
+    let url = `${config.BASE_URL}auth/logout`;
+
+    fetch(url, {
+      method: "Get",
+      headers: {
+        Authorization: `TOKEN ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+         //console.log(data );
+         //<Redirect to="/auth/login"/>
+      })
+      .catch(err => console.log(err));
+
+      console.log({ Error: "Fields are required" }); //Handle errors here...
+
+  }
+
+
   render() {
     const { classes } = this.props;
 
@@ -52,7 +79,7 @@ class UserAvatar extends Component {
             fullScreen={true}
           />
 
-          <IconButton>
+          <IconButton onClick={this.logOut} style={{zIndex:1}}>
             <i className="material-icons" style={{color: "#fff"}}>exit_to_app</i>
           </IconButton>
         </div>
