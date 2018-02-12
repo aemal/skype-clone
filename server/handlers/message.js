@@ -17,7 +17,7 @@ module.exports = class {
           .then(data=> res.json(data))
           .catch(err=> console.log(err));
       } else {
-          this.messageModel.findOne({roomID: chat._id})
+          this.messageModel.find({roomID: chat._id}).limit(100)
           .exec((err, messages)=>{
                 if(err || !messages)next(err);
                 res.json({chat, messages});

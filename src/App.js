@@ -111,7 +111,8 @@ class App extends Component {
   getSocketChanelId(chatInfo) {
     
     console.log("joining the room: ", chatInfo.chatID);
-console.log(this.socket)
+    console.log(this.socket)
+
     this.socket.join(chatInfo.chatID);
 
     this.setState({

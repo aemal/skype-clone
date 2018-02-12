@@ -177,7 +177,11 @@ const styles = theme => ({
           console.log("Json Data: ", data); 
           if(data){
             localStorage.setItem('updatedUserData',JSON.stringify(data))
-            window.location.reload();
+            console.log(data);
+            
+            setTimeout(()=> {
+              window.location.reload();
+            }, 400);
           }       
           
         }) 
