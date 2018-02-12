@@ -28,7 +28,6 @@ class UserAvatar extends Component {
   };
 
   handleClickOpen = () => {
-    console.log("AAA");
     this.setState({ open: true });
   };
 
@@ -41,9 +40,9 @@ class UserAvatar extends Component {
   console.log(this.props.avatarURL)
     return (
       <div className={classes.root}>
-        <div className="icons" style={{padding: 0, color: "#fff"}}>
-          <IconButton onClick={this.handleClickOpen} style={{zIndex:1}}>
-            <i className="material-icons" style={{color: "#fff"}}>settings</i>
+        <div className="icons" style={{ padding: 0, color: "#fff" }}>
+          <IconButton onClick={this.handleClickOpen} style={{ zIndex: 1 }}>
+            <i className="material-icons" style={{ color: "#fff" }}>settings</i>
           </IconButton>
           <FormDialog
             open={this.state.open}
@@ -53,10 +52,10 @@ class UserAvatar extends Component {
           />
 
           <IconButton>
-            <i className="material-icons" style={{color: "#fff"}}>exit_to_app</i>
+            <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
           </IconButton>
         </div>
-        <div className={classes.avatar} style={{padding: 10, marginTop: -60}}>
+        <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
           <Avatar size="100px" avatar={this.props.avatarURL} />
         </div>
 
