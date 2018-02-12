@@ -182,16 +182,20 @@ console.log(this.socket)
     let avatarURL;
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
+    let currentAvatar = user.profile.avatarURL;
     /* if(!this.props.currentUserData.profile.avatarURL === undefined){
       let avatarURL = this.props.currentUserData.profile.avatarURL
     }else{
       let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
     } */
-    if(localStorage.getItem("avatarUpdated")) {
-      let updatedUserData = localStorage.getItem("updatedUserData");
-      avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${updatedUserData.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
+    if(localStorage.getItem("updatedUserData")) {
+     
+      let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
+      let newAvatar = updatedUserData.profile.avatarURL 
+      console.log(updatedUserData)
+      avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {
-      avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
+      avatarURL =  `${config.BASE_URL}images/avatars/${currentAvatar}` ;
     }
     console.log(user)
     return (
