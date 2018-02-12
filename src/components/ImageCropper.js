@@ -36,7 +36,7 @@ class ImageCrop extends Component {
         return (
             <div>
                 <h3>Default image crop</h3>
-                <img src={this.state.imgSrc} />
+
                 <Cropper
                     src={this.state.imgSrc}
                     ref={ref => { this.image = ref }}

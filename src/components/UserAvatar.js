@@ -78,13 +78,14 @@ class UserAvatar extends Component {
             fullScreen={true}
           />
 
-          <IconButton>
+          <IconButton onClick={this.logOut} style={{ zIndex: 1 }}>
             <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
           </IconButton>
         </div>
         <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
           <Avatar size="100px" avatar={this.props.avatarURL} />
         </div>
+      </div>
       );
     }
 
