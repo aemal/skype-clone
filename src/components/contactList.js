@@ -16,17 +16,18 @@ const styles = theme => ({
 });
 
 class ContactList extends Component {
-  
+
   constructor() {
     super();
-    this.state={
-      socketChanelId:'',
-      selectedIndex: null,    
+    this.state = {
+      socketChanelId: '',
+      selectedIndex: null,
     }
   }
 
   socketChanel(friend, e, i){
     
+
     this.setState({ selectedIndex: i });
 
     //AJAX call 
@@ -46,7 +47,8 @@ class ContactList extends Component {
   
     this.props.setCurrentFriend(friend);
 
-   // console.log(friend);
+    // console.log(friend);
+
 
    let user = decode(localStorage.getItem('token')) ;
    let userId = user._id;
@@ -57,28 +59,31 @@ class ContactList extends Component {
     socketChanelId: chatInfo.chatID
    })
 
+
     this.props.getId(chatInfo)
 
   }
   
   render() {
     const { classes } = this.props;
+
     const listItems = this.props.friendsList.map((item, index) => {
       
+
       let avatarURL = item.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${item.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-      
+
       let highlightedFriend = (index === this.state.selectedIndex) ? "#01062e" : "";
 
       return (
         <ListItem key={item.userId}
           dense button className="list-item"
-          style={{backgroundColor: highlightedFriend}}
+          style={{ backgroundColor: highlightedFriend }}
           onClick={event => this.socketChanel(item, event, index)} >
           <SkypeAvatar
             avatar={avatarURL}
             size={45}
           />
-          <ListItemText primary={item.fullName}  />
+          <ListItemText primary={item.fullName} />
         </ListItem>
       );
     });
@@ -93,9 +98,9 @@ class ContactList extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      setCurrentFriend: (user) => {
-          dispatch(setCurrentFriend(user));
-      }
+    setCurrentFriend: (user) => {
+      dispatch(setCurrentFriend(user));
+    }
   };
 };
 
