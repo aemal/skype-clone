@@ -87,7 +87,6 @@ module.exports = class {
               }
             );    
         } else {
-            console.log(req.filename);
             this.userModel.findOneAndUpdate({_id: id},
                             {
                              $set:{profile : profile,
@@ -95,11 +94,19 @@ module.exports = class {
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
                                   if(err || !user){
-                                    console.log("err");
                                     deleteAvatar(req, next); 
                                     return res.json({ success : false, message : 'profile is not edited....', Error: err});
                                   };
-                                  process.nextTick(()=>res.json({ success : true, message : 'profile is edited successfully', user: user}));                            
+                                  let sendUser = user => new Promise(res=> res(user));
+                                  sendUser(user).then((user)=>{
+                                    let userObj = {};
+                                    if(user.profile.avatarURL !== req.filename){
+                                      let avatarURL = req.filename;
+                                      let {emailAddress, profile, gender, dateOfBirth, _id, status} = user;
+                                      return userObj =  {emailAddress, profile, gender, dateOfBirth, avatarURL, _id};                                   
+                                    };
+                                  }).then((data)=>res.json({ success : true, message : 'profile is edited successfully', user: data}));
+                                  
             });
         }       
   }
