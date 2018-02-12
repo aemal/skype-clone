@@ -17,9 +17,10 @@ module.exports = class {
           .then(data=> res.json(data))
           .catch(err=> console.log(err));
       } else {
-          this.messageModel.find({roomID: chat._id}).limit(100)
+          this.messageModel.find({chatID: chat._id}).limit(100)
           .exec((err, messages)=>{
                 if(err || !messages)next(err);
+                console.log(messages);
                 res.json({chat, messages});
           })
       }
@@ -28,15 +29,17 @@ module.exports = class {
   send(req,res,next) {
 
     let roomID = req.body.roomID;
-    let newMessage = {userID: req.body.userID, message: req.body.message};
+    let userID = req.body.userID;
+    let newMessage = req.body.message;
 
     this.messageModel.findOne({roomID: roomID})
     .exec((err, chat) => {
       if(err) next(err);
       if(!chat) {
           this.messageModel.create({
-            roomID: roomID,
-            messages: [newMessage], 
+            chatID: roomID,
+            userID: userID,
+            message: newMessage 
           })
           .then(data=> res.json(data))
           .catch(err=> console.log(err));         
