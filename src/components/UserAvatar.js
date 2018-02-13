@@ -28,7 +28,7 @@ const styles = {
 class UserAvatar extends Component {
   state = {
     open: false,
-    redirect : false
+    redirect: false
   };
 
   handleClickOpen = () => {
@@ -52,8 +52,8 @@ class UserAvatar extends Component {
     })
       .then(res => res.json())
       .then(data => {
-         localStorage.clear();
-         this.setState({ redirect : true })
+        localStorage.clear();
+        this.setState({ redirect: true })
       })
       .catch(err => console.log(err));
 
@@ -62,30 +62,30 @@ class UserAvatar extends Component {
 
   render() {
     const { classes } = this.props;
-    if(this.state.redirect){
-      return <Redirect to='/'/>
-    }else{
-    return (
-      <div className={classes.root}>
-        <div className="icons" style={{ padding: 0, color: "#fff" }}>
-          <IconButton onClick={this.handleClickOpen} style={{ zIndex: 1 }}>
-            <i className="material-icons" style={{ color: "#fff" }}>settings</i>
-          </IconButton>
-          <FormDialog
-            open={this.state.open}
-            handleClose={this.handleClose}
-            compo={<ProfileSettings />}
-            fullScreen={true}
-          />
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    } else {
+      return (
+        <div className={classes.root}>
+          <div className="icons" style={{ padding: 0, color: "#fff" }}>
+            <IconButton onClick={this.handleClickOpen} style={{ zIndex: 1 }}>
+              <i className="material-icons" style={{ color: "#fff" }}>settings</i>
+            </IconButton>
+            <FormDialog
+              open={this.state.open}
+              handleClose={this.handleClose}
+              compo={<ProfileSettings />}
 
-          <IconButton onClick={this.logOut} id='cypress-logout' style={{ zIndex: 1 }}>
-            <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
-          </IconButton>
+            />
+
+            <IconButton onClick={this.logOut} id='cypress-logout' style={{ zIndex: 1 }}>
+              <i className="material-icons" style={{ color: "#fff" }}>exit_to_app</i>
+            </IconButton>
+          </div>
+          <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
+            <Avatar size="100px" avatar={this.props.avatarURL} />
+          </div>
         </div>
-        <div className={classes.avatar} style={{ padding: 10, marginTop: -60 }}>
-          <Avatar size="100px" avatar={this.props.avatarURL} />
-        </div>
-      </div>
       );
     }
 

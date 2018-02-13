@@ -22,8 +22,8 @@ const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
 
-// const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
-const db = config.DB_Connection.URL;
+const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+//const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise;
@@ -71,41 +71,41 @@ const server = app.listen(port, () => {
 const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', socket => {
-    /*const sessionid = socket.id;
-    console.log("Socket Connected: %s",  sessionid);
-    socket.on('message', body => {
-      socket.broadcast.emit('message', {
-        body,
-        id: sessionid,
-      })
+  /*const sessionid = socket.id;
+  console.log("Socket Connected: %s",  sessionid);
+  socket.on('message', body => {
+    socket.broadcast.emit('message', {
+      body,
+      id: sessionid,
     })
+  })
 
-    socket.on('joinRoom', (roomInfo)=>{
-      console.log('joining room', roomInfo);
-      //Save into chatmodel.
-      socket.join(roomInfo.roomID);
-    });
- */ 
+  socket.on('joinRoom', (roomInfo)=>{
+    console.log('joining room', roomInfo);
+    //Save into chatmodel.
+    socket.join(roomInfo.roomID);
+  });
+*/
 
-    socket.on('joinRoom', (chatID)=>{
-      console.log('joining room', chatID);
-      //Save into chatmodel.
-      socket.join(chatID);
-    });
+  socket.on('joinRoom', (chatID) => {
+    console.log('joining room', chatID);
+    //Save into chatmodel.
+    socket.join(chatID);
+  });
 
-    socket.on('privateMessage', function(data) {
-        console.log('chatMessages', data);
+  socket.on('privateMessage', function (data) {
+    console.log('chatMessages', data);
 
-        Message.create({
-          chatID: data.chatID,
-          userID: data.userID,
-          message: data.messageBody
-        })
-        .then(data=> console.log(data))
-        .catch(err=> console.log(err));
+    Message.create({
+      chatID: data.chatID,
+      userID: data.userID,
+      message: data.messageBody
+    })
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
 
-        socket.broadcast.to(data.chatID).emit('chatMessages', data);
-    });
+    socket.broadcast.to(data.chatID).emit('chatMessages', data);
+  });
 
 });
 

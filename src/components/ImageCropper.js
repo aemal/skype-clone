@@ -1,56 +1,42 @@
 import React, { Component } from 'react';
+import AvatarImageCropper from 'react-avatar-image-cropper';
+import config from "../config/config.js";
 
-import { Cropper } from 'react-image-cropper';
+class ImageCropper extends Component {
 
 
-
-class ImageCrop extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            imgSrc: this.props.imgSrc,
-            image: '',
-            imageLoaded: false,
+            imgSrc: "",
+
         }
-    }
 
-    handleImageLoaded(state) {
+    }
+    apply = (file) => {
+
+        localStorage.setItem("arguments", JSON.stringify(arguments));
+        let objectURL = URL.createObjectURL(file);
+
         this.setState({
-            [state + 'Loaded']: true
+            imgSrc: objectURL,
         })
+        console.log(this.state);
+        this.props.saveCropedImage(file)
     }
-
-
-    handleClick(state) {
-        let node = this[state]
-        this.setState({
-            [state]: node.crop()
-        })
-    }
-
 
 
 
 
     render() {
         return (
-            <div>
-                <h3>Default image crop</h3>
+            <div style={{ width: '150px', height: '150px', position: "absolute", top: "4%", right: "5%", margin: 'auto', border: '1px solid #ccc', borderRadius: '50%', marginTop: '20px' }}>
+                <AvatarImageCropper apply={this.apply} rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%' }} />
 
-                <Cropper
-                    src={this.state.imgSrc}
-                    ref={ref => { this.image = ref }}
-                    onImgLoad={() => this.handleImageLoaded('image')}
-                />
-                <br />
-                {this.state.imageLoaded ? <button onClick={() => this.handleClick('image')}>crop</button> : null}
-                <h4>after crop</h4>
-                {this.state.image ? <img className="after-img" src={this.state.image} alt="" /> : null}
             </div>
 
         );
     }
-
 }
 
-export default ImageCrop;
+export default ImageCropper;
