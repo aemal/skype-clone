@@ -10,9 +10,9 @@ import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
 import Grid from "material-ui/Grid";
-import { changeSetting } from "../actions/changeSetting";
-import compose from 'recompose/compose';
-import { connect } from "react-redux";
+//import { changeSetting } from "../actions/changeSetting";
+//import compose from 'recompose/compose';
+//import { connect } from "react-redux";
 import ImageCropper from './ImageCropper';
 const styles = theme => ({
 
@@ -153,7 +153,7 @@ class UserPictureAndState extends Component {
     e.preventDefault();
 
     var formData = new FormData(e.target);
-    let data = this.state.newUser;
+   // let data = this.state.newUser;
 
    
     console.log(formData)
