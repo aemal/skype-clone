@@ -40,7 +40,7 @@ class ContactDetail extends Component {
                           compo={"Comming soon..."}
                           fullScreen={false}
                         />
-                        <Button onClick={this.handleClickOpen}  style={{float: "right"}}>
+                        <Button id='cypress-vedio' onClick={this.handleClickOpen}  style={{float: "right"}}>
                         <i className='material-icons' >videocam</i>
                         </Button>
                         <FormDialog
