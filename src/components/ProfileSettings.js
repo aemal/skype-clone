@@ -156,7 +156,7 @@ class UserPictureAndState extends Component {
     let data = this.state.newUser;
 
    
-    console.log(formData)
+    console.log("formData: ", formData)
     
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
     let token = localStorage.getItem("token");
