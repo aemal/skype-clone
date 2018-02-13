@@ -10,9 +10,9 @@ import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
 import Grid from "material-ui/Grid";
-import { changeSetting } from "../actions/changeSetting";
-import compose from 'recompose/compose';
-import { connect } from "react-redux";
+//import { changeSetting } from "../actions/changeSetting";
+//import compose from 'recompose/compose';
+//import { connect } from "react-redux";
 import ImageCropper from './ImageCropper';
 const styles = theme => ({
   textField: {
@@ -133,8 +133,9 @@ class UserPictureAndState extends Component {
   submitForm() {
 
     var formData = new FormData(this.formSettings.target);
-
     let data = this.state.newUser;
+
+   
 
     formData.append('file', this.state.submittedImgValue)
     formData.append('dateOfBirth', this.state.userCurrentData.dateOfBirth)

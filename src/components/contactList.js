@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import List, { ListItem, ListItemText } from "material-ui/List";
 import SkypeAvatar from "./skypeAvatar";
-import SearchList from "../components/searchList";
+//import SearchList from "../components/searchList";
 import decode from 'jwt-decode';
 import config from '../config/config';
 import { setCurrentFriend } from "../actions/setCurrentFriendAction";
