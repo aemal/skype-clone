@@ -68,7 +68,7 @@ class UserAvatar extends Component {
     return (
       <div className={classes.root}>
         <div className="icons" style={{ padding: 0, color: "#fff" }}>
-          <IconButton onClick={this.handleClickOpen} style={{ zIndex: 1 }}>
+          <IconButton onClick={this.handleClickOpen} id='cypress-settings' style={{ zIndex: 1 }}>
             <i className="material-icons" style={{ color: "#fff" }}>settings</i>
           </IconButton>
           <FormDialog
