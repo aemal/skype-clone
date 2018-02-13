@@ -198,11 +198,6 @@ console.log("last hope: ", chatInfo.messages);
     // Getting the information from the loged user
     let user = decode(localStorage.getItem("token"));
     let currentAvatar = user.profile.avatarURL;
-    /* if(!this.props.currentUserData.profile.avatarURL === undefined){
-      let avatarURL = this.props.currentUserData.profile.avatarURL
-    }else{
-      let avatarURL = user.profile.avatarURL !== '' ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
-    } */
     if(localStorage.getItem("updatedUserData")) {
      
       let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
@@ -213,7 +208,6 @@ console.log("last hope: ", chatInfo.messages);
     } else {
       avatarURL =  `${config.BASE_URL}images/avatars/${currentAvatar}` ;
     }
-    console.log(user)
     return (
       <Grid
         container

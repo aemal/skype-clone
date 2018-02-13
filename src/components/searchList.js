@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import SkypeAvatar from './skypeAvatar';
+import Avatar from './skypeAvatar';
 import IconButton from "material-ui/IconButton";
 import uuidv1 from "uuid/v1";
 import FriendConfirmation from "./addFriendConfirmation";
-
+import config from "../config/config";
+import AddIcon from 'material-ui-icons/Add';
+import Icon from 'material-ui/Icon';
+import Button from 'material-ui/Button';
 const styles = theme => ({
   root: {
     width: '100%',
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
@@ -58,9 +64,12 @@ class SearchList extends Component {
   };
   render() {
     const { classes } = this.props;
-    let listItems = "Search a new friend";
+    
+    let listItems = "";
     if(this.props.users !== ''){
      listItems = this.props.users.map(item => {
+     // let avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
+     //console.log(item,`${config.BASE_URL}images/avatars/${item.profile.avatarURL}`)
       return (
         <ListItem key={item._id} dense button className="list-item" onClick={()=>{
           this.requestFriends(item);
@@ -69,23 +78,20 @@ class SearchList extends Component {
         }
 
         }>
-          <SkypeAvatar
-            avatar={
-              // the image will be item.avatarURL
-                `images/avatar/${item.profile.avatarURL}`
-            }
+          <Avatar
+            avatar={ `${config.BASE_URL}images/avatars/${item.profile.avatarURL}`}
             size={45}
           />
           <ListItemText primary={item.profile.firstName + ' ' + item.profile.lastName} />
-        <IconButton onClick={()=>{
+        <Button  className={classes.button} variant="fab" color="primary" aria-label="Add" onClick={()=>{
           this.requestFriends(item);
           // this.handleClickOpen();
           <FriendConfirmation handleClickOpen={this.handleClickOpen} />
         }
 
         }>
-          <i className="material-icons">add_circle_outline</i>
-        </IconButton>
+         <AddIcon />
+        </Button>
         </ListItem>
       );
     });
