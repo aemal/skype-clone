@@ -7,7 +7,7 @@ class ContactDetail extends Component {
   render() {
     const {message} = this.props
     let align;
-    let time = this.props.time;
+    //let time = this.props.time;
 
     let user = decode(localStorage.getItem("token"));
 

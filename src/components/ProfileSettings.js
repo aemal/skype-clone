@@ -10,57 +10,40 @@ import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
 import Grid from "material-ui/Grid";
-import { changeSetting } from "../actions/changeSetting";
-import compose from 'recompose/compose';
-import { connect } from "react-redux";
+//import { changeSetting } from "../actions/changeSetting";
+//import compose from 'recompose/compose';
+//import { connect } from "react-redux";
 import ImageCropper from './ImageCropper';
 const styles = theme => ({
-
   textField: {
-    borderRadius: 4,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    padding: '10px 12px',
-    width: 'calc(100% - 24px)',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    '&:focus': {
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      padding: 0,
-      'label + &': {
-        marginTop: theme.spacing.unit * 3,
-      },
-    },
-    Typography: {
-      fontSize: "20px",
-      marginTop: 10
-    },
-    pic: {
-      fontSize: "20px",
-      marginTop: 10,
-      float: 'left'
-    },
-    DatePicker: {
-      float: "left",
-      marginBottom: 30,
-      width: 250
-    },
-    RadioGroup: {
-      display: "inline-block",
-
-      marginBottom: 20
-    },
+    width: 300,
+    float: 'left',
+    marginBottom: 10,
   },
+  emailAddress: {
+    width: 300,
+    float: 'left',
+    marginBottom: 30,
+  },
+
+  pickerContainer: {
+    width: 200,
+  },
+
+  datePicker: {
+    width: 300,
+  }
+
+
 });
 
 
 class UserPictureAndState extends Component {
   constructor() {
     super();
-    console.log(`${config.BASE_URL}images/avatar_placeholder.png`)
-
     this.state = {
       value: '',
+      submittedImgValue: '',
       newUser: {
         firstName: '',
         lastName: '',
@@ -85,22 +68,22 @@ class UserPictureAndState extends Component {
         emailAddress: user.emailAddress,
         dateOfBirth: user.dateOfBirth,
         gender: user.profile.gender,
-        //avatarURL: user.profile.avatarURL
+        avatarURL: user.profile.avatarURL
+
       }
     })
-  }
 
-  componentDidMount() {
-    console.log(this.props)
+
   }
 
   handleDataChange = date => {
-    let checketDate = date.format().substring(0, 10);
+    let checkedDate = date.format().substring(0, 10);
     this.setState({
-      newUser: { ...this.state.newUser, dateOfBirth: checketDate }
+      newUser: { ...this.state.newUser, dateOfBirth: checkedDate }
     });
-    console.log(checketDate)
   };
+
+
   handleImageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
@@ -120,13 +103,10 @@ class UserPictureAndState extends Component {
 
     reader.readAsDataURL(file);
 
-    /*  this.setState({
-       newUser:{
-         ...this.state.newUser,
-         avatarURL:e.target.f
-       }
-     }) */
   }
+
+
+
   handleRadioChange = (e, value) => {
     this.setState({
       newUser: {
@@ -136,6 +116,7 @@ class UserPictureAndState extends Component {
       value: value
     });
   };
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -149,47 +130,64 @@ class UserPictureAndState extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  submitForm() {
 
-    var formData = new FormData(e.target);
+    var formData = new FormData(this.formSettings.target);
     let data = this.state.newUser;
 
    
-    console.log(formData)
-    
+
+    formData.append('file', this.state.submittedImgValue)
+    formData.append('dateOfBirth', this.state.userCurrentData.dateOfBirth)
+    formData.append('firstName', this.state.userCurrentData.firstName)
+    formData.append('lastName', this.state.userCurrentData.lastName)
+
+
+
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
     let token = localStorage.getItem("token");
 
     if (this.state.newUser.avatarURL !== '') {
-      console.log('hi')
 
-     // this.props.changeUserSetting(url,formData)
-     
-        fetch(url, {
+
+      // this.props.changeUserSetting(url,formData)
+
+      fetch(url, {
         method: "POST",
-        headers: { 
+        headers: {
           'Authorization': `TOKEN ${token}`
         },
         body: formData
       })
         .then(res => res.json())
         .then(data => {
-          console.log("Json Data: ", data); 
-          if(data){
-            localStorage.setItem('updatedUserData',JSON.stringify(data))
+
+          if (data) {
+            localStorage.setItem('updatedUserData', JSON.stringify(data))
             setTimeout(() => {
               window.location.reload();
-            },2000) 
-            
-          }       
-          
-        }) 
-        .catch(err => console.log(err));  
+            }, 2000)
+
+          }
+
+        })
+        .catch(err => console.log(err));
 
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
+  }
+
+  saveCropedImage(file) {
+    let objectURL = URL.createObjectURL(file);
+    this.setState({ submittedImgValue: file })
+
+  }
+
+  handleSubmit(e) {
+
+    e.preventDefault();
+
   };
 
   render() {
@@ -202,6 +200,7 @@ class UserPictureAndState extends Component {
             autoComplete="off"
             onSubmit={this.handleSubmit.bind(this)}
             encType="multipart/form-data"
+            ref={(form) => this.formSettings = form}
           >
             <TextField
               id="firstName"
@@ -222,27 +221,17 @@ class UserPictureAndState extends Component {
 
             <TextField
               id="emailAddress"
-              className={classes.textField}
+              className={classes.emailAddress}
               label={this.state.userCurrentData.emailAddress}
               onChange={this.handleInputChange}
               name="emailAddress"
             />
 
-            <TextField
-              id="dateOfBirth"
-              className={classes.textField}
-              value={this.state.newUser.dateOfBirth || this.state.userCurrentData.dateOfBirth}
-              onChange={this.handleInputChange}
-              name="dateOfBirth"
-              type="hidden"
-            />
-
-            <div className="picker">
+            <div className={classes.pickerContainer}>
               <Typography
                 type="caption"
                 align="left"
                 gutterBottom
-                className={classes.pic}
               >
                 Date of Birth
                 </Typography>
@@ -251,38 +240,20 @@ class UserPictureAndState extends Component {
                 value={this.state.userCurrentData.dateOfBirth}
                 labelFunc={date => moment(date).format("Do MMMM YYYY")}
                 onChange={this.handleDataChange}
-                className={classes.DatePicker}
+                className={classes.datePicker}
               />
             </div>
-            <TextField
-            id="file"
-            className={classes.textField}
-            label={'change Pic'}
-            onChange={this.handleImageChange}
-            name="avatar"
-            type='file'
 
-          />
-            <Button type="submit" className="login-button" >
+
+            <ImageCropper saveCropedImage={this.saveCropedImage.bind(this)} />
+
+            <Button type="button" className={"login-button"} onClick={this.submitForm.bind(this)} >
               SAVE
               </Button>
           </form>
 
         </Grid>
-       {/*  <Grid item xs>
-          <ImageCropper imgSrc={this.state.newUser.avatarURL} />
-          <TextField
-            id="file"
-            className={classes.textField}
-            label={'change Pic'}
-            onChange={this.handleImageChange}
-            name="avatar"
-            type='file'
-
-          />
-
-        </Grid>*/}
-      </Grid> 
+      </Grid>
     )
   }
 }

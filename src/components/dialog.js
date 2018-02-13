@@ -16,6 +16,7 @@ const styles = {
   comp:{
     position:'relative',
     display:'flex',
+    width:'50%'
     
   },
   background:{

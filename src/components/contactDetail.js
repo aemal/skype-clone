@@ -40,7 +40,7 @@ class ContactDetail extends Component {
                           compo={"Comming soon..."}
                           fullScreen={false}
                         />
-                        <Button onClick={this.handleClickOpen}  style={{float: "right"}}>
+                        <Button id='cypress-vedio' onClick={this.handleClickOpen}  style={{float: "right"}}>
                         <i className='material-icons' >videocam</i>
                         </Button>
                         <FormDialog
@@ -59,7 +59,7 @@ class ContactDetail extends Component {
       <div className="contact-list">
         <div style={{width: "100%"}}>
           <div style={{float: "left"}}>
-            <img src={config.BASE_URL + "images/who_logo.png"} style={{height: 54, marginTop: 5}} />
+            <img src={config.BASE_URL + "images/who_logo.png"} style={{height: 54, marginTop: 5}} alt='logo' />
           </div>
           {friendDetail}
 

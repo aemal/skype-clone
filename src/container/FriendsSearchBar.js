@@ -127,7 +127,7 @@ class SearchBar extends Component {
               handleClose={this.handleClickClose}
               compo={<AddContact />}
               autoScrollBodyContent={false}
-              fullScreen= {true}
+              fullScreen= {false}
           />
       </Toolbar>
       </AppBar>
