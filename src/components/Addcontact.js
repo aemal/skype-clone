@@ -10,7 +10,7 @@ class AddContact extends Component {
     super();
     this.state = {
       users: '',
-      error:''
+      error :''
     };
     this.btnSearchClicked = this.btnSearchClicked.bind(this);
   }
@@ -48,7 +48,7 @@ class AddContact extends Component {
           inputRef={thisInput => {
             this.txtSearchInput = thisInput;
           }}
-          style={{width:"80%"}}
+          style={{width:"80%",marginLeft:35}}
           label="Search For a Friends"
           helperText={this.state.error}
         />
@@ -57,8 +57,8 @@ class AddContact extends Component {
           style={{
             position: "absolute",
             top: 25,
-            right: 40,
-            backgroundColor: "#726F6F"
+            right: 60,
+            backgroundColor: "rgba(8,6,6,0)"
           }}
           aria-label="Menu"
           onClick={this.btnSearchClicked}

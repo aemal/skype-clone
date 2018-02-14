@@ -12,9 +12,16 @@ import Button from 'material-ui/Button';
 const styles = theme => ({
   root: {
     width: '100%',
+    backgroundColor:'#fff'
   },
   button: {
-    margin: theme.spacing.unit,
+    minWidth:10,
+    height:"46px",
+    width:"46px",
+    borderRadius:'50%',
+    fontSize:24,
+    backgroundColor:'#0d56a5',
+    color:'#fff'
   },
 });
 
@@ -71,7 +78,7 @@ class SearchList extends Component {
      // let avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
      //console.log(item,`${config.BASE_URL}images/avatars/${item.profile.avatarURL}`)
       return (
-        <ListItem key={item._id} dense button className="list-item" onClick={()=>{
+        <ListItem key={item._id} dense button className="list-item"  className={classes.root} onClick={()=>{
           this.requestFriends(item);
           // this.handleClickOpen();
           <FriendConfirmation handleClickOpen={this.handleClickOpen} />
@@ -97,7 +104,7 @@ class SearchList extends Component {
     });
   }
     return (
-      <div id="friend-list" className={classes.root}>
+      <div id="friend-list">
         <List>{listItems}</List>
       </div>
     );
