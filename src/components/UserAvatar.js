@@ -75,7 +75,7 @@ console.log('Asdfd');
             open={this.state.open}
             handleClose={this.handleClose}
             compo={<ProfileSettings />}
-            fullScreen={true}
+            
           />
 
           <IconButton onClick={this.logOut} style={{ zIndex: 1 }}>
