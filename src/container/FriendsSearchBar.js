@@ -55,7 +55,10 @@ class SearchBar extends Component {
       open: false,
     });
   };
-
+searchFriends(e) {
+  this.props.onFilter(e.target.value)
+  this.setState({searchKeyword: e.target.value});
+} 
   button = null;
 
   render() {
@@ -108,8 +111,9 @@ class SearchBar extends Component {
       <Input
         id="searchContact"
         type="text"
+        value={this.state.searchKeyword}
         onChange={e =>{
-          this.props.onFilter(e.target.value)
+          this.searchFriends(e)
         }}
       />
       </FormControl>
@@ -119,6 +123,7 @@ class SearchBar extends Component {
         aria-label="Menu"
         style={{position:'absolute',top:7,right:2}}
         onClick={this.handleClickOpen}>
+
         <i className="material-icons">add_circle</i>
       </IconButton>
         <FormDialog 
