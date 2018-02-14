@@ -29,7 +29,33 @@ module.exports = class {
                               }
                             },{upsert: false ,multi: true}, (err, user)=>{
                                     if (err || !user)return next(err);
-                                    return res.json({ success : true, message : 'Request is sentd successfully...'});
+
+                                    this.userModel.findById({_id: req.body.userId}, (err, user2)=>{
+                                            if (err || !user2)return next(err);
+                                            let friendAccept = user2.contacts.friends;
+                                            friendAccept.push({
+                                                          fullName: user.profile.firstName,
+                                                          avatarURL: user.profile.avatarURL,
+                                                          userId: user._id
+                                                        });
+                                            if(friendAccept.length>0){
+                                              let contacts = {
+                                                                friends: friendAccept,
+                                                                blocked: [],
+                                                                requested: [],
+                                                                pending: [],
+                                                                decline: []
+                                                              };
+                                              this.userModel.findOneAndUpdate({_id: req.body.userId},
+                                                              {
+                                                               $set:{contacts : contacts
+                                                                }
+                                                              },{upsert: false ,multi: true}, (err, user2)=>{
+                                                                      if (err || !user2)return next(err);
+                                                                      res.json({ success : true, message : 'Request is sent successfully...'});
+                                              });
+                                            }
+                                    });        
             });
         }
 

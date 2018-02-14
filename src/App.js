@@ -16,6 +16,7 @@ import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 import config from "./config/config";
 import store from "./store"; 
+//import messageBaloun from "./components/messageBaloun";
 
 function mapStateToProps(state, filter) {
   return {
@@ -122,15 +123,17 @@ class App extends Component {
     })
 
     let oldMessages = [];
-
-    chatInfo.messages.forEach(message => {
+console.log("last hope: ", chatInfo.messages);
+    chatInfo.messages.forEach((message) => {
+      console.log("message: ", message)
       let oldMessage = {
-        messageBody: message.messageBody,
+        messageBody: message.message,
         userID: message.userID,
         roomID: chatInfo.chatID
       };
       oldMessages.push(oldMessage);
     });
+    console.log("Old Messages: ", oldMessages)
 
     this.setState({ messages: oldMessages });
 
@@ -180,6 +183,7 @@ class App extends Component {
           messageBody: event.target.value
         };
 
+        console.log("messagePayload: ", messagePayload)
         this.socket.emit("privateMessage", messagePayload);
    // });
 
