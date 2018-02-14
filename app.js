@@ -22,13 +22,9 @@ const authRoutes = require("./server/routers/auth-routers")(passport);
 const userRoutes = require("./server/routers/user-routers")();
 
 
-<<<<<<< HEAD
-const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
-=======
 
  const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
 
->>>>>>> 1ff3eaf5eeb7e54fe8223675888696c86784e0d0
 //const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;
 
