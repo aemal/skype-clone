@@ -10,10 +10,13 @@ import Typography from "material-ui/Typography/Typography";
 import decode from "jwt-decode";
 import uuidv1 from "uuid/v1";
 import Grid from "material-ui/Grid";
+import { Route, Redirect } from 'react-router';
 //import { changeSetting } from "../actions/changeSetting";
 //import compose from 'recompose/compose';
 //import { connect } from "react-redux";
 import ImageCropper from './ImageCropper';
+
+
 const styles = theme => ({
   textField: {
     width: 300,
@@ -49,31 +52,46 @@ class UserPictureAndState extends Component {
         lastName: '',
         emailAddress: '',
         dateOfBirth: '',
-        gender: '',
-        avatarURL: `${config.BASE_URL}images/avatar_placeholder.png`
+        gender: ''
       },
       disabled: true
 
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleimageChange = this.handleimageChange.bind(this);
   }
   componentWillMount() {
-    let user = decode(localStorage.getItem('token'))
-    this.setState({
-      userCurrentData: {
-        firstName: user.profile.firstName,
-        lastName: user.profile.lastName,
-        emailAddress: user.emailAddress,
-        dateOfBirth: user.dateOfBirth,
-        gender: user.profile.gender,
-        avatarURL: user.profile.avatarURL
+    let oldCredentials = decode(localStorage.getItem('token'));
+    let user = JSON.parse(localStorage.getItem('updatedUserData'));
+    console.log('oldCredentials', oldCredentials);
+    console.log('user', user);
 
-      }
-    })
+    if (user) {
+      this.setState({
+        userCurrentData: {
+          firstName: user.user.profile.firstName,
+          lastName: user.user.profile.lastName,
+          emailAddress: user.user.emailAddress,
+          dateOfBirth: user.user.dateOfBirth,
+          gender: user.user.profile.gender,
+          avatarURL: user.user.profile.avatarURL
 
+        }
+      });
+    } else {
+      this.setState({
+        userCurrentData: {
+          firstName: oldCredentials.profile.firstName,
+          lastName: oldCredentials.profile.lastName,
+          emailAddress: oldCredentials.emailAddress,
+          dateOfBirth: oldCredentials.dateOfBirth,
+          gender: oldCredentials.profile.gender,
+          avatarURL: oldCredentials.profile.avatarURL
+        }
 
+      });
+    }
   }
 
   handleDataChange = date => {
@@ -84,7 +102,7 @@ class UserPictureAndState extends Component {
   };
 
 
-  handleImageChange(e) {
+  handleimageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
@@ -115,7 +133,7 @@ class UserPictureAndState extends Component {
       },
       value: value
     });
-  };
+  }
 
   handleInputChange(event) {
     const target = event.target;
@@ -131,56 +149,80 @@ class UserPictureAndState extends Component {
   }
 
   submitForm() {
+    let changedEmail = false;
+    let formData = new FormData(this.formSettings.target);
 
-    var formData = new FormData(this.formSettings.target);
-    let data = this.state.newUser;
 
-   
 
-    formData.append('file', this.state.submittedImgValue)
-    formData.append('dateOfBirth', this.state.userCurrentData.dateOfBirth)
-    formData.append('firstName', this.state.userCurrentData.firstName)
-    formData.append('lastName', this.state.userCurrentData.lastName)
 
+    // Only will be updated what the user changes
+    //this.state.submittedImgValue === '' ? formData.append('file', this.state.userCurrentData.avatarURL) : formData.append('file', this.state.submittedImgValue);
+    this.state.newUser.dateOfBirth === '' ? formData.append('dateOfBirth', this.state.userCurrentData.dateOfBirth) : formData.append('dateOfBirth', this.state.newUser.dateOfBirth);
+    this.state.newUser.firstName === '' ? formData.append('firstName', this.state.userCurrentData.firstName) : formData.append('firstName', this.state.newUser.firstName);
+    this.state.newUser.lastName === '' ? formData.append('lastName', this.state.userCurrentData.lastName) : formData.append('lastName', this.state.newUser.lastName);
+    this.state.imageChanged === true ? formData.append('file', this.state.submittedImgValue) : null;
+
+    // if the email is empty it will no send nothing
+    if (this.state.newUser.emailAddress !== '') {
+      formData.append('emailAddress', this.state.newUser.emailAddress);
+      changedEmail = true;
+    }
+
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
 
 
     let url = `${config.BASE_URL}user/profile_edit/${uuidv1()}`;
     let token = localStorage.getItem("token");
 
-    if (this.state.newUser.avatarURL !== '') {
 
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Authorization': `TOKEN ${token}`
+      },
+      body: formData
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data) {
+          localStorage.setItem('updatedUserData', JSON.stringify(data))
 
-      // this.props.changeUserSetting(url,formData)
-
-      fetch(url, {
-        method: "POST",
-        headers: {
-          'Authorization': `TOKEN ${token}`
-        },
-        body: formData
-      })
-        .then(res => res.json())
-        .then(data => {
-
-          if (data) {
-            localStorage.setItem('updatedUserData', JSON.stringify(data))
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000)
-
+          console.log(changedEmail);
+          // 
+          if (changedEmail) {
+            let url = `${config.BASE_URL}auth/logout`;
+            fetch(url, {
+              method: "Get",
+              headers: {
+                Authorization: `TOKEN ${token}`,
+              }
+            })
+              .then(res => res.json())
+              .then(data => {
+                localStorage.clear();
+                this.setState({ redirect: true })
+              })
+              .catch(err => console.log(err));
           }
+          // setTimeout(() => {
+          //   //window.location.reload();
+          // }, 10000)
 
-        })
-        .catch(err => console.log(err));
+        }
 
-    } else {
-      console.log({ Error: "Fields are required" }); //Handle errors here...
-    }
+      })
+      .catch(err => console.log(err));
+
+
   }
 
   saveCropedImage(file) {
-    let objectURL = URL.createObjectURL(file);
-    this.setState({ submittedImgValue: file })
+    //let objectURL = URL.createObjectURL(file);
+    this.setState({ imageChanged: true, submittedImgValue: file })
 
   }
 
@@ -192,85 +234,77 @@ class UserPictureAndState extends Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <Grid container spacing={24} className={classes.row}>
-        <Grid item xs>
-          <form
-            noValidate
-            autoComplete="off"
-            onSubmit={this.handleSubmit.bind(this)}
-            encType="multipart/form-data"
-            ref={(form) => this.formSettings = form}
-          >
-            <TextField
-              id="firstName"
-              className={classes.textField}
-              label={this.state.userCurrentData.firstName}
-              onChange={this.handleInputChange}
-              name="firstName"
-            />
-
-            <TextField
-              id="lastName"
-              className={classes.textField}
-              label={this.state.userCurrentData.lastName}
-              onChange={this.handleInputChange}
-              name="lastName"
-              helperText={this.state.errorMessagelastName}
-            />
-
-            <TextField
-              id="emailAddress"
-              className={classes.emailAddress}
-              label={this.state.userCurrentData.emailAddress}
-              onChange={this.handleInputChange}
-              name="emailAddress"
-            />
-
-            <div className={classes.pickerContainer}>
-              <Typography
-                type="caption"
-                align="left"
-                gutterBottom
-              >
-                Date of Birth
-                </Typography>
-              <DatePicker
-                keyboard
-                value={this.state.userCurrentData.dateOfBirth}
-                labelFunc={date => moment(date).format("Do MMMM YYYY")}
-                onChange={this.handleDataChange}
-                className={classes.datePicker}
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    } else {
+      return (
+        <Grid container spacing={24} className={classes.row}>
+          <Grid item xs>
+            <form
+              noValidate
+              autoComplete="off"
+              onSubmit={this.handleSubmit.bind(this)}
+              encType="multipart/form-data"
+              ref={(form) => this.formSettings = form}
+            >
+              <TextField
+                id="firstName"
+                className={classes.textField}
+                label={this.state.userCurrentData.firstName}
+                onChange={this.handleInputChange}
+                name="firstName"
               />
-            </div>
+
+              <TextField
+                id="lastName"
+                className={classes.textField}
+                label={this.state.userCurrentData.lastName}
+                onChange={this.handleInputChange}
+                name="lastName"
+                helperText={this.state.errorMessagelastName}
+              />
+
+              <TextField
+                id="emailAddress"
+                className={classes.emailAddress}
+                label={this.state.userCurrentData.emailAddress}
+                onChange={this.handleInputChange}
+                name="emailAddress"
+              />
+
+              <div className={classes.pickerContainer}>
+                <Typography
+                  type="caption"
+                  align="left"
+                  gutterBottom
+                >
+                  Date of Birth
+                </Typography>
+                <DatePicker
+                  keyboard
+                  value={this.state.userCurrentData.dateOfBirth}
+                  labelFunc={date => moment(date).format("Do MMMM YYYY")}
+                  onChange={this.handleDataChange}
+                  className={classes.datePicker}
+                />
+              </div>
 
 
-            <ImageCropper saveCropedImage={this.saveCropedImage.bind(this)} />
+              <ImageCropper saveCropedImage={this.saveCropedImage.bind(this)} />
 
-            <Button type="button" className={"login-button"} onClick={this.submitForm.bind(this)} >
-              SAVE
+              <Button type="button" className={"login-button"} onClick={this.submitForm.bind(this)} >
+                SAVE
               </Button>
-          </form>
+            </form>
 
+          </Grid>
         </Grid>
-      </Grid>
-    )
+      )
+    }
   }
 }
 
-/* const mapDispatchToProps = (dispatch) => {
-  return {
-    changeUserSetting: (url, formData) => { dispatch(changeSetting(url, formData)) }
-  }
-
-  }; */
-
-
 
 export default withStyles(styles)(UserPictureAndState)
- /*  withStyles(styles),
-  connect(null, mapDispatchToProps)
-)(UserPictureAndState);
 
-  */
 
