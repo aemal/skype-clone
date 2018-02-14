@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Avatar from './skypeAvatar';
-import IconButton from "material-ui/IconButton";
+//import IconButton from "material-ui/IconButton";
 import uuidv1 from "uuid/v1";
-import FriendConfirmation from "./addFriendConfirmation";
+//import FriendConfirmation from "./addFriendConfirmation";
 import config from "../config/config";
 import AddIcon from 'material-ui-icons/Add';
-import Icon from 'material-ui/Icon';
+//import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
 const styles = theme => ({
   root: {
@@ -78,10 +78,10 @@ class SearchList extends Component {
      // let avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
      //console.log(item,`${config.BASE_URL}images/avatars/${item.profile.avatarURL}`)
       return (
-        <ListItem key={item._id} dense button className="list-item"  className={classes.root} onClick={()=>{
+        <ListItem key={item._id} dense button className="list-item"   onClick={()=>{
           this.requestFriends(item);
           // this.handleClickOpen();
-          <FriendConfirmation handleClickOpen={this.handleClickOpen} />
+         
         }
 
         }>
@@ -93,7 +93,7 @@ class SearchList extends Component {
         <Button  className={classes.button} variant="fab" color="primary" aria-label="Add" onClick={()=>{
           this.requestFriends(item);
           // this.handleClickOpen();
-          <FriendConfirmation handleClickOpen={this.handleClickOpen} />
+          
         }
 
         }>
@@ -104,7 +104,7 @@ class SearchList extends Component {
     });
   }
     return (
-      <div id="friend-list">
+      <div id="friend-list" className={classes.root}>
         <List>{listItems}</List>
       </div>
     );

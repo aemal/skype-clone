@@ -3,8 +3,8 @@ import IconButton from "material-ui/IconButton";
 //import Input from "material-ui/Input";
 import SearchList from "../components/searchList";
 import TextField from 'material-ui/TextField';
-import { CircularProgress } from 'material-ui/Progress';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+//import { CircularProgress } from 'material-ui/Progress';
+//import { FormControl, FormHelperText } from 'material-ui/Form';
 class AddContact extends Component {
   constructor() {
     super();

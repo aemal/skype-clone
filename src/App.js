@@ -123,7 +123,7 @@ class App extends Component {
 
     let oldMessages = [];
 
-    chatInfo.messages.map(message => {
+    chatInfo.messages.forEach(message => {
       let oldMessage = {
         messageBody: message.messageBody,
         userID: message.userID,
@@ -197,9 +197,9 @@ class App extends Component {
     if(localStorage.getItem("updatedUserData")) {
      
       let updatedUserData = JSON.parse(localStorage.getItem("updatedUserData"));
-      console.assert.og
+     
       let newAvatar = updatedUserData.user.avatarURL 
-      console.log(updatedUserData)
+
       avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {
       avatarURL =  `${config.BASE_URL}images/avatars/${currentAvatar}` ;

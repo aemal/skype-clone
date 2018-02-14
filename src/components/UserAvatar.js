@@ -5,7 +5,7 @@ import Avatar from "./skypeAvatar";
 import ProfileSettings from "./ProfileSettings";
 import FormDialog from "./dialog";
 import config from "../config/config.js";
-import { Route, Redirect } from 'react-router'
+import {  Redirect } from 'react-router'
 
 
 const styles = {

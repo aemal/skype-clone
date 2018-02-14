@@ -31,8 +31,8 @@ class ContactList extends Component {
     this.setState({ selectedIndex: i });
 
     let user = decode(localStorage.getItem('token')) ;
-    let userId = user._id;
-    let socketChanelId = userId+"--"+friend.userId;
+    //let userId = user._id;
+    //let socketChanelId = userId+"--"+friend.userId;
 
     //AJAX call 
     let url = `${config.BASE_URL}user/message/get`;

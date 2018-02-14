@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AvatarImageCropper from 'react-avatar-image-cropper';
-import config from "../config/config.js";
+//import config from "../config/config.js";
 
 class ImageCropper extends Component {
 
