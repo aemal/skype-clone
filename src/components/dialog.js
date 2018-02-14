@@ -8,7 +8,7 @@ import Dialog, {
 
 const styles = {
   closeDialog:{
-    color:'red',
+    color:'#00010b',
     position:'absolute',
     right:0,
     top:0,

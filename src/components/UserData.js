@@ -414,7 +414,7 @@ class UserData extends Component {
                 {this.state.buttonTitle}
               </Button>
 
-              <div className="additional-options text-center" style={{"text-align": "center"}}>
+              <div className="additional-options text-center" style={{"textAlign": "center"}}>
                 <Link className="link" to="/" style={{"display": "block"}}>
                   <p>Login</p>
                 </Link>

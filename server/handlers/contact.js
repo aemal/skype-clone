@@ -13,8 +13,17 @@ module.exports = class {
           if(err || !users){
             res.json({ success : false, message : 'Can not find any match names' });
           }else{
-            let user = users.map(el=>({profile:el.profile, status:el.status, _id:el._id, dateOfBirth:el.dateOfBirth}));
-            res.json(user);
+            this.userModel.findById({_id: req.id}, (err, user)=>{
+              let usersList; 
+              user.contacts.friends.length>0? 
+                user.contacts.friends.map(item=>
+                usersList = users.filter(el=> 
+                JSON.stringify(el._id) !== JSON.stringify(item.userId) && JSON.stringify(el._id) !== JSON.stringify(user._id))
+                .map(user=>({profile:user.profile, status:user.status, _id:user._id, dateOfBirth:user.dateOfBirth})))
+              :usersList= users.filter(el=> JSON.stringify(el._id) !== JSON.stringify(user._id))
+                .map(user=>({profile:user.profile, status:user.status, _id:user._id, dateOfBirth:user.dateOfBirth}));
+              res.json({usersList});
+            });
           }
        });
    }
