@@ -74,7 +74,7 @@ class SearchList extends Component {
     
     let listItems = "";
     if(this.props.users !== ''){
-     listItems = this.props.users.map(item => {
+     listItems = this.props.users.usersList.map(item => {
      // let avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
      //console.log(item,`${config.BASE_URL}images/avatars/${item.profile.avatarURL}`)
       return (

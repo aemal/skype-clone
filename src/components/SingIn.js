@@ -31,7 +31,8 @@ class SignIn extends Component {
     this.state = {
       checked: false,
       email: "",
-      password: ""
+      password: "",
+      loginError:''
     };
   }
 
@@ -82,7 +83,13 @@ class SignIn extends Component {
           localStorage.setItem("token", data.token);
           this.props.history.push("/auth");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err)
+          this.setState({
+            loginError:err.message
+          })
+        
+        });
     } else {
       console.log({ Error: "Fields are required" }); //Handle errors here...
     }
@@ -141,7 +148,9 @@ class SignIn extends Component {
                 <p>Forgot Password?</p>
               </Link>
             </div>
+            <span style={{color:'#e80909'}}>{this.state.loginError}</span>
           </div>
+         
         </div>
       </div>
     );
