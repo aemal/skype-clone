@@ -39,10 +39,10 @@ class MessagesLog extends Component {
 
 console.log("user", user)
 console.log("message", message)
-      console.log('aaacssssccddee', message)
+      console.log('profile avatar hereee: ', user.profile.avatarURL)
       if(message.userID === user._id) {
         order = ''
-        avatarURL = `${config.BASE_URL}images/avatars/${user.profile.avatarURL}`;
+        avatarURL = user.profile.avatarURL !== "" ? `${config.BASE_URL}images/avatars/${user.profile.avatarURL}` : `${config.BASE_URL}images/avatar_placeholder.png`;
       } else {
         order = 2;
         avatarURL = `${config.BASE_URL}images/avatars/${this.props.setCurrentFriend.avatarURL}`; 

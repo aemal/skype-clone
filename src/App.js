@@ -206,7 +206,7 @@ console.log("last hope: ", chatInfo.messages);
 
       avatarURL = `${config.BASE_URL}images/avatars/${newAvatar}`;
     } else {
-      avatarURL =  `${config.BASE_URL}images/avatars/${currentAvatar}` ;
+      avatarURL = currentAvatar !== "" ? `${config.BASE_URL}images/avatars/${currentAvatar}` : `${config.BASE_URL}images/avatar_placeholder.png`;
     }
     return (
       <Grid

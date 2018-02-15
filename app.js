@@ -23,7 +23,7 @@ const userRoutes = require("./server/routers/user-routers")();
 
 
 
- const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
+const db = "mongodb://test:test@ds119988.mlab.com:19988/skypeclone";
 
 //const db = config.DB_Connection.URL;
 const port = process.env.PORT || 3001;

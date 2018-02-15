@@ -59,6 +59,8 @@ class SearchList extends Component {
       .then(res => res.json())
       .then(data => {
         // console.log(data );
+        window.location.reload();
+
       })
       .catch(err => console.log(err));
     } else {
@@ -92,6 +94,7 @@ class SearchList extends Component {
           <ListItemText primary={item.profile.firstName + ' ' + item.profile.lastName} />
         <Button  className={classes.button} variant="fab" color="primary" aria-label="Add" onClick={()=>{
           this.requestFriends(item);
+
           // this.handleClickOpen();
           
         }

@@ -52,6 +52,8 @@ class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    localStorage.removeItem("updatedUserData");
+
     let url = `${config.BASE_URL}auth/login`;
     const formData = {
       checked: this.state.checked,

@@ -212,9 +212,9 @@ class UserPictureAndState extends Component {
               })
               .catch(err => console.log(err));
           }
-          // setTimeout(() => {
-          //   //window.location.reload();
-          // }, 10000)
+           setTimeout(() => {
+             window.location.reload();
+           }, 2000)
 
         }
 

@@ -62,6 +62,9 @@ console.log('Asdfd');
 
   render() {
     const { classes } = this.props;
+    let avatarURL;
+
+    
     if(this.state.redirect){
       return <Redirect to='/'/>
     }else{
