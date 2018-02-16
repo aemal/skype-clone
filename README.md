@@ -9,32 +9,16 @@ cd skypeClone
 npm install
 ```
 ## Running the app
-### Run client side
+### Run client & server side
 ```
 npm start
-```
-### Run server side
-```
-node app.js
 ```
 
 ### Run tests
 open test console `./node_modules/.bin/cypress open`
 
 run `dashboard_spec.js`
-## Teams:
-- Yaser
-- Hussein
----
-- Ahmad
-- Mudhafar
----
-- Jose
-- Sareh
----
-- Mir
-- Dr Who
----
+
 
 [Skype Clone Heroku App Link](https://skypeclone.herokuapp.com)
 
