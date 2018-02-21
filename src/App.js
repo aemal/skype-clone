@@ -16,7 +16,7 @@ import Paper from "material-ui/Paper";
 import decode from "jwt-decode";
 import config from "./config/config";
 import store from "./store"; 
-//import messageBaloun from "./components/messageBaloun";
+
 
 function mapStateToProps(state, filter) {
   return {
