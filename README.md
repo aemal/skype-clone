@@ -19,6 +19,10 @@ open test console `./node_modules/.bin/cypress open`
 
 run `dashboard_spec.js`
 
+### Demos
+[Demo 1](https://youtu.be/KweSZ6xMDNc)
+[Demo 2](https://youtu.be/6ULYoaBvBqA)
+[Demo 3](https://youtu.be/QPCOMQGg858)
 
 [Skype Clone Heroku App Link](https://skypeclone.herokuapp.com)
 
